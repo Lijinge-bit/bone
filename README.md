@@ -4,6 +4,15 @@
 
 当前已有真实 CPU 模型和独立留出测试结果，**MAE 19.2524 个月，尚未达到 <6 个月目标**。本项目不是临床产品，不提供成年身高、闭合时间窗、治疗建议或医院签署报告。
 
+## 下载完整研究项目包
+
+- [直接下载 BoneAtlas_MVP_0.1.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.1.zip)
+- [打开下载文件页面](https://github.com/Lijinge-bit/bone/blob/main/downloads/BoneAtlas_MVP_0.1.zip)：如直接下载未开始，可点击页面上的 **Download raw file** 下载按钮。
+
+完整包约 7.5 MB，附带真实研究模型权重、六张公开样例、全新待复核样本记录和审计／评估报告。解压后进入 `bone-atlas`，按下文 Windows 或 Python 启动步骤安装依赖并运行。它不包含约 10 GB 原始数据集和虚拟环境。
+
+GitHub 的 **Code → Download ZIP** 下载的是源码快照；上面的链接下载的是带模型的研究项目包。项目包采用版本化的 ZIP 作为明确的分发例外，普通 `var/` 运行目录、私有上传与数据库仍不提交到源码仓库。
+
 ## 本环境启动
 
 ```bash
