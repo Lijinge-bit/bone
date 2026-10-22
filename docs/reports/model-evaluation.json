@@ -1,0 +1,193 @@
+{
+  "created_at": "2026-10-22T13:46:20+00:00",
+  "architecture": "boneage-small-cnn-v1",
+  "training_samples": 10091,
+  "validation_samples": 1260,
+  "test_samples": 1260,
+  "epochs": 20,
+  "best_epoch": 20,
+  "best_validation_mae_months": 18.7502,
+  "test": {
+    "n": 1260,
+    "mae_months": 19.2524,
+    "rmse_months": 25.5958,
+    "median_absolute_error": 14.3468,
+    "p90_absolute_error": 42.7537,
+    "by_sex": {
+      "M": {
+        "n": 682,
+        "mae_months": 19.2557
+      },
+      "F": {
+        "n": 578,
+        "mae_months": 19.2486
+      }
+    },
+    "by_boneage": {
+      "0-24": {
+        "n": 9,
+        "mae_months": 33.0096
+      },
+      "24-72": {
+        "n": 124,
+        "mae_months": 30.6775
+      },
+      "72-120": {
+        "n": 295,
+        "mae_months": 19.8229
+      },
+      "120-168": {
+        "n": 621,
+        "mae_months": 15.2088
+      },
+      "168-+": {
+        "n": 211,
+        "mae_months": 23.0549
+      }
+    }
+  },
+  "target_mae_months": 6,
+  "target_passed": false,
+  "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+  "grouping": "decoded raster equality and exact dHash candidates; patient grouping unavailable",
+  "label_reference_standard": "Not provided; public RSNA labels, not validated against Chinese clinical standard",
+  "manifest_sha256": "bf4f9f51d30d08e0c3a89d9bf69e5347af2ec6570c246dbe7a6147e6d49cecb5",
+  "cache_sha256": "4a79203844c51cb2efdf0b5151289df4f6cb3c77b29382f93675c8be22c86000",
+  "preprocess_version": "gray-letterbox-v1",
+  "image_size": 96,
+  "seed": 20261022,
+  "runtime": {
+    "torch": "2.7.1+cpu",
+    "device": "cpu",
+    "threads": 3
+  },
+  "limitations": [
+    "Research CPU baseline trained from scratch, not a clinical model",
+    "Patient independence is unverified; no patient identifiers supplied",
+    "Near-duplicate search is not exhaustive; no external clinical validation",
+    "8-bit grayscale PNG only; no DICOM, ROI labels or longitudinal outcomes"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.34418,
+      "validation_mae_months": 30.1585,
+      "elapsed_seconds": 7
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.28158,
+      "validation_mae_months": 28.6961,
+      "elapsed_seconds": 14
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.25,
+      "validation_mae_months": 27.0961,
+      "elapsed_seconds": 20
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.23049,
+      "validation_mae_months": 24.7786,
+      "elapsed_seconds": 26
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.21122,
+      "validation_mae_months": 26.1596,
+      "elapsed_seconds": 32
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.20449,
+      "validation_mae_months": 22.8865,
+      "elapsed_seconds": 38
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.18646,
+      "validation_mae_months": 22.9787,
+      "elapsed_seconds": 44
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.17673,
+      "validation_mae_months": 21.2616,
+      "elapsed_seconds": 51
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.16534,
+      "validation_mae_months": 21.2273,
+      "elapsed_seconds": 58
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.15454,
+      "validation_mae_months": 20.469,
+      "elapsed_seconds": 65
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.14621,
+      "validation_mae_months": 20.2492,
+      "elapsed_seconds": 71
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.14144,
+      "validation_mae_months": 20.4729,
+      "elapsed_seconds": 76
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.13148,
+      "validation_mae_months": 20.887,
+      "elapsed_seconds": 82
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.12676,
+      "validation_mae_months": 20.3514,
+      "elapsed_seconds": 88
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.11898,
+      "validation_mae_months": 19.3826,
+      "elapsed_seconds": 94
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.11308,
+      "validation_mae_months": 19.4327,
+      "elapsed_seconds": 101
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.10758,
+      "validation_mae_months": 19.095,
+      "elapsed_seconds": 108
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.1051,
+      "validation_mae_months": 19.0548,
+      "elapsed_seconds": 115
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.10287,
+      "validation_mae_months": 18.7714,
+      "elapsed_seconds": 122
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.1019,
+      "validation_mae_months": 18.7502,
+      "elapsed_seconds": 129
+    }
+  ],
+  "elapsed_seconds": 130
+}

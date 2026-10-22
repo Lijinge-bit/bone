@@ -1,0 +1,309 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="时序骨龄项目 PRD V0.2：首版单时相骨龄评估、RSNA 数据检查、PNG 质控、数据划分、验收与后续联合预测规划。">
+<title>时序骨龄与生长潜力联合预测系统 · PRD V0.2</title><style>
+:root{--ink:#172e39;--muted:#5c717c;--brand:#086f75;--line:#dbe5e8;--paper:#fff;--bg:#eff4f5;--nav:#132e38;--amber:#8d6115;--soft:#e9f4f3}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:26px}body{margin:0;color:var(--ink);background:var(--bg);font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;font-size:15px;line-height:1.85}a{color:var(--brand);text-underline-offset:3px}aside{position:fixed;inset:0 auto 0 0;width:250px;overflow:auto;background:var(--nav);color:#d4e3e6;padding:30px 22px}aside .brand{color:#fff;font-size:19px;font-weight:700;line-height:1.55}aside .edition{font-size:12px;color:#a5bdc6;margin:12px 0 24px}aside a{display:block;padding:7px 10px;color:#d4e3e6;text-decoration:none;font-size:13px;border-radius:5px}aside a:hover,aside a:focus{background:#254751;color:#fff}aside .note{border-top:1px solid #35525c;margin-top:22px;padding-top:16px;font-size:12px;color:#a5bdc6}main{margin-left:250px;padding:38px 46px 65px;max-width:1540px}.hero{background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--brand);padding:40px 42px;margin-bottom:26px}.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--brand);font-weight:700}h1{font-size:34px;line-height:1.45;letter-spacing:-.5px;margin:16px 0}h1 span{display:block;font-size:23px;font-weight:500;color:var(--muted)}.lead{max-width:850px;color:var(--muted);font-size:16px}.meta{display:flex;gap:10px 28px;flex-wrap:wrap;margin-top:25px;font-size:13px}.meta strong{margin-right:6px}.chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 0}.chip{padding:3px 11px;background:var(--soft);color:var(--brand);font-size:12px;border-radius:4px}section{background:var(--paper);border:1px solid var(--line);padding:30px 34px;margin:22px 0}h2{margin:0 0 18px;font-size:23px;line-height:1.5}h2 .n{display:inline-block;color:var(--brand);font-size:14px;margin-right:13px;font-weight:600}h3{font-size:17px;margin:26px 0 10px}h4{font-size:15px;margin:20px 0 8px}p{margin:10px 0}ul,ol{padding-left:24px;margin:10px 0}li{margin:5px 0}.callout{border-left:4px solid var(--brand);background:#f0f7f7;padding:14px 18px;margin:18px 0}.callout.warn{border-left-color:#b38226;background:#fcf8ef}.small,figcaption{font-size:12px;color:var(--muted)}.label{display:inline-block;border:1px solid #c5e0df;color:var(--brand);border-radius:3px;padding:0 6px;font-size:11px;white-space:nowrap}.label.proposed{border-color:#e4d2aa;color:var(--amber)}.label.open{border-color:#d3dce3;color:#596d86}.scroll{overflow-x:auto;margin:12px 0}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.75}th,td{text-align:left;vertical-align:top;padding:11px 13px;border:1px solid var(--line)}th{background:#edf4f5;font-weight:600}tbody tr:nth-child(even){background:#fafcfc}td:first-child{font-weight:500}code{font-family:ui-monospace,Consolas,monospace;background:#eef3f5;padding:2px 4px;font-size:12px;overflow-wrap:anywhere}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}.card{background:#f6f9fa;border:1px solid var(--line);padding:18px}.card strong{display:block;font-size:25px;color:var(--brand);line-height:1.5}.card p{font-size:13px;color:var(--muted)}.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}.step{padding:16px;background:#f2f7f8;border:1px solid var(--line);font-size:13px}.step b{display:block;color:var(--brand);margin-bottom:6px}.wire{border:1px solid #bfcfd5;margin:16px 0;font-size:12px;background:#f8fafb}.wire-head{padding:10px 15px;background:#e6eff2;font-weight:600}.wire-grid{display:grid;grid-template-columns:1fr 2fr 1.3fr;gap:12px;padding:15px}.wire-box{border:1px dashed #b4c9cf;padding:15px;min-height:135px}.wire-box b{display:block;margin-bottom:10px}.wire-bottom{border-top:1px solid var(--line);padding:12px 15px}.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:30px}.source{color:var(--muted);font-size:12px;margin-top:14px}strong{font-weight:650}figure{margin:16px 0}caption{text-align:left;color:var(--muted);font-size:12px;margin:0 0 6px}.nowrap{white-space:nowrap}
+@media(max-width:1050px){aside{width:210px;padding:24px 14px}main{margin-left:210px;padding:24px}.hero{padding:28px}section{padding:25px}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:1fr}}
+@media(max-width:700px){aside{position:static;width:auto;padding:18px}aside nav{display:flex;flex-wrap:wrap;gap:3px}aside a{font-size:12px;padding:4px 7px}aside .edition{margin:6px 0 12px}aside .note{display:none}main{margin:0;padding:14px}.hero,section{padding:22px 18px}h1{font-size:27px}h1 span{font-size:19px}h2{font-size:21px}.wire-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}th,td{min-width:105px}}
+@media print{@page{size:A4;margin:15mm}html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.6}aside{display:none}main{margin:0;padding:0;max-width:none}.hero{padding:20px;border-top-width:4px}section{padding:16px 0;border:0;border-top:1px solid #bbb;margin:15px 0;break-inside:auto}h1{font-size:25pt}h1 span{font-size:17pt}h2{font-size:16pt;break-after:avoid}h3,h4{break-after:avoid}table{font-size:8.5pt}tr,.card,.step,.callout{break-inside:avoid}.scroll{overflow:visible}thead{display:table-header-group}a{color:inherit;text-decoration:none}.cards{grid-template-columns:repeat(3,1fr)}.flow{grid-template-columns:repeat(4,1fr)}.foot{font-size:8pt}}
+
+.stage{color:#086f75;font-weight:700}.evidence{border:1px solid #dbe5e8;padding:15px 18px;background:#f8fafb}.checklist li{margin:9px 0}
+</style></head><body>
+<aside aria-label="文档导航"><div class="brand">时序骨龄<br>与生长潜力联合预测</div><div class="edition">PRD V0.2 · 首版范围更新稿</div><nav>
+<a href="#overview">01 修订说明与阶段决策</a>
+<a href="#goals">02 目标、指标与验收层次</a>
+<a href="#users">03 用户与使用场景</a>
+<a href="#scope">04 首版范围与后续规划</a>
+<a href="#workflow">05 首版业务流程</a>
+<a href="#architecture">06 页面与信息架构</a>
+<a href="#features">07 详细功能需求</a>
+<a href="#rules">08 业务规则与状态</a>
+<a href="#data">09 数据清单与检查证据</a>
+<a href="#model">10 模型基线与评估协议</a>
+<a href="#quality">11 影像质控与非功能要求</a>
+<a href="#acceptance">12 验收场景与交付门槛</a>
+<a href="#roadmap">13 实施顺序与数据依赖</a>
+<a href="#questions">14 待确认事项与负责人</a>
+<a href="#trace">15 追溯、术语与变更记录</a>
+</nav><div class="note">首版：单张 PNG＋性别 → 骨龄评估。<br>原项目的时序与生长潜力目标保留为后续阶段。<br>静态需求文档，无预测功能。</div></aside><main>
+<header class="hero"><div class="eyebrow">Product requirements document / revision 02</div>
+<h1>时序骨龄与生长潜力<span>联合预测系统 · PRD V0.2</span></h1>
+<p class="lead">首版聚焦单时相骨龄评估：导入手部 PNG 影像与性别，经质量检查后输出骨龄和模型关注区域，保留结果记录及人工复核意见。以经过检查的数据和独立评估作为后续时序研究的起点。</p>
+<div class="meta"><div><strong>版本</strong>V0.2 范围更新稿</div><div><strong>更新日期</strong>2026-10-22</div><div><strong>依据</strong>Word＋两份 CSV＋Kaggle 样例抽查</div><div><strong>当前交付</strong>静态 HTML PRD</div></div>
+<div class="chips"><span class="chip">PNG＋性别</span><span class="chip">单时相骨龄基线</span><span class="chip">图像质量与可追溯</span><span class="chip">分阶段验收</span></div></header>
+<section id="overview"><h2><span class="n">01</span>修订说明与阶段决策</h2>
+<p>本稿依据《时序骨龄.docx》、用户上传的两份 CSV、Kaggle RSNA Bone Age 页面与 7 张实际影像抽查，以及本轮讨论更新。项目全称保留；当前首版名称为<strong>“单时相骨龄评估研究原型”</strong>。</p>
+<div class="callout"><strong>本轮确认的阶段方向：</strong>先建立“单张影像＋性别 → 骨龄”的可验证闭环，再推进 ROI 检测、医院 DICOM 工作流与纵向联合预测。当前仅更新需求文档，不开发应用或训练模型。</div>
+<div class="scroll"><table><thead><tr><th>修订点</th><th>V0.2 决策</th><th>原因</th></tr></thead><tbody>
+<tr><td>首版输入</td><td>PNG 影像与性别为必需；实足年龄不是当前模型必需输入。</td><td>现有表格只有影像 ID、骨龄标签与性别。</td></tr>
+<tr><td>数据管理</td><td>先建立样本清单；患者身份未知时保持未知。</td><td>图片编号不能证明患者身份或多次随访关系。</td></tr>
+<tr><td>ROI 与 DICOM</td><td>保留为后续 P1；首版使用整图骨龄基线与原图阅览。</td><td>当前缺少骨骼位置框；已抽查文件是 PNG。</td></tr>
+<tr><td>解释与复核</td><td>首版包含热力图、原图对照和人工复核意见。</td><td>延续原文可解释性与辅助定位；临床签署另设准入条件。</td></tr>
+<tr><td>联合预测</td><td>时序、终身高、闭合时间窗与生长百分位列 P2。</td><td>患者随访、身高和相应真实结局尚未提供。</td></tr>
+<tr><td>验收</td><td>分别记录数据准备、功能运行、模型指标和临床试用条件。</td><td>页面可用、模型达标和临床有效是不同结论。</td></tr>
+</tbody></table></div>
+<div class="scroll"><table><thead><tr><th>依据标记</th><th>含义</th></tr></thead><tbody>
+<tr><td><span class="label">原文要求</span></td><td>Word 明确的研究目标及系统能力；不代表已实现。</td></tr>
+<tr><td><span class="label">检查证据</span></td><td>CSV 全表统计、Kaggle 元数据和已实际查看的 7 张样例；不外推为全量图片结果。</td></tr>
+<tr><td><span class="label proposed">阶段设计</span></td><td>为形成首版闭环而新增或调整的需求，执行时以本稿范围为依据。</td></tr>
+<tr><td><span class="label open">待确认</span></td><td>标注标准、授权、患者关联、临床阈值等尚未确定的内容，不能视为已获批准。</td></tr>
+</tbody></table></div>
+<p class="small">原文提及的医院合作、伦理审批、500 例以上纵向数据、4090 工作站和学校 GPU 资源仍按计划／原文陈述记录；本次未核实其落实情况。V0.2 的阶段方向不等于所有临床和统计定义已确认。</p>
+</section>
+<section id="goals"><h2><span class="n">02</span>目标、指标与验收层次</h2>
+<div class="cards"><div class="card"><strong>数据可用</strong><p>形成图片与标签对应清单、质量统计及可追溯的数据分区。</p></div><div class="card"><strong>单次可评估</strong><p>有效图片和性别可产生骨龄结果、关注区域热力图和复核记录。</p></div><div class="card"><strong>效果可验证</strong><p>在独立有标签数据上计算 MAE，并揭示不同性别与骨龄区间的误差。</p></div></div>
+<p>产品长期目标仍为辅助医师分析当前骨龄、未来演进、成年终身高分布与闭合时间窗。首版仅验证单次研究能力，不将预测结果视为诊断或治疗建议。</p>
+<div class="scroll"><table><thead><tr><th>指标</th><th>原文目标</th><th>阶段与判定</th></tr></thead><tbody>
+<tr><td>G-01 单次骨龄 MAE</td><td>&lt; 6 个月</td><td>MVP 效果目标。单位、标签定义及评估协议确认后，在独立有标签测试集计算；未达标则标记“功能已运行、效果未达目标”。</td></tr>
+<tr><td>G-02 成年终身高 RMSE</td><td>&lt; 4 cm</td><td>P2；必须有可靠成年终身高结局，不作为首版验收项。</td></tr>
+<tr><td>G-03 ROI mAP@0.5</td><td>&gt; 0.85，原文拟在 100 张标注图验证</td><td>P1；先有骨骼框标注及独立测试图。首版整图骨龄模型不以此指标验收。</td></tr>
+<tr><td>G-04 终身高预测区间</td><td>希望控制在 ±4 cm 内</td><td>P2 研究愿景；须同时定义覆盖水平、实测覆盖率及区间宽度，不能与 RMSE 混用。</td></tr>
+<tr><td>G-05 未来骨龄曲线</td><td>未来 2–4 年</td><td>P2；预测时点与各跨度误差门槛待确认。</td></tr>
+<tr><td>G-06 闭合时间窗</td><td>给出估计时间范围</td><td>P2；部位、闭合标签、删失处理和指标待确认。</td></tr>
+</tbody></table></div>
+<p><strong>单位约束：</strong>产品骨龄输出采用月，可补充“岁＋月”。CSV 原始数值保留；标签单位与标准须由数据说明核实后才能参与正式训练和效果验收。输出小数不代表标签具备相应精度。</p>
+</section>
+<section id="users"><h2><span class="n">03</span>用户与使用场景</h2>
+<div class="scroll"><table><thead><tr><th>角色</th><th>首版行为</th><th>后续扩展</th></tr></thead><tbody>
+<tr><td>研究／数据人员</td><td>整理已授权数据；核对图片与标签；查看质量、分区和评估结果。</td><td>多中心数据治理与模型对比。</td></tr>
+<tr><td>医师或获授权复核人员</td><td>查看影像、预测及热力图，填写复核意见。</td><td>按医院制度审核签署报告；支持纵向门诊工作流。</td></tr>
+<tr><td>维护人员</td><td>维护研究环境、可用模型及版本信息；访问数据遵循实际授权。</td><td>账号角色、机构级权限与运维管理。</td></tr>
+<tr><td>家长与体育选材人员</td><td>当前无独立入口。</td><td>原文关注对象／延伸场景，另行确认授权和产品范围。</td></tr>
+</tbody></table></div>
+<h3>首版场景</h3><ol><li>研究人员核对一批 PNG 与 CSV，处理缺图、重复和质量待复核项。</li><li>用户选择一张支持的 PNG，确认性别，检查原图与质量提示后发起骨龄评估。</li><li>用户查看预测骨龄和热力图，记录接受、存疑或需人工处理的意见。</li><li>评估人员在固定有标签测试集检查总体与分层误差，分析偏暗、低对比度和异常构图样本。</li></ol><p><strong>使用边界：</strong>公开研究样本在首版以“样本记录”管理；只有取得真实患者关联和临床授权后，才进入患者随访及正式报告流程。</p>
+</section>
+<section id="scope"><h2><span class="n">04</span>首版范围与后续规划</h2>
+<p>P0 表示当前 MVP 必需；P1 为单时相及临床流程增强；P2 为纵向联合预测。P1/P2 是保留的原项目目标，不因本轮分阶段交付而认定已完成或取消。</p>
+<div class="scroll"><table><thead><tr><th>阶段</th><th>范围</th><th>进入条件</th></tr></thead><tbody>
+<tr><td>P0 · 单时相 MVP</td><td>PNG 导入、性别确认、样本记录、质量提示、原图预览、骨龄预测、热力图、结果保存及人工复核意见；数据清单和独立评估报告。</td><td>数据使用范围和标签定义核实；划分协议固定；模型、预处理和功能可复现。</td></tr>
+<tr><td>P1 · 单时相增强</td><td>骨骼 ROI 检测与标注、DICOM 去标识化和预处理、可验证的实足年龄输入增强、正式报告与医师签署、机构权限。</td><td>具备相应标注、医院样本、元数据、流程和验证依据。不得用 PNG 支持情况代替 DICOM 验收。</td></tr>
+<tr><td>P2 · 联合预测</td><td>患者纵向档案、不规则时序、未来 2–4 年骨龄、终身高分布、闭合时间窗、历史贡献及标准生长曲线；图谱与文字解释。</td><td>补齐患者和检查时间、身高与各任务真实结局；定义预测与解释评估口径。</td></tr>
+<tr><td>另行评审</td><td>家长端、体育选材端、PACS/HIS 接入、自动治疗建议。</td><td>前三项需新增产品与授权范围；自动处方和治疗决策不属于现有辅助系统目标。</td></tr>
+</tbody></table></div>
+<div class="callout warn"><strong>首版界面规则：</strong>主流程只显示可用的单次能力。后续模块可在规划说明中列出，功能入口隐藏或明确标记“后续阶段”；不使用固定成年身高、闭合日期或假曲线填充真实结果页。演示样例须持续标注“演示数据”。</div>
+</section>
+<section id="workflow"><h2><span class="n">05</span>首版业务流程</h2>
+<div class="flow" role="list" aria-label="首版主流程">
+<div class="step" role="listitem"><b>01 选择样本</b>导入 PNG 或从已登记样本选择，建立本次评估记录。</div>
+<div class="step" role="listitem"><b>02 核对性别</b>从表格读取并确认，或手动选择；记录来源。</div>
+<div class="step" role="listitem"><b>03 检查质量</b>识别解析失败、重复、构图及亮度等问题；必要时人工复核。</div>
+<div class="step" role="listitem"><b>04 确认输入</b>查看原图及处理预览，确认本轮可运行。</div>
+<div class="step" role="listitem"><b>05 骨龄评估</b>使用固定模型与预处理生成骨龄；失败显示原因。</div>
+<div class="step" role="listitem"><b>06 查看解释</b>叠加本轮热力图，与原图对照。</div>
+<div class="step" role="listitem"><b>07 人工复核</b>保留 AI 原值，独立记录意见与复核人。</div>
+<div class="step" role="listitem"><b>08 保存结果</b>保存输入指纹、模型版本、结果和复核历史。</div>
+</div>
+<div class="scroll"><table><thead><tr><th>情况</th><th>处理</th></tr></thead><tbody>
+<tr><td>文件损坏／不支持编码或格式</td><td>逐文件阻断并说明原因；保留同批成功项。</td></tr>
+<tr><td>性别缺失或值非法</td><td>等待确认，不能自动默认成某一性别；不要求补录不存在的实足年龄。</td></tr>
+<tr><td>低对比度、过亮／过暗、背景大或目标不明确</td><td>进入“待人工复核”；不凭单一亮度阈值直接删除。复核需记录可用、重选／调整或排除原因。</td></tr>
+<tr><td>同一文件重复导入</td><td>按内容指纹提示已存在，不静默覆盖。不同评估允许复用原文件并形成不同评估 ID。</td></tr>
+<tr><td>推理失败或热力图失败</td><td>分别显示状态；解释失败不展示旧图。保留有效骨龄输出，但本轮不能视为完整解释链路通过。</td></tr>
+<tr><td>数据或模型更新后重算</td><td>形成新结果版本并保留旧记录；不改写人工意见历史。</td></tr>
+</tbody></table></div>
+</section>
+<section id="architecture"><h2><span class="n">06</span>页面与信息架构</h2>
+<div class="scroll"><table><thead><tr><th>页面</th><th>P0 内容</th><th>状态要求</th></tr></thead><tbody>
+<tr><td>P-01 样本工作台</td><td>样本 ID、性别来源、图片质量、最近评估与复核状态；检索、新建和进入记录。</td><td>空列表、加载、无权限、异常项。</td></tr>
+<tr><td>P-02 导入与检查</td><td>文件清单、CSV 对应状态、格式和尺寸、重复检查、质量待复核项。</td><td>成功、失败、待核对；逐文件反馈。</td></tr>
+<tr><td>P-03 阅片与评估</td><td>PNG 原图、缩放平移、亮度／对比度、输入确认、预测骨龄与热力图。</td><td>未运行、处理中、失败、解释失败、已完成。</td></tr>
+<tr><td>P-04 结果与人工复核</td><td>输入摘要、AI 骨龄、版本、热力图状态、人工意见与历史。</td><td>未复核、已复核、存疑、需人工处理、历史版本。</td></tr>
+<tr><td>P-05 数据与效果摘要</td><td>固定数据分区、质量统计、总体和分层 MAE；可由离线报告承载，不强制首版管理后台。</td><td>未评估、通过／未达目标、未知患者隔离状态。</td></tr>
+</tbody></table></div>
+<figure><div class="wire"><div class="wire-head">首版阅片工作区 · 结构说明，非应用界面</div><div class="wire-grid"><div class="wire-box"><b>样本与输入</b>样本 ID / 图片 ID<br>性别与来源<br>质量状态及复核<br>模型与处理版本<br>不自动展示患者时间轴</div><div class="wire-box"><b>PNG 原图与解释</b>缩放 / 平移<br>亮度 / 对比度 / 重置<br>原图与处理预览<br>热力图开关及透明度<br>保持比例与原图坐标</div><div class="wire-box"><b>评估与复核</b>预测骨龄（月）<br>本轮任务状态<br>解释可用性<br>人工意见与修订历史<br>未提供实足年龄时无差值结论</div></div><div class="wire-bottom">选择影像 → 确认性别 → 质控 → 运行 → 查看结果与解释 → 人工复核 → 保存记录</div></div><figcaption>模型版本等详细来源信息可置于结果详情；用户主操作围绕影像、输入确认、结果及复核展开。</figcaption></figure>
+<p>PNG 的亮度／对比度仅改变显示；不宣称恢复 DICOM 原始窗宽窗位。除明确发起新的模型输入版本外，用户调节阅片显示不得悄然改变推理输入。</p>
+</section>
+<section id="features"><h2><span class="n">07</span>详细功能需求</h2>
+<h3>F-01 样本记录与未来患者档案</h3><p class="stage">P0 记录；P2 随访</p><p>每次评估使用唯一记录 ID，保存样本 ID、文件指纹、性别及来源、质量状态、评估和复核历史。原始图片 ID 作为源数据标识，不自动充当患者 ID。</p><ul><li>实足年龄、患者 ID 和检查日期在首版可为空；不把导入日期当检查日期，不造出生日期。</li><li>同一图片重复推理形成新评估，原图可复用；性别更正或输入变更保留旧值和影响范围。</li><li>P2 才按核实的患者关联与日期构建时间轴，支持缺失与不规则间隔。</li></ul><p><strong>验收要点：</strong>新记录不覆盖历史；来源不明的患者关系保持未知；样本模式不生成虚假的历年随访。</p>
+<h3>F-02 PNG 导入、匹配与质控</h3><p class="stage">P0；DICOM 为 P1</p><p>支持本次样例验证过的 8 位灰度 PNG，并以内容解码而非仅扩展名判断文件。彩色、16 位或其他编码的支持须在验证后声明；未支持时给出原因。数据准备阶段支持批量清单核对，产品端至少支持单张导入。</p><ul><li>通过 CSV 的源图片 ID 与文件名主干精确关联；递归读取实际目录，记录真实路径，禁止按行号或目录顺序配对。</li><li>区分缺图、多余图、重复 ID、重复内容和无法解析；同名但内容不同的文件标记冲突。</li><li>性别统一映射；缺骨龄标签不影响推理，但不能进入监督训练和误差计算。</li><li>保留原图；预处理产生可追溯衍生输入。质控流程详见第 11 节。</li><li>P1 扩展 DICOM 标签与烧录文字去标识化、DICOM → PNG、窗宽窗位及设备信息，并单独验证。</li></ul><p><strong>验收要点：</strong>匹配清单逐项有状态；支持的 PNG 可解码；未支持和损坏样本被明确阻断；待复核图片不自动当作通过。</p>
+<h3>F-03 影像浏览与骨骼 ROI</h3><p class="stage">P0 浏览；P1 检测</p><p>原图可缩放、平移、调节显示亮度／对比度并重置；叠加热力图须与原图坐标一致，用户可对照关闭叠加。</p><ul><li>首版骨龄基线可使用整图或经验证的手部裁剪；手部裁剪不等于桡骨等多类别骨骼检测。</li><li>P1 按原文定位桡骨、尺骨、掌骨和指骨等 ROI；需新增类别、位置框标注与独立测试。</li><li>自动骨骼框缺失时不生成假框；如后续支持手工修改，保留自动原始结果并生成新评估版本。</li></ul><p><strong>验收要点：</strong>显示调节不影响已保存推理值；图像变换可回溯；P1 的 ROI 另按 G-03 评估。</p>
+<h3>F-04 单时相骨龄评估</h3><p class="stage">P0 核心</p><p>以有效影像和已确认性别为当前模型输入，输出骨龄（月）、任务状态、生成时间及版本。模型候选为原文的 ResNet-50 等预训练骨干，具体实现由后续技术方案决定。</p><ul><li>真实骨龄标签仅用于训练和离线评估，不作为预测时输入；文件名 ID 不作为发育特征。</li><li>实足年龄在当前表格缺失，因此不作为首版必填项；没有实际年龄时不展示骨龄超前／落后判断或年龄差值。</li><li>不从当前骨龄直接换算成年身高、剩余生长高度或闭合日期。</li><li>异常数值、模型失败和不适用输入显示明确状态；不得通过静默裁剪数值掩盖模型问题。</li></ul><p><strong>验收要点：</strong>同一版本输入可复现到约定数值容差；不泄漏目标标签；MAE 按独立协议计算，G-01 通过与否如实记录。</p>
+<h3>F-05 纵向时序与未来骨龄</h3><p class="stage">P2 保留</p><p>按原文处理同一患者历次检查、时间间隔与缺失模式，展示未来 2–4 年骨龄曲线。最低有效随访次数、预测步长及效果阈值需确认。</p><ul><li>仅使用预测起点之前可获信息；缺失不填成零；同日多张影像不自动当作多次随访。</li><li>图表区分历史观测、当前评估和未来预测；保留数据截止日期及重算版本。</li></ul><p><strong>验收要点：</strong>具备真实患者序列和未来骨龄标签后，验证各跨度误差与不规则随访场景；首版不验收。</p>
+<h3>F-06 成年终身高与生长潜力</h3><p class="stage">P2 保留</p><p>按原文展示成年终身高分布、中心统计量和预测区间；需要独立成年结局验证，父母身高、当前身高及治疗史是否必需由模型输入协议明确。</p><ul><li>区间显示覆盖水平；达到某身高的概率须定义为明确事件，例如 P(成年身高 ≥ 阈值)。</li><li>剩余可增长身高仅在有效当前实测身高及成年预测可用时计算，并保留不确定性含义。</li><li>同时检验 RMSE、区间覆盖与宽度；不强行缩窄至 ±4 cm。</li></ul><p><strong>验收要点：</strong>具备成年结局后验收 G-02/G-04；表格中的当前骨龄不能代替身高结局。</p>
+<h3>F-07 生长板闭合时间窗</h3><p class="stage">P2 保留</p><p>明确目标骨骼、闭合定义及随访结局后，估计闭合时间范围。需考虑检查间隔造成的区间和删失；无验证能力时标记不可评估。</p><p>不将热力图或某次骨龄直接当作闭合结论，不生成自动用药或治疗时机建议。</p><p><strong>验收要点：</strong>按独立闭合标签和冻结口径验证时间窗；本阶段不承诺精度或固定日期。</p>
+<h3>F-08 热力图、历史贡献与文字解释</h3><p class="stage">P0 热力图；P2 历史与图谱解释</p><p>首版采用经验证的 Grad-CAM++ 或相应解释方法，展示当前骨龄输出对应的相对关注区域；可调透明度、开关和原图对照。</p><ul><li>解释绑定本轮图片、预处理与模型版本；映射回原图坐标并保留实际裁剪范围。</li><li>热力图不是病变分割、骨骼检测真值、模型置信度或因果证据；不自动生成“生长板偏窄”等未经验证的文字。</li><li>解释失败单独报错，不复用其他样本图；解释链路失败时本轮标记部分成功。</li><li>P2 按原文增加历史时点消融贡献、发育图谱叠加与有依据的自然语言提示；消融变化不默认是因果权重。</li></ul><p><strong>验收要点：</strong>坐标、颜色图例和版本一致；使用者能区分关注与诊断；当前流程具备成功热力图样本及失败路径验证。</p>
+<h3>F-09 生长曲线与百分位</h3><p class="stage">P2 保留</p><p>按原文比较历次身高、骨龄与参考曲线。需补齐实足年龄、身高及日期，并明确参考标准及适用人群。</p><p>骨龄与身高分别标单位；不把骨龄套入身高百分位；缺失不当作真实观测。无适用标准时只展示自身轨迹。</p><p><strong>验收要点：</strong>数据和图表一致，标准可查，预测与观测区分；当前不展示伪造百分位。</p>
+<h3>F-10 结果记录、复核与正式报告</h3><p class="stage">P0 记录；P1 临床签署</p><p>首版保存影像标识、输入性别、质量及处理状态、AI 原始骨龄、模型版本、解释状态、人工意见和复核时间；有修改时保留前后记录。</p><ul><li>人工意见可为接受、存疑或需人工处理，允许另记人工确认骨龄并注明依据；不覆盖 AI 值。</li><li>首版结果为研究记录；研究人员标记“已复核”不等于临床诊断或医师合法签署。</li><li>首版提供结果详情与浏览器打印友好视图，统一标明“研究结果／非正式临床报告”；专门 PDF 导出可后续增强。</li><li>P1 接入医院确认的草稿、退回、审核和签署流程；签署后更正生成新版本并保留旧版，签署方式与法律效力单独确认。</li></ul><p><strong>验收要点：</strong>记录可追溯；AI 值与人工意见分开；页面与打印内容一致，不把未审核研究结果显示为正式报告。</p>
+<h3>F-11 模型与评估追溯</h3><p class="stage">P0 追溯；P1 机构管理</p><p>每次结果保存模型权重标识、性别映射、预处理版本、输入指纹与时间；离线评估报告保存数据版本、分区清单、指标与排除样本说明。</p><ul><li>模型更新不覆盖旧结果；停用或不可用版本不能接受新任务。</li><li>首版研究环境需有明确授权范围；完整角色后台可放 P1，但不得因此开放私有数据给未授权用户。</li><li>P1 建立机构级账号、患者权限、审计查询与模型管理工作流。</li></ul><p><strong>验收要点：</strong>可从任一结果定位输入与版本；独立测试结果能对应到固定样本分区。</p>
+</section>
+<section id="rules"><h2><span class="n">08</span>业务规则与状态</h2>
+<div class="scroll"><table><thead><tr><th>规则</th><th>首版要求与后续约束</th></tr></thead><tbody>
+<tr><td>BR-01 标签与年龄</td><td>boneage 是监督目标，不是实足年龄；首版无实际年龄时显示“未提供”，不补零、不推断出生日期。P1 加入实际年龄前需重新验证输入方案。</td></tr>
+<tr><td>BR-02 编号与身份</td><td>源图片 ID、系统样本 ID、评估 ID 和患者 ID 各有语义；CSV 的 ID 不自动映射为患者身份。</td></tr>
+<tr><td>BR-03 性别映射</td><td>统一研究编码 M/F：训练表 male 的 True→M、False→F；测试表 Sex 的 M/F 保持。保留原值；非法值或缺失转人工确认。不能按非空字符串解析布尔值。</td></tr>
+<tr><td>BR-04 输入来源</td><td>推理接口不接收真实骨龄作为发育输入。批量研究评估可关联真值计算误差，但真值与预测输入分开。</td></tr>
+<tr><td>BR-05 质量处理</td><td>支持“通过、待人工复核、拒绝”。待复核须有原因；确认可用后再运行。原图损坏或不支持直接阻断；不因低亮度自动删除文件。</td></tr>
+<tr><td>BR-06 版本</td><td>性别、裁剪、预处理或模型变化后重算形成新结果；显示调节保持独立；旧 AI 值和复核意见保留。</td></tr>
+<tr><td>BR-07 单位与范围</td><td>骨龄统一以月输出、评估；转换和标准需核实。标签最大／最小值不是临床准入边界，不用训练范围静默截断预测。</td></tr>
+<tr><td>BR-08 数据集边界</td><td>不同文件 ID 不等于不同患者。重复／近重复组、同一患者和增强衍生样本不得跨分区；未知患者隔离如实标注。</td></tr>
+<tr><td>BR-09 任务状态</td><td>成功骨龄与失败热力图分别记录。任何失败不以零值、缓存旧图或固定数值冒充成功。</td></tr>
+<tr><td>BR-10 后续预测</td><td>P2 只按检查日期构建序列，区分实测与预测；输入截止时点明确，缺失和区间语义保留；不得从单张记录伪造历史。</td></tr>
+</tbody></table></div>
+<h3>状态定义</h3><ul><li><strong>导入：</strong>待处理 → 解码／匹配 → 成功、待核对或失败；批量逐文件记录。</li><li><strong>质量：</strong>未检查 → 通过、待人工复核或拒绝；复核保留处理人、原因和时间。</li><li><strong>评估：</strong>待校验 → 待运行 → 运行中 → 成功、部分成功或失败；输入不满足条件时停留待补充状态。</li><li><strong>复核：</strong>未复核 → 已复核（接受／存疑／需人工处理），更正保留历史；不使用“已签署”冒充机构确认。</li></ul>
+</section>
+<section id="data"><h2><span class="n">09</span>数据清单与检查证据</h2>
+<h3>9.1 已检查的表格</h3><p>两份用户上传文件均与仓库同名 CSV 内容一致。以下为全部表格记录的统计；不等同图片已全量匹配或完整数据已下载。</p>
+<div class="scroll"><table><thead><tr><th>项目</th><th>训练表</th><th>测试表</th></tr></thead><tbody>
+<tr><td>文件</td><td>boneage-training-dataset.csv</td><td>boneage-test-dataset.csv</td></tr>
+<tr><td>记录与字段</td><td>12,611；id / boneage / male</td><td>200；Case ID / Sex</td></tr>
+<tr><td>空字段、重复行、重复 ID</td><td>均为 0</td><td>均为 0</td></tr>
+<tr><td>性别</td><td>True 6,833（54.18%）；False 5,778（45.82%）</td><td>M 100；F 100</td></tr>
+<tr><td>骨龄标签</td><td>有；原始取值 1–228，160 个不同数值</td><td>无；不可直接计算 MAE</td></tr>
+<tr><td>编号交集</td><td>两表 ID 无交集</td><td>不能据此证明患者不重叠</td></tr>
+</tbody></table></div>
+<p><strong>分布注意：</strong>10,168 条标签（80.63%）是 6 的倍数；按月口径计，不足 24 个月的 91 条、216 个月及以上的 93 条。需核实标注粒度与取整规则，并报告尾部骨龄区间表现；这些统计本身不证明标签错误。</p>
+<h3>9.2 Kaggle 页面与实际图片抽查</h3><p>来源：<a href="https://www.kaggle.com/datasets/kmader/rsna-bone-age">Kaggle / kmader / RSNA Bone Age</a>。页面与下载入口已可公开访问；本次实际下载并查看 6 张训练图和 1 张测试图。抽查文件全部为 8 位灰度 PNG，非完整图片审计。</p>
+<div class="scroll"><table><thead><tr><th>源图片 ID</th><th>CSV 原始标签／性别</th><th>原始尺寸（像素）</th><th>抽查观察</th></tr></thead><tbody>
+<tr><td>1377</td><td>boneage=180；male=False</td><td>1514×2044</td><td>手部占比较大，存在文字与侧别标识。</td></tr>
+<tr><td>1378</td><td>boneage=12；male=False</td><td>1514×2044</td><td>整体偏亮、对比度低；背景与非手部区域占比较大。</td></tr>
+<tr><td>3806</td><td>boneage=1；male=True</td><td>906×1189</td><td>大面积黑色填充；边缘出现其他手指影像，需要识别目标手部。</td></tr>
+<tr><td>6197</td><td>boneage=150；male=True</td><td>1209×1654</td><td>手部主体与文字标识同时可见。</td></tr>
+<tr><td>11929</td><td>boneage=120；male=False</td><td>1554×1690</td><td>构图与前述样本不同，存在文字标识和亮边。</td></tr>
+<tr><td>14466</td><td>boneage=228；male=True</td><td>1538×1930</td><td>文字、侧别标识与边框可见。</td></tr>
+<tr><td>4360（测试）</td><td>无 boneage；Sex=M</td><td>999×1414</td><td>整体偏暗，侧别和文字标识突出。</td></tr>
+</tbody></table></div>
+<p class="small">上表骨龄为 CSV 标签，不是本次人工阅片预测。文件名与标签已对这 7 张逐项关联；不能据此宣称 12,811 条记录的全部图片均存在或全部符合标准。</p>
+<h3>9.3 首版数据清单字段</h3>
+<div class="scroll"><table><thead><tr><th>字段组</th><th>内容</th><th>要求</th></tr></thead><tbody>
+<tr><td>源标识</td><td>dataset_source / dataset_version / source_image_id / image_path</td><td>记录来源、版本、真实路径；图片 ID 按源系统保存。</td></tr>
+<tr><td>完整性</td><td>文件字节数、SHA-256、解码状态、宽高、通道／位深</td><td>用于精确重复检测、完整性与预处理决策；近重复另设分组。</td></tr>
+<tr><td>输入与标签</td><td>原始性别、统一性别、性别来源、boneage_label、标签单位／标准</td><td>训练／评估要求真值；推理允许无真值；不混淆实际年龄。</td></tr>
+<tr><td>质量</td><td>quality_status / quality_reasons / reviewer / reviewed_at</td><td>保留异常、决定及原因；排除不删除原始数据。</td></tr>
+<tr><td>数据分区</td><td>split / duplicate_group / patient_group（有则填）/ split_version</td><td>训练、验证、有标签留出测试和无标签预测集分别标记。</td></tr>
+<tr><td>处理与结果</td><td>预处理版本、裁剪框／变换、模型版本、评估 ID、预测及复核记录</td><td>可从结果追溯到原图和输入。</td></tr>
+<tr><td>后续补充</td><td>patient_id / exam_id / exam_date / 实足年龄 / 身高及日期</td><td>缺失保留未知；具备后再支持患者时序。</td></tr>
+</tbody></table></div>
+<h3>9.4 全量数据验收清单</h3><ol><li>核实数据源、使用授权、骨龄单位和参考标准。Kaggle 元数据显示许可为“Other (specified in description)”，不能直接解释为允许任何商业或临床用途。</li><li>对全部 CSV ID 建立图片匹配清单，核对缺图、额外图、重名冲突、损坏与无法解码文件；每一项有处理结果。</li><li>执行精确重复和近重复检查，核实患者关联是否可取得，并生成质量及排除清单。</li><li>形成固定数据分区文件和版本；数据质量统计、分层分布及患者隔离未知项进入评估报告。</li></ol>
+<div class="callout warn">当前已完成的是 CSV 检查和 7 张样例抽查。完整图片包下载、全量文件审计、患者级关联、ROI 标注、模型训练及独立效果验证均未完成。</div>
+<h3>9.5 原项目后续数据依赖</h3><p>P1 ROI 需要骨骼类别与位置框；DICOM 需要真实编码样本、元数据和脱敏要求。P2 需要同一患者多时点影像与检查日期、身高测量、成年身高及闭合结局。原文的 500 例计划须按患者数、检查数和每任务有效结局数分别核验；增强数据不能替代真实纵向或成年结局。</p>
+</section>
+<section id="model"><h2><span class="n">10</span>模型基线与评估协议</h2>
+<h3>10.1 首版基线</h3><p>使用原文候选 ResNet-50 等预训练骨干建立整图／经验证手部裁剪的骨龄回归基线，融合性别。输入分辨率、灰度转通道方式和归一化依据骨干及实验确定并记录，当前不将某个实现细节写成已验证结论。Grad-CAM++ 等解释与最终选定模型配套验证。</p>
+<div class="scroll"><table><thead><tr><th>协议项</th><th>要求</th></tr></thead><tbody>
+<tr><td>输入／目标</td><td>输入为影像与确认性别；目标为骨龄标签。ID、文件路径和真实骨龄不作为输入特征；实足年龄增强另立实验。</td></tr>
+<tr><td>固定分区</td><td>建议有标签数据按约 80%／10%／10% 划分训练／验证／留出测试，作为初始方案；比例、种子和清单在训练前固定，按分组情况允许调整。</td></tr>
+<tr><td>分组优先</td><td>同患者及重复／近重复组不可跨分区；患者标识不可得时，重复组隔离与性别／骨龄分层可作为研究基线，但必须注明“患者级隔离未验证”，不声称已完成患者独立验证。</td></tr>
+<tr><td>无标签 200 张</td><td>保留为预测集，不用于 MAE、调参、挑模型或重新划分有标签数据；输出预测不等于效果验收。</td></tr>
+<tr><td>增强与统计</td><td>先划分后增强；增强仅用于训练。需从数据估计的归一化等参数只使用训练分区；验证和测试不施加随机训练增强。</td></tr>
+<tr><td>选择与测试</td><td>使用验证集选模型和处理方案；锁定后在留出测试集报告最终结果。若因观察测试结果调整方案，需披露并重新建立独立检验。</td></tr>
+<tr><td>指标</td><td>MAE＝平均 |预测骨龄－参考骨龄|，以月报告；另给样本数、误差分布与有依据的不确定范围。</td></tr>
+<tr><td>分层</td><td>至少按性别、参考骨龄区间报告 MAE 和样本数；区间建议 0–&lt;24、24–&lt;72、72–&lt;120、120–&lt;168、≥168 月，冻结前可按样本分布调整；稀疏区间单列限制。</td></tr>
+<tr><td>质量与捷径</td><td>对暗图、低对比度、多余背景、文字／边框等分组分析；可用遮挡敏感性和人工热力图复核检查是否依赖非骨骼区域，不把热力图合理视为充分证明。</td></tr>
+<tr><td>可复现</td><td>保存数据与分区版本、随机种子、训练配置、权重标识、输入／预处理版本、运行条件及评估输出；每个排除样本有原因。</td></tr>
+</tbody></table></div>
+<h3>10.2 逐阶段研究路线</h3><ul><li><strong>P0：</strong>完成可复现骨龄基线、总体／分层误差和热力图检查。未达 G-01 时记录失败并分析，不能为了达标丢弃难例。</li><li><strong>P1：</strong>按独立标注比较整图与 ROI 方法（原文候选 YOLOv8／RT-DETR）；验证设备变化和实足年龄增强，明确每次新增输入的实际收益。</li><li><strong>P2：</strong>按相同患者分区比较 LSTM／TCN，考虑不规则间隔和缺失、MMD 域自适应；终身高采用经验证的概率方法，分别检验精度和校准；闭合结局另定义删失和区间评估。</li></ul>
+<p>原文“首次引入”“显著优于”等描述须经文献和实验支撑，不作为当前已证实的产品结论。</p>
+</section>
+<section id="quality"><h2><span class="n">11</span>影像质控与非功能要求</h2>
+<h3>11.1 PNG 质量与预处理规范</h3>
+<div class="scroll"><table><thead><tr><th>问题</th><th>首版要求</th><th>验证样例／方式</th></tr></thead><tbody>
+<tr><td>宽高和比例不同</td><td>保持宽高比缩放，并按模型方案填充；禁止无依据的非等比拉伸。保留裁剪与填充变换，可映射回原图。</td><td>抽查尺寸从 906×1189 到 1554×1690 等；检查处理前后几何关系。</td></tr>
+<tr><td>手部很小／背景大</td><td>定位完整目标手部，确保指尖、腕骨和桡尺骨远端不被不当裁剪；不只按“最亮区域”决定目标。</td><td>1378、3806 等构图用于复核；扩大样本后验证。</td></tr>
+<tr><td>边缘其他手指</td><td>目标不明确转人工选择／复核；不默认每图仅有一个完整手部目标。</td><td>3806 可见边缘其他手指影像。</td></tr>
+<tr><td>偏暗、偏亮或低对比度</td><td>记录质量提示；保留原图和可重置显示。用于模型的归一化／增强先验证，不能把展示调节当作原始信息恢复。</td><td>4360 偏暗，1378 对比度低；人工复核决定是否可用。</td></tr>
+<tr><td>文字、侧别标识和边框</td><td>记录非解剖信息；处理文字时避免遮挡骨骼，保留所需侧别语义。统一策略后检查对效果与解释的影响。</td><td>1377、6197、11929、14466 等可见标识。</td></tr>
+<tr><td>方向与左右侧</td><td>检测或记录方向；侧别无法可靠确认则标记未知。旋转／镜像增强是否允许由数据规范确认，不据编号推断。</td><td>对照原图与变换记录；不得把“L”本身作为骨龄线索。</td></tr>
+<tr><td>仅 8 位灰度样例已验证</td><td>首版兼容清单先覆盖经检查的文件类型；更高位深、彩色或其他编码通过专门样本验证后扩充。</td><td>逐项解码、显示与数值范围检查。</td></tr>
+<tr><td>质控阈值未冻结</td><td>亮度、模糊和手部占比等数值阈值列 Q-17；前期使用明确人工复核，不以未验证自动阈值拒绝样本。</td><td>包含通过／待复核／拒绝的人工案例集与原因。</td></tr>
+</tbody></table></div>
+<h3>11.2 非功能要求</h3>
+<div class="scroll"><table><thead><tr><th>维度</th><th>当前要求与验收</th></tr></thead><tbody>
+<tr><td>完整性与可靠性</td><td>原图只读保留；输入、结果和复核可追溯；失败可重试且不产生伪成功，不丢失同批成功项。</td></tr>
+<tr><td>显示与解释</td><td>图像、骨龄单位及状态清晰；热力图可关闭；显示调节不改变本轮推理结果；失败提示指出需采取的动作。</td></tr>
+<tr><td>性能</td><td>在指定影像、硬件和并发下记录导入、骨龄推理、热力图与保存耗时，重点报告 P95；目标值由 Q-12 确定，不承诺未经实测时延。</td></tr>
+<tr><td>兼容性</td><td>优先桌面研究／阅片环境；浏览器、屏幕、PNG 支持清单和文件大小上限需冻结并验证；DICOM 另在 P1 验收。</td></tr>
+<tr><td>授权与隐私</td><td>研究使用遵循数据许可；儿童临床数据进入前落实伦理和授权。真实私有数据须有访问控制；演示内容清晰标注。</td></tr>
+<tr><td>临床扩展</td><td>医院试用时按机构要求落实加密传输／存储、备份、保留期、角色及审计，不将研究原型声称为已认证的医疗产品。</td></tr>
+</tbody></table></div>
+</section>
+<section id="acceptance"><h2><span class="n">12</span>验收场景与交付门槛</h2>
+<p>以下是未来实施时的验收清单，当前仅完成文档与数据抽查；<strong>未开发应用，未训练模型，未执行模型或应用验收</strong>。AC-M 编号为本次首版清单，V0.1 的完整系统验收目标按 P1/P2 继续保留。</p>
+<div class="scroll"><table><thead><tr><th>编号</th><th>操作／条件</th><th>预期结果</th><th>追溯</th></tr></thead><tbody>
+<tr><td>AC-M01 匹配审计</td><td>核对全部待用 CSV 与图片目录。</td><td>每个 ID 有匹配状态；缺图、多余图、冲突和排除项可查，不能用抽查冒充全量。</td><td>F-02 / 第 9 节</td></tr>
+<tr><td>AC-M02 格式与失败</td><td>导入有效灰度 PNG、损坏文件和未支持类型。</td><td>有效图可显示；其余明确阻断；成功记录保留。</td><td>F-02/03</td></tr>
+<tr><td>AC-M03 性别映射</td><td>分别输入 True、False、M、F 和非法值。</td><td>统一映射正确；False 不被当真；非法值待确认。</td><td>BR-03</td></tr>
+<tr><td>AC-M04 无实足年龄</td><td>仅提供有效图片和性别。</td><td>可进行当前基线预测；不强制年龄、不显示超前／落后结论。</td><td>F-04 / BR-01</td></tr>
+<tr><td>AC-M05 质量复核</td><td>使用偏暗、低对比度、多背景与额外手指样例。</td><td>问题可提示／人工标记并记录决定；不自动误删；未解决目标歧义不进入正常推理。</td><td>F-02 / 第 11 节</td></tr>
+<tr><td>AC-M06 几何与展示</td><td>缩放、调亮、裁剪预览和叠加热力图。</td><td>比例正确，关键解剖不被误裁；变换可追溯；显示操作不改变预测值。</td><td>F-03/08</td></tr>
+<tr><td>AC-M07 推理成功</td><td>使用模型支持的输入执行骨龄评估。</td><td>输出骨龄、单位、模型和处理版本；不把真值或 ID 当模型特征。</td><td>F-04/11</td></tr>
+<tr><td>AC-M08 解释与故障</td><td>查看本轮热力图，并模拟解释或推理失败。</td><td>解释对应本轮输入；失败单独显示，无缓存旧图／固定假结果。</td><td>F-08 / BR-09</td></tr>
+<tr><td>AC-M09 复核与版本</td><td>填写复核意见、更正性别并重算。</td><td>AI 原值与人工意见分开，旧记录保留，新输入对应新结果。</td><td>F-01/10/11</td></tr>
+<tr><td>AC-M10 数据隔离</td><td>检查分区、重复组与患者关联状态。</td><td>分区固定；增强不跨分区；未知患者隔离如实披露；测试数据不参与调参。</td><td>BR-08 / 第 10 节</td></tr>
+<tr><td>AC-M11 效果验证</td><td>锁定模型后在有标签留出测试集评估。</td><td>报告总体、性别与骨龄分层 MAE、样本量及排除情况；G-01 结果单列。</td><td>G-01 / 第 10 节</td></tr>
+<tr><td>AC-M12 无标签预测</td><td>对原 200 张无标签测试记录生成预测。</td><td>可形成预测文件／研究记录；不输出真实误差或“测试准确率”。</td><td>F-04 / 第 10 节</td></tr>
+<tr><td>AC-M13 范围边界</td><td>查看研究结果页和打印内容。</td><td>不出现假身高、闭合日期、假时间轴或正式签署结论；演示数据明确标注。</td><td>第 4 节 / F-10</td></tr>
+<tr><td>AC-M14 模型不可用／重试</td><td>停用模型或模拟任务中断，再重试。</td><td>错误可诊断；不丢输入、不产生重复有效写入或伪成功。</td><td>F-11 / 非功能要求</td></tr>
+</tbody></table></div>
+<div class="scroll"><table><thead><tr><th>交付门槛</th><th>通过证据</th><th>结论边界</th></tr></thead><tbody>
+<tr><td>D1 数据准备</td><td>授权与标签定义核实；完整匹配／质量／分区清单；重复处理及患者隔离状态明确。</td><td>仅完成 7 张抽查不满足 D1。未知患者关系可披露用于受限研究基线，不能宣称患者独立验证。</td></tr>
+<tr><td>D2 MVP 功能</td><td>AC-M01～M14 中相应数据与功能路径通过，包括骨龄、成功热力图、解释失败路径和结果复核。</td><td>G-01 未达时只能报告功能完成与效果未达目标；无应用实现时 D2 未完成。</td></tr>
+<tr><td>D3 效果目标</td><td>单位与协议冻结后 G-01 在固定有标签留出测试集 MAE &lt; 6 个月，并有分层结果和限制。</td><td>不能把无标签 200 张预测、训练误差或窄骨龄子集结果替代总体效果。</td></tr>
+<tr><td>D4 临床试用（P1+）</td><td>实际医院授权／伦理、适用范围、临床审核与签署流程及代表性验证。</td><td>研究原型和公开数据表现不自动满足临床可用条件。</td></tr>
+</tbody></table></div>
+<p><strong>后续保留验收：</strong>P1 骨骼定位需通过 G-03 和 DICOM／签署工作流检查；P2 分别验证 G-02/G-04/G-05/G-06、非等间隔随访、历史贡献及参考生长曲线。它们不计入本轮 MVP 的“已完成”。</p>
+</section>
+<section id="roadmap"><h2><span class="n">13</span>实施顺序与数据依赖</h2>
+<p>按本轮讨论调整当前执行顺序，不设未经核实的完成日期。每一步以交付物推进；文档版本 V0.2 不等于应用版本已经上线。</p>
+<div class="scroll"><table><thead><tr><th>顺序</th><th>工作与交付物</th><th>建议责任</th><th>完成条件</th></tr></thead><tbody>
+<tr><td>01 需求与来源确认</td><td>本稿范围；标签单位／标准、许可与数据字典；未决事项清单。</td><td>项目／数据负责人</td><td>首版输入和可用范围明确，问题有处理结论或限制。</td></tr>
+<tr><td>02 完整数据准备</td><td>下载所需图片；全量清单、缺图／重复／质量报告及固定分区。</td><td>数据负责人</td><td>D1 通过；原图保留，异常有记录。</td></tr>
+<tr><td>03 骨龄基线</td><td>图片＋性别模型，训练记录、验证选择和独立效果报告。</td><td>算法负责人</td><td>训练与评估可复现；G-01 通过或失败有证据。</td></tr>
+<tr><td>04 可解释与错误分析</td><td>热力图原图映射、非解剖依赖分析、质量与骨龄尾部分层。</td><td>算法／复核人员</td><td>解释与本轮结果一致，错误和限制明确。</td></tr>
+<tr><td>05 Web 首版集成</td><td>PNG 导入、阅片、骨龄、热力图、复核和记录。</td><td>产品／研发负责人</td><td>AC-M 功能验收完成；页面明确研究边界。</td></tr>
+<tr><td>06 P1 单次增强</td><td>ROI 标注与检测；DICOM、年龄增强与临床审核工作流。</td><td>临床／标注／研发</td><td>相应新增数据、指标与流程单独验收。</td></tr>
+<tr><td>07 P2 联合研究</td><td>纵向数据、身高与闭合结局；时序／概率／解释验证。</td><td>临床／算法负责人</td><td>各任务有真实数据和独立效果证据。</td></tr>
+</tbody></table></div>
+<h3>主要风险与处置</h3><ul><li><strong>标签来源或单位不清：</strong>先核实再训练，保留原值和标准；不通过改标签或删难例追求达标。</li><li><strong>图片与患者关联未知：</strong>优先取得患者分组；研究基线披露限制，分组去重不能证明完全无患者泄漏。</li><li><strong>少样本和图像风格差异：</strong>分层报告，独立外部验证后才扩展适用范围；文字和边框可能造成捷径需检查。</li><li><strong>算力和预算：</strong>在实际硬件上测资源需求，选择适当输入与批量；原文 4090／V100／A100 资源未在当前环境确认。</li><li><strong>后续结局缺失：</strong>逐任务统计可用患者及标签，明确未完成能力，不由单次骨龄外推完整预测有效性。</li></ul>
+<h3>原申报计划保留</h3><p>Word 填报 2026 年 6 月至 2027 年 6 月、称 12 个月：第 1–2 月需求与数据，第 3–4 月 ROI／单次模型，第 5–7 月时序，第 8–9 月集成，第 10–11 月临床试用，第 12 月结题。另一个进度章节将第 10–12 月合并固化。实际进展与日历口径需重新对齐，本稿不推断已完成月份。</p><p>原文预算为 10,000 元，含会议、版面、差旅与耗材；数据标注、存储、算力、部署的承担方式仍待确认。论文、软著和结题属于项目成果，不替代产品与模型验收。</p>
+</section>
+<section id="questions"><h2><span class="n">14</span>待确认事项与负责人</h2>
+<p>阶段方向已按本轮要求调整。以下保留未决定义并标明影响范围；P1/P2 的数据问题不阻止独立的首版准备。具体人名由项目负责人分配。</p>
+<div class="scroll"><table><thead><tr><th>编号与影响</th><th>问题／处理原则</th><th>建议确认方</th></tr></thead><tbody>
+<tr><td>Q-01 · 适用范围</td><td>目标人群、骨龄／实际年龄范围、疾病和侧别。首版以数据可验证范围限定，标签极值不能直接当临床边界。</td><td>临床／算法</td></tr>
+<tr><td>Q-02 · 训练与效果验收</td><td>CSV 单位、参考骨龄标准、标注来源与粒度；GP／TW／中华05 等不默认等价。</td><td>数据／临床</td></tr>
+<tr><td>Q-03 · 数据使用／临床扩展</td><td>Kaggle 原始许可与允许用途；医院合作、伦理及 500 例计划实际状态。公开研究和医院使用分别核实。</td><td>项目／数据／医院</td></tr>
+<tr><td>Q-04 · P2</td><td>独立随访次数、时间间隔与序列长度；“2 次以上随访”是否包含初次检查。</td><td>临床／算法</td></tr>
+<tr><td>Q-05 · P1/P2</td><td>实际年龄、身高、父母身高、治疗史是否模型必需；时序输入用 AI 还是确认骨龄。首版只要求图片＋性别。</td><td>算法／临床</td></tr>
+<tr><td>Q-06 · P2</td><td>终身高中心统计量、预测区间覆盖水平及 ±4 cm 目标条件。</td><td>统计／算法</td></tr>
+<tr><td>Q-07 · P2</td><td>未来曲线时间步长与每个跨度的误差门槛。</td><td>算法／临床</td></tr>
+<tr><td>Q-08 · P2</td><td>闭合部位、定义、标签、删失处理和验收指标。</td><td>临床／标注／算法</td></tr>
+<tr><td>Q-09 · P2</td><td>身高与骨龄参考曲线来源、人群、授权及百分位算法。</td><td>临床</td></tr>
+<tr><td>Q-10 · P1</td><td>骨骼 ROI 类别与标注规范；DICOM 类型、编码、设备样本及脱敏方案。</td><td>影像／标注／研发</td></tr>
+<tr><td>Q-11 · 后续范围</td><td>人工 ROI 修改、图谱文字解释、家长端及院内接口是否另立需求；本轮不纳入 P0。</td><td>项目／产品</td></tr>
+<tr><td>Q-12 · 非功能验收</td><td>实际 CPU/GPU、存储、并发、浏览器、文件上限、输入分辨率与 P95 时延；实测后冻结。</td><td>研发／项目</td></tr>
+<tr><td>Q-13 · P1 临床报告</td><td>机构签署、正式导出、账号权限、保留期和流转规则。首版仅研究记录。</td><td>医院业务／信息科</td></tr>
+<tr><td>Q-14 · 计划</td><td>当前真实进度、原申报日历及预算资源如何对齐；各阶段责任人。</td><td>项目／指导教师</td></tr>
+<tr><td>Q-15 · 数据隔离</td><td>图片 ID 是否代表患者、能否取得患者分组与近重复说明；未知时明确患者级隔离未验证。</td><td>数据提供方</td></tr>
+<tr><td>Q-16 · 训练前冻结</td><td>分区比例、种子、分层区间与清单；建议约 80/10/10，但以分组与样本量决定。</td><td>数据／算法</td></tr>
+<tr><td>Q-17 · 质控与处理</td><td>亮度／模糊／手部占比阈值、方向、裁剪和填充方案、人工复核标准；阈值未验证前不自动删图。</td><td>算法／复核人员</td></tr>
+<tr><td>Q-18 · 解释与尾部误差</td><td>热力图人工评审方法、低龄／高骨龄稀疏区间适用限制，如何分析标签取整和文字干扰。</td><td>算法／临床复核</td></tr>
+</tbody></table></div>
+</section>
+<section id="trace"><h2><span class="n">15</span>追溯、术语与变更记录</h2>
+<div class="scroll"><table><thead><tr><th>来源</th><th>内容</th><th>V0.2 对应</th></tr></thead><tbody>
+<tr><td>Word：项目简介／研究内容</td><td>ROI、单时相、时序、终身高与闭合时间窗。</td><td>F-03～07；P1/P2 保留，P0 先建立单次基线。</td></tr>
+<tr><td>Word：实施方案</td><td>MAE、RMSE、mAP；DICOM；Web 侧栏；临床试用。</td><td>G-01～06；分阶段功能与效果验收；临床条件单列。</td></tr>
+<tr><td>Word：创新点与特色</td><td>热力图、历史贡献、图谱文字、百分位及医师签字。</td><td>F-08～10；首版热力图与人工复核，后续独立验证。</td></tr>
+<tr><td>Word：基础条件／进度／预算</td><td>医院和算力计划、阶段产出、经费。</td><td>第 1、9、13、14 节，未核实资源不视为现状。</td></tr>
+<tr><td>用户上传 CSV</td><td>训练 12,611 条／测试 200 条；字段、标签、分布、缺失与重复统计。</td><td>第 9 节；BR-01/03/04/08；评估协议。</td></tr>
+<tr><td>Kaggle 实际访问与抽查</td><td>页面来源、许可元数据、7 张图片及格式／尺寸／构图观察。</td><td>第 9、11 节；只声明抽查范围。</td></tr>
+<tr><td>本轮用户讨论</td><td>同意先以单时相闭环开始，并要求更新 PRD。</td><td>首版 P0、执行顺序、数据清单和 AC-M 验收；不代表已开发。</td></tr>
+</tbody></table></div>
+<h3>术语</h3>
+<div class="scroll"><table><thead><tr><th>术语</th><th>含义</th></tr></thead><tbody>
+<tr><td>骨龄／实足年龄</td><td>骨骼发育程度与检查时的实际年龄；CSV boneage 不能作为实际年龄或预测输入。</td></tr>
+<tr><td>样本／患者／检查</td><td>一条图片记录、一个真实个体与一次检查不是同一对象；需明确关联后才能形成纵向研究。</td></tr>
+<tr><td>ROI／热力图</td><td>解剖区域位置与模型相对关注的可视化不同；热力图不能充当骨骼位置框真值。</td></tr>
+<tr><td>MAE／RMSE／mAP@0.5</td><td>分别用于骨龄绝对误差、终身高平方误差尺度和目标检测精度；指标不互换。</td></tr>
+<tr><td>预测区间／置信区间</td><td>个体未来结果的范围与参数估计不确定范围不同，统计术语随实际对象定义。</td></tr>
+<tr><td>PNG 显示调节／DICOM 窗宽窗位</td><td>当前 PNG 亮度对比度调节不等同具有原始医学元数据的窗宽窗位处理。</td></tr>
+</tbody></table></div>
+<div class="scroll"><table><thead><tr><th>版本</th><th>变更</th><th>交付状态</th></tr></thead><tbody>
+<tr><td>V0.1</td><td>基于 Word 的完整系统需求与待确认项。</td><td>保留原稿作为历史版本。</td></tr>
+<tr><td>V0.2 · 2026-10-22</td><td>更新单时相首版；新增 CSV 与图片证据、PNG 质控、分区规则、患者隔离限制、阶段指标和验收。</td><td>静态 PRD 已更新；临床与数据未决项仍需落实。</td></tr>
+</tbody></table></div>
+<p><strong>本次交付：</strong>无需安装依赖即可离线阅读的静态 HTML；目录锚点、表格和打印样式保留。数据源网页链接需联网访问，正文无外部资源依赖。本文件不包含应用逻辑、模型、真实预测结果或临床签署能力。</p>
+<p><strong>后续第一项工作：</strong>核实标签与许可，整理全量图片匹配／质量清单，明确患者分组可获得性并冻结数据划分；然后进入模型基线和产品实现。</p>
+<p class="source">项目全称、原研究目标与指标取自用户上传《时序骨龄.docx》；表格统计取自用户上传 CSV；图片观察取自 Kaggle 的 7 张实际下载样例。源文档内容作为需求材料处理。本次未运行应用或训练模型，未证明临床可用性。</p>
+</section>
+<footer class="foot">时序骨龄与生长潜力联合预测系统 · PRD V0.2 · 2026-10-22<br>首版：单时相骨龄评估研究原型 / 静态需求文档 / 无应用实现</footer></main></body></html>

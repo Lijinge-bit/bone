@@ -1,0 +1,92 @@
+[
+  {
+    "file": "test4360.png",
+    "width": 999,
+    "height": 1414,
+    "mode": "L",
+    "png_bit_depth": 8,
+    "label": {
+      "Case ID": "4360",
+      "Sex": "M"
+    },
+    "sha256": "0b759cbef2ed61f464ae6543fc535f542f4bc6f44d11d44a233620fa6a29a0e7"
+  },
+  {
+    "file": "train11929.png",
+    "width": 1554,
+    "height": 1690,
+    "mode": "L",
+    "png_bit_depth": 8,
+    "label": {
+      "id": "11929",
+      "boneage": "120",
+      "male": "False"
+    },
+    "sha256": "e4d14641941b979c5eb9e9271a99eaadaea31cc77ef0fca437061e34062483ca"
+  },
+  {
+    "file": "train1377.png",
+    "width": 1514,
+    "height": 2044,
+    "mode": "L",
+    "png_bit_depth": 8,
+    "label": {
+      "id": "1377",
+      "boneage": "180",
+      "male": "False"
+    },
+    "sha256": "1491b3be5411ca33dbbe5c80ec2595886b537bdceb7f77b1a3c635a1f9c586d8"
+  },
+  {
+    "file": "train1378.png",
+    "width": 1514,
+    "height": 2044,
+    "mode": "L",
+    "png_bit_depth": 8,
+    "label": {
+      "id": "1378",
+      "boneage": "12",
+      "male": "False"
+    },
+    "sha256": "ddd0648c3040d8db46b56e99fc3576ace81451c0a7c9b81b04818eac6c7a8308"
+  },
+  {
+    "file": "train14466.png",
+    "width": 1538,
+    "height": 1930,
+    "mode": "L",
+    "png_bit_depth": 8,
+    "label": {
+      "id": "14466",
+      "boneage": "228",
+      "male": "True"
+    },
+    "sha256": "e0b46918385cb025d8dcfa824f6d5786a04f54e1537c56195c58ef5523da8170"
+  },
+  {
+    "file": "train3806.png",
+    "width": 906,
+    "height": 1189,
+    "mode": "L",
+    "png_bit_depth": 8,
+    "label": {
+      "id": "3806",
+      "boneage": "1",
+      "male": "True"
+    },
+    "sha256": "51742b4a3a4ea2d9bb1402e0f733f5231d9be9fae9b4a76cb7a7742ddfabaff7"
+  },
+  {
+    "file": "train6197.png",
+    "width": 1209,
+    "height": 1654,
+    "mode": "L",
+    "png_bit_depth": 8,
+    "label": {
+      "id": "6197",
+      "boneage": "150",
+      "male": "True"
+    },
+    "sha256": "bbf0e105d6026fb55e521e7ee7d50fc24de2f5631b26c47da4ac9c62360d3f10"
+  }
+]

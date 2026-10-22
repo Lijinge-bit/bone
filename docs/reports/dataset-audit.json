@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-10-22T13:44:08+00:00",
+  "source": "kmader/rsna-bone-age",
+  "dataset_version": 2,
+  "source_url": "https://www.kaggle.com/datasets/kmader/rsna-bone-age",
+  "license": "Other (specified in description); research use; verify terms for other uses",
+  "training_rows": 12611,
+  "unlabeled_rows": 200,
+  "png_entries": 12811,
+  "matched_training": 12611,
+  "matched_unlabeled": 200,
+  "anomalies_count": 0,
+  "anomalies": [],
+  "exact_duplicate_groups": 0,
+  "dhash_candidate_groups": 0,
+  "cross_labeled_unlabeled_duplicate_groups": [],
+  "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+  "near_duplicate_limit": "Exact 256-bit dHash buckets grouped; not exhaustive visual similarity search",
+  "label_unit": "months (RSNA research convention); verify reference labeling standard before clinical use",
+  "csv_checksums": {
+    "boneage-training-dataset.csv": {
+      "sha256": "9459296c0fca3e3cd908e79002914d0d90c7f5e46936eefd34b11261468ce209",
+      "archive_matches": true
+    },
+    "boneage-test-dataset.csv": {
+      "sha256": "95d7de74b4bdf7551b81a249f7fce469865eaa5a6d20356c3af96fb2e56953de",
+      "archive_matches": true
+    }
+  },
+  "splits": {
+    "train": 10091,
+    "validation": 1260,
+    "test": 1260
+  },
+  "split_seed": 20261022,
+  "grouping": "decoded raster equality and exact dHash candidates; patient grouping unavailable",
+  "image_size": 96,
+  "preprocess_version": "gray-letterbox-v1",
+  "manifest_sha256": "bf4f9f51d30d08e0c3a89d9bf69e5347af2ec6570c246dbe7a6147e6d49cecb5",
+  "cache_sha256": "4a79203844c51cb2efdf0b5151289df4f6cb3c77b29382f93675c8be22c86000",
+  "modes": {
+    "L": 12811
+  },
+  "distinct_dimensions": 10903,
+  "elapsed_seconds": 386
+}

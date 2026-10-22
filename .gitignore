@@ -1,0 +1,14 @@
+.venv/
+var/
+data/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.env
+*.sqlite3*
+*.pt
+*.npz
+*.zip
+coverage.xml
+htmlcov/

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163b3c">
+  <title>骨龄研究工作台 · Bone Atlas</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+<div id="app">
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="返回概览"><span class="brand-mark">b<span>•</span></span><span>BONE ATLAS<small>骨龄研究工作台</small></span></a>
+    <div class="nav-caption">WORKSPACE / 工作空间</div>
+    <nav aria-label="主导航">
+      <a href="#overview" data-route="overview"><span data-icon="dashboard"></span>工作概览</a>
+      <a href="#cases" data-route="cases"><span data-icon="folder"></span>样本工作台<span class="nav-count" id="nav-count">0</span></a>
+      <a href="#data" data-route="data"><span data-icon="chart"></span>数据与模型</a>
+      <a href="#guide" data-route="guide"><span data-icon="book"></span>使用指南</a>
+    </nav>
+    <div class="sidebar-card"><span class="tiny-label">RESEARCH EDITION</span><h3>单时相，循序向前。</h3><p>基于手部影像与性别，探索骨骼发育的量化评估。</p><span class="version-tag">MVP 0.1 <i></i> 研究原型</span></div>
+    <div class="sidebar-bottom"><span class="avatar">研</span><div>本机研究空间<small>单用户 · 非临床环境</small></div><span data-icon="shield"></span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong id="breadcrumb-title">工作概览</strong></div><div class="topbar-right"><span class="connection" id="connection"><i></i>正在连接</span><span class="top-divider"></span><span class="edition-badge">研究辅助</span><span class="avatar small">研</span></div></header>
+    <main id="main" tabindex="-1"><div class="page-loading"><span class="spinner"></span>正在载入工作空间…</div></main>
+    <footer class="app-footer"><span>Bone Atlas · 单时相骨龄评估研究原型</span><span>AI 结果需人工复核 · 不用于临床诊断或治疗决策</span></footer>
+  </div>
+</div>
+<dialog id="upload-dialog" class="upload-dialog" aria-labelledby="upload-title">
+  <form id="upload-form">
+    <div class="dialog-header"><div><span class="eyebrow">NEW SAMPLE</span><h2 id="upload-title">导入手部影像</h2></div><button type="button" class="icon-button" data-action="close-upload" aria-label="关闭"><span data-icon="close"></span></button></div>
+    <p class="muted">上传原始 PNG，核对输入后开始一次新的评估。</p>
+    <label class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-label="选择或拖入 PNG 图片">
+      <input type="file" id="upload-file" name="file" accept="image/png,.png" required>
+      <span class="upload-icon" data-icon="upload"></span><strong id="file-title">点击选择，或将影像拖到这里</strong><span id="file-description">8 位灰度 PNG · 单张不超过 15 MiB</span>
+    </label>
+    <div id="upload-preview" class="upload-preview" hidden></div>
+    <div class="form-grid"><label>样本编号 <span class="optional">选填</span><input name="source_image_id" maxlength="120" placeholder="例如 RSNA-1377"></label><fieldset><legend>性别 <span class="optional">可稍后确认</span></legend><div class="sex-options"><label><input type="radio" name="sex" value="M"><span>男</span></label><label><input type="radio" name="sex" value="F"><span>女</span></label><label><input type="radio" name="sex" value="" checked><span>待确认</span></label></div></fieldset></div>
+    <div class="inline-note"><span data-icon="info"></span><span>导入后需核对完整手部、文字与其他手指等干扰，再确认图片可用。实际年龄不是当前模型的必填项。</span></div>
+    <div id="upload-error" class="form-error" role="alert" hidden></div>
+    <div class="dialog-footer"><button type="button" class="button secondary" data-action="close-upload">取消</button><button type="submit" class="button primary" id="upload-submit"><span data-icon="upload"></span>导入并检查</button></div>
+  </form>
+</dialog>
+<dialog id="review-dialog" class="review-dialog" aria-labelledby="review-title"><form id="review-form"><div class="dialog-header"><div><span class="eyebrow">HUMAN REVIEW</span><h2 id="review-title">记录复核意见</h2></div><button class="icon-button" type="button" data-action="close-review" aria-label="关闭"><span data-icon="close"></span></button></div><p class="muted">保留模型原始结果，独立记录你的判断。</p><label>复核人<input name="reviewer" required maxlength="80" placeholder="姓名或研究人员编号"></label><label>处理意见<select name="decision"><option value="accepted">接受本轮研究结果</option><option value="question">结果存疑，需进一步核对</option><option value="manual">转人工处理</option></select></label><label>人工确认骨龄（月）<span class="optional">选填</span><input name="confirmed_months" type="number" min="0" max="600" step="0.1" placeholder="仅在具备依据时填写"></label><label>复核说明<textarea name="note" required minlength="2" maxlength="4000" rows="4" placeholder="记录影像依据、疑问或后续处理建议"></textarea></label><div class="inline-note"><span data-icon="info"></span><span>此操作形成研究复核记录，不等同医院的临床审核签署。</span></div><div id="review-error" class="form-error" role="alert" hidden></div><div class="dialog-footer"><button type="button" class="button secondary" data-action="close-review">取消</button><button type="submit" class="button primary">保存复核意见</button></div></form></dialog>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<noscript>本工作台需要启用 JavaScript。需求文档可通过 /api/prd 单独阅读。</noscript>
+</body></html>

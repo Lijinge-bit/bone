@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "clean_dependency_install": true,
+  "unit_tests": 14,
+  "unit_skipped": 0,
+  "unpacked_fresh_database_samples": 6,
+  "private_runtime_database_copied": false,
+  "raw_dataset_required_for_inference": false,
+  "real_inference": true,
+  "heatmap_original_dimensions": [
+    1514,
+    2044
+  ],
+  "unlabeled_export_rows": 200,
+  "platform": "Linux / Python 3.12 / CPU"
+}
