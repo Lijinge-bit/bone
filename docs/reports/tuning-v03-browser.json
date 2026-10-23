@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "browser_errors": [],
+  "checks": [
+    "homepage",
+    "duplicate upload opens original",
+    "quality review",
+    "real model inference",
+    "real heatmap",
+    "image controls",
+    "review persistence",
+    "search",
+    "data report",
+    "mobile width",
+    "print CSS"
+  ]
+}

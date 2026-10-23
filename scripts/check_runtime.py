@@ -1,4 +1,4 @@
-"""Compare real inference/Grad-CAM against the original Python 3.12 runtime.
+"""Check the registered real model, predictions and original-coordinate Grad-CAM.
 
 Works with the six public samples in the full bundle. --bundle prepares only
 checksum-verified model/sample files, so source CI also exercises real weights.
@@ -9,9 +9,12 @@ import csv
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
 from pathlib import Path
 import platform
 import sys
+import shutil
+import tempfile
 from zipfile import ZipFile
 
 import numpy as np
@@ -168,10 +171,34 @@ def main():
     parser.add_argument('--cache', type=Path, help='Optional audited cache-96.npz for all 1,260 holdout images')
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
-    reference = json.loads(args.reference.read_text())
+    reference = json.loads(args.reference.read_text(encoding='utf-8'))
     if args.bundle:
         prepare_bundle(args.bundle, args.storage, reference)
     predictor = Predictor(args.storage / 'models')
+    meta = predictor.metadata()
+    require(meta is not None, 'Registered model missing or incompatible; use the complete project bundle')
+    if meta['checkpoint_sha256'] != reference['checkpoint_sha256']:
+        require(args.cache is None,
+                '--cache is the original CNN regression; evaluate new candidates with scripts/evaluate_model.py')
+        from scripts.check_candidate import check_candidate
+        with tempfile.TemporaryDirectory(prefix='bone-active-check-') as temporary:
+            directory = Path(temporary)
+            shutil.copyfile(predictor.directory/'active.json', directory/'candidate.json')
+            source=predictor.directory/meta['checkpoint'];target=directory/meta['checkpoint']
+            try:
+                os.link(source,target)
+            except OSError:
+                shutil.copyfile(source,target)
+            report=check_candidate(directory,args.storage/'images',ROOT/'docs/reports/sample-manifest.json')
+        require(predictor.metadata()==meta,'Registered model changed during checking; retry with the current model')
+        report['mode']='registered_model_functional_check'
+        report['accuracy_evaluation']=False
+        if args.output:
+            args.output.parent.mkdir(parents=True,exist_ok=True)
+            args.output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        print(json.dumps({k:v for k,v in report.items() if k not in ('samples','code_sha256')},
+                         ensure_ascii=False,indent=2))
+        return
     samples = check_samples(predictor, args.storage, reference)
     report = {'status': 'passed', 'created_at': datetime.now(timezone.utc).isoformat(),
         'runtime': {'python': platform.python_version(), 'torch': str(torch.__version__),

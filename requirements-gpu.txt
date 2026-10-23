@@ -1,0 +1,6 @@
+# Default Windows x64 / Python 3.14 GPU training environment.
+# Requires a driver supporting CUDA 13.0; check_environment.py tests real CUDA.
+-r requirements.txt
+--extra-index-url https://download.pytorch.org/whl/cu130
+torch==2.14.1+cu130
+torchvision==0.29.1+cu130

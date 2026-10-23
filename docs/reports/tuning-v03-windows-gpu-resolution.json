@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "check": "Target-platform binary-wheel dependency resolution only",
+  "target_platform": "Windows x64",
+  "python": "3.14.0",
+  "torch": "2.14.1+cu130",
+  "torchvision": "0.29.1+cu130",
+  "index": "https://download.pytorch.org/whl/cu130",
+  "packages": 30,
+  "native_windows_gpu_execution": false,
+  "driver_compatibility_verified_on_user_machine": false,
+  "requirements_sha256": "bc3a9a077487c0b1f7b80c5337a2a552215aef13e07ffc84853083f7e64d2466"
+}

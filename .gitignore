@@ -1,5 +1,9 @@
 .venv/
 .venv314/
+.venv314-gpu/
+experiments/
+torch-cache/
+*.npy
 var/
 data/
 __pycache__/

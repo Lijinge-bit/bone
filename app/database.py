@@ -87,6 +87,11 @@ def initialize(path):
             created_at TEXT NOT NULL
         );
         """)
+        # Additive migration: prior results remain tied to their original model ID.
+        columns = {row[1] for row in db.execute("PRAGMA table_info(evaluations)")}
+        for name in ("checkpoint_sha256", "model_metadata_sha256", "architecture", "explanation_method"):
+            if name not in columns:
+                db.execute(f"ALTER TABLE evaluations ADD COLUMN {name} TEXT")
         db.execute("""UPDATE evaluations SET status='failed',
                    explanation_status='unavailable', error='服务重启，本轮任务已中断，请重新评估',
                    finished_at=? WHERE status IN ('queued','running')""", (now(),))

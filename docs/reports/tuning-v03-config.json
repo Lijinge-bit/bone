@@ -1,0 +1,29 @@
+{
+  "architecture": "resnet50-sex-v1",
+  "device": "cpu",
+  "image_size": 224,
+  "epochs": 60,
+  "batch_size": 128,
+  "feature_batch_size": 16,
+  "threads": 2,
+  "seed": 20261023,
+  "head_lr": 0.0003,
+  "weight_decay": 0.0005,
+  "gradient_clip_norm": 5.0,
+  "early_stopping_patience": 10,
+  "early_stopping_min_delta": 0.01,
+  "augmentation": false,
+  "bn_strategy": "freeze_running_stats",
+  "amp": false,
+  "training_protocol": "frozen_backbone_head_only",
+  "scheduler": "cosine_annealing",
+  "minimum_lr": 1e-06,
+  "pretrained_weights": "resnet50-11ad3fa6.pth",
+  "pretrained_weights_sha256": "11ad3fa62ca79e40addfd354a8ec4b7c75143b3038b8d2a807fbc68deab379ca",
+  "feature_module": "pool(features(image))",
+  "feature_width": 2048,
+  "limitations": [
+    "Frozen pretrained backbone with trained head only; not full fine-tuning",
+    "No image augmentation; fixed train/validation selection only"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "architecture": "boneage-small-cnn-v1", "device": "cpu", "image_size": 96,
+  "epochs": 60, "batch_size": 96, "threads": 3, "num_workers": 0,
+  "seed": 20261022, "pretrained": false, "weights_path": null, "amp": false,
+  "freeze_backbone_epochs": 0, "bn_strategy": "freeze_running_stats",
+  "backbone_lr": 0.0015, "head_lr": 0.0015, "weight_decay": 0.0005,
+  "minimum_lr": 0.00005, "gradient_accumulation_steps": 1,
+  "gradient_clip_norm": 5.0, "early_stopping_patience": 0,
+  "early_stopping_min_delta": 0.0, "augmentation": true,
+  "loss": "smooth_l1", "loss_beta": 0.5
+}

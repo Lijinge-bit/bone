@@ -6,7 +6,20 @@ import numpy as np
 from PIL import Image, UnidentifiedImageError
 
 PREPROCESS_VERSION = "gray-letterbox-v1"
+IMAGENET_PREPROCESS_VERSION = "imagenet-gray-letterbox-v1"
 QC_VERSION = "research-triage-v1"
+
+
+def preprocess_version_for(architecture):
+    """Return the preprocessing contract of a supported model architecture."""
+    versions = {
+        "boneage-small-cnn-v1": PREPROCESS_VERSION,
+        "resnet50-sex-v1": IMAGENET_PREPROCESS_VERSION,
+    }
+    try:
+        return versions[architecture]
+    except (KeyError, TypeError) as exc:
+        raise ValueError(f"Unsupported model architecture: {architecture!r}") from exc
 
 
 class ImageValidationError(ValueError):

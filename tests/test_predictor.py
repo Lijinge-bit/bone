@@ -47,7 +47,13 @@ class TrainedModelIntegration(unittest.TestCase):
         if not all((STORAGE/'images'/(r['image_sha256']+'.png')).is_file()
                    for r in reference['samples']):
             self.skipTest('Six public samples required; use the complete research bundle')
-        results=check_samples(Predictor(MODEL),STORAGE,reference)
+        predictor=Predictor(MODEL)
+        if predictor.metadata()['checkpoint_sha256']!=reference['checkpoint_sha256']:
+            legacy=MODEL/'versions'/reference['model_id']
+            self.assertTrue((legacy/'legacy-active.json').is_file(),
+                            'The original model must be retained for regression and rollback')
+            predictor=Predictor(legacy,metadata_filename='legacy-active.json')
+        results=check_samples(predictor,STORAGE,reference)
         self.assertEqual(len(results),12)
 
 

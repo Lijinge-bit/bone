@@ -17,17 +17,26 @@ from zipfile import ZIP_DEFLATED, ZipFile
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from app.database import initialize,transaction,event,now
 from app.imaging import quality_check,validate_png
+from app.config import Settings
+from app.predictor import Predictor
 
 
 def main():
     root=Path(__file__).resolve().parents[1]
     ap=argparse.ArgumentParser()
-    ap.add_argument('--output',type=Path,default=Path('/workspace/deliverables/BoneAtlas_MVP_0.2_Python314.zip'))
+    ap.add_argument('--output',type=Path,default=root/'downloads/BoneAtlas_MVP_0.3_Training.zip')
     ap.add_argument('--samples',type=Path,default=Path('/workspace/rsna-image-review'))
+    ap.add_argument('--data',type=Path,default=Settings.from_env().dataset)
     args=ap.parse_args();args.output.parent.mkdir(parents=True,exist_ok=True)
     meta=json.loads((root/'var/models/active.json').read_text())
     checkpoint=root/'var/models'/Path(meta['checkpoint']).name
-    assert hashlib.sha256(checkpoint.read_bytes()).hexdigest()==meta['checkpoint_sha256']
+    if hashlib.sha256(checkpoint.read_bytes()).hexdigest()!=meta['checkpoint_sha256']:
+        raise RuntimeError('Active checkpoint checksum mismatch')
+    if Predictor(root/'var/models').metadata() is None:
+        raise RuntimeError('Active model is unavailable')
+    report=json.loads((root/'var/models/evaluation.json').read_text())
+    if report.get('model_id')!=meta['model_id']:
+        raise RuntimeError('Evaluation report does not match active model')
     with (root/'boneage-training-dataset.csv').open() as f:labels={r['id']:r for r in csv.DictReader(f)}
     expected={r['file'].removeprefix('train').removesuffix('.png'):r['sha256']
               for r in json.loads((root/'docs/reports/sample-manifest.json').read_text())
@@ -55,9 +64,10 @@ def main():
         with sqlite3.connect(database) as db:db.execute('PRAGMA wal_checkpoint(TRUNCATE)')
         with ZipFile(args.output,'w',compression=ZIP_DEFLATED,compresslevel=6) as out:
             for name in ('README.md','.gitignore','requirements.txt','requirements-ml.txt','requirements-dev.txt','requirements.lock',
+                         'requirements-gpu.txt','requirements-gpu.lock',
                          'boneage-training-dataset.csv','boneage-test-dataset.csv'):
                 out.write(root/name,base+name)
-            for folder in ('app','scripts','tests','docs','.github'):
+            for folder in ('app','scripts','tests','docs','.github','configs'):
                 for path in sorted((root/folder).rglob('*')):
                     if path.is_file() and '__pycache__' not in path.parts and path.suffix!='.pyc':
                         out.write(path,base+str(path.relative_to(root)))
@@ -65,15 +75,31 @@ def main():
             for path,name in sample_files:out.write(path,base+name)
             for name in ('active.json','evaluation.json',checkpoint.name,'test-predictions.csv'):
                 out.write(root/'var/models'/name,base+'var/models/'+name)
-            out.write(root/'var/unlabeled-predictions.csv',base+'var/unlabeled-predictions.csv')
-            for name in ('audit.json','download.json'):
-                path=Path('/workspace/bone-data')/name
-                if path.exists():out.write(path,base+'data/'+name)
+            # Keep the active weights once. The registry snapshots them atomically
+            # on the first switch; older immutable versions remain ready to roll back.
+            versions=root/'var/models/versions'
+            if versions.is_dir():
+                for version in sorted(versions.iterdir()):
+                    if version.is_dir() and version.name!=meta['model_id']:
+                        for path in sorted(version.rglob('*')):
+                            if path.is_file():
+                                out.write(path,base+str(path.relative_to(root)))
+            for name in ('unlabeled-predictions.csv','unlabeled-predictions.csv.metadata.json'):
+                out.write(root/'var'/name,base+'var/'+name)
+            for name in ('audit.json','download.json','manifest.jsonl'):
+                path=args.data/name
+                out.write(path,base+'data/'+name)
             out.writestr(base+'PACKAGE.json',json.dumps({
-                'version':'0.2.0','python':'3.14','torch':'2.14.1+cpu',
+                'version':'0.3.0','python':'3.14','torch':'2.14.1+cpu','torchvision':'0.29.1+cpu',
+                'gpu_dependencies':'requirements-gpu.lock',
                 'scope':'single-image research prototype','public_samples':6,
                 'operational_database_included':False,'private_uploads_included':False,
                 'model_id':meta['model_id'],'model_sha256':meta['checkpoint_sha256'],
+                'architecture':meta['architecture'],'training_protocol':meta.get('training_protocol'),
+                'gpu_full_finetuning_completed':False,
+                'active_snapshot':'created by registry on first switch; active weights included once',
+                'older_immutable_versions_included':True,
+                'test_evaluation_role':meta['evaluation'].get('evaluation_role'),
                 'test_mae_months':meta['evaluation']['test']['mae_months'],
                 'target_passed':meta['evaluation']['target_passed'],
                 'raw_full_dataset_included':False,
@@ -82,6 +108,8 @@ def main():
             bad=out.testzip()
             if bad:raise RuntimeError('Package CRC failed: '+bad)
             print('Verified',len(out.infolist()),'archive entries')
+    if args.output.stat().st_size>=100*1024*1024:
+        raise RuntimeError('Bundle exceeds the GitHub 100 MiB file limit; do not publish')
     sha=hashlib.sha256(args.output.read_bytes()).hexdigest()
     args.output.with_suffix('.zip.sha256').write_text(f'{sha}  {args.output.name}\n')
     print(args.output,'bytes',args.output.stat().st_size,'sha256',sha)

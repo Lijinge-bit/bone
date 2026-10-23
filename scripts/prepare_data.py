@@ -18,6 +18,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.database import now
+from app.config import Settings
 from app.imaging import PREPROCESS_VERSION, letterbox, validate_png
 
 
@@ -45,8 +46,8 @@ def grouped_split(labels, groups, seed):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--archive', type=Path, default=Path('/workspace/bone-data/rsna-bone-age-v2.zip'))
-    ap.add_argument('--output', type=Path, default=Path('/workspace/bone-data'))
+    ap.add_argument('--archive', type=Path, default=Settings.from_env().dataset/'rsna-bone-age-v2.zip')
+    ap.add_argument('--output', type=Path, default=Settings.from_env().dataset)
     ap.add_argument('--size', type=int, default=96)
     ap.add_argument('--seed', type=int, default=20261022)
     args = ap.parse_args()

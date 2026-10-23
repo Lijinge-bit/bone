@@ -1,4 +1,6 @@
 import asyncio
+import csv
+import hashlib
 import io
 import json
 import os
@@ -55,9 +57,48 @@ def create_app(settings=None):
         yield
         executor.shutdown(wait=True, cancel_futures=False)
 
-    app = FastAPI(title="Bone Age Research Workbench", version="0.2.0", lifespan=lifespan)
+    app = FastAPI(title="Bone Age Research Workbench", version="0.3.0", lifespan=lifespan)
     app.state.settings = settings
     app.state.predictor = predictor
+
+    def metadata_signature(meta):
+        return hashlib.sha256(json.dumps(meta, sort_keys=True, separators=(",", ":"),
+                                         ensure_ascii=False).encode("utf-8")).hexdigest()
+
+    def prediction_export_matches(meta):
+        path = settings.storage / "unlabeled-predictions.csv"
+        if not path.is_file():
+            return False
+        if meta is None:
+            return True  # Explicit versioned artifact remains downloadable without a model.
+        try:
+            with path.open(encoding="utf-8", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+            return bool(rows) and all(r.get("model_id") == meta["model_id"] for r in rows)
+        except (OSError, ValueError, UnicodeError):
+            return False
+
+    def registered_report(meta):
+        if meta is None:
+            return None
+        # Registered metadata always carries the matching summary. Never silently
+        # display an old evaluation.json after switching to a different model.
+        summary = {**meta["evaluation"], "model_id": meta["model_id"],
+                   "checkpoint_sha256": meta["checkpoint_sha256"],
+                   "architecture": meta["architecture"]}
+        path = settings.storage / "models" / "evaluation.json"
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+            if (report.get("model_id") == meta["model_id"] and
+                    report.get("checkpoint_sha256") == meta["checkpoint_sha256"]):
+                return report
+            if (meta.get("schema_version", 1) == 1 and
+                    report.get("architecture") == meta["architecture"] and
+                    report.get("test") == meta["evaluation"].get("test")):
+                return {**report, **summary}
+        except (OSError, ValueError, TypeError):
+            pass
+        return summary
 
     @app.middleware("http")
     async def same_origin(request: Request, call_next):
@@ -113,13 +154,13 @@ def create_app(settings=None):
         audit_path = settings.dataset / "audit.json"
         if audit_path.exists():
             try:
-                audit = json.loads(audit_path.read_text())
+                audit = json.loads(audit_path.read_text(encoding="utf-8"))
             except (OSError, ValueError):
                 pass
-        return {"app_version": "0.2.0", "scope": "single-image-research", "stats": stats,
+        return {"app_version": "0.3.0", "scope": "single-image-research", "stats": stats,
                 "model": meta, "dataset_audit": audit,
                 "dataset_archive_available": (settings.dataset / "rsna-bone-age-v2.zip").is_file(),
-                "unlabeled_predictions_available": (settings.storage / "unlabeled-predictions.csv").is_file(),
+                "unlabeled_predictions_available": prediction_export_matches(meta),
                 "privacy": "本机单用户研究环境；正式部署前需配置身份与访问控制"}
 
     @app.get("/api/cases")
@@ -252,6 +293,10 @@ def create_app(settings=None):
                 db.execute("UPDATE evaluations SET status='running' WHERE id=?", (evaluation_id,))
             path = settings.storage / "images" / f"{snapshot['input_sha256']}.png"
             image = validate_png(path.read_bytes(), settings.max_pixels)
+            current_meta = predictor.metadata()
+            if (snapshot.get("model_metadata_sha256") and
+                    (current_meta is None or metadata_signature(current_meta) != snapshot["model_metadata_sha256"])):
+                raise RuntimeError("模型配置已变更，本轮已停止，请刷新后重新评估")
             value, heatmap, warning = predictor.assess(image, snapshot["input_sex"], snapshot["model_id"], model_sha)
             heatmap_file = None
             if heatmap is not None:
@@ -290,9 +335,11 @@ def create_app(settings=None):
                 raise HTTPException(409, "该样本已有运行中的任务")
             evaluation_id = uuid.uuid4().hex
             db.execute("""INSERT INTO evaluations(id,case_id,input_revision,input_sha256,input_sex,model_id,
-                preprocess_version,status,created_at) VALUES(?,?,?,?,?,?,?,'queued',?)""",
+                preprocess_version,status,created_at,checkpoint_sha256,model_metadata_sha256,architecture,
+                explanation_method) VALUES(?,?,?,?,?,?,?,'queued',?,?,?,?,?)""",
                 (evaluation_id, case_id, row["revision"], row["image_sha256"], row["sex"], meta["model_id"],
-                 PREPROCESS_VERSION, now()))
+                 meta.get("preprocess_version", PREPROCESS_VERSION), now(), meta["checkpoint_sha256"],
+                 metadata_signature(meta), meta.get("architecture"), meta.get("explanation_method", "Grad-CAM")))
             event(db, case_id, "assessment_queued", {"evaluation_id": evaluation_id, "model_id": meta["model_id"]})
         executor.submit(run_assessment, evaluation_id, meta["checkpoint_sha256"])
         return {"id": evaluation_id, "status": "queued"}
@@ -329,25 +376,25 @@ def create_app(settings=None):
 
     @app.get("/api/dataset-report")
     def dataset_report():
-        result = {}
-        for key, path in (("audit", settings.dataset / "audit.json"),
-                          ("evaluation", settings.storage / "models" / "evaluation.json")):
-            try:
-                result[key] = json.loads(path.read_text()) if path.is_file() else None
-            except (OSError, ValueError):
-                result[key] = None
-        return result
+        path = settings.dataset / "audit.json"
+        try:
+            audit = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
+        except (OSError, ValueError):
+            audit = None
+        return {"audit": audit, "evaluation": registered_report(predictor.metadata())}
 
     @app.get("/api/unlabeled-predictions")
     def export_predictions():
         path = settings.storage / "unlabeled-predictions.csv"
         if not path.is_file():
             raise HTTPException(404, "尚未生成无标签批量预测，请先运行 predict_unlabeled.py")
+        if not prediction_export_matches(predictor.metadata()):
+            raise HTTPException(409, "该预测文件属于其他模型，请用当前模型重新生成无标签预测")
         return FileResponse(path, media_type="text/csv; charset=utf-8", filename="rsna-unlabeled-predictions.csv")
 
     @app.get("/api/prd")
-    def prd():
-        path = ROOT / "docs" / "PRD_V0.2.html"
+    def prd(version: Literal["0.2", "0.3"] = "0.3"):
+        path = ROOT / "docs" / ("PRD_V0.3_GPU_TRAINING.html" if version == "0.3" else "PRD_V0.2.html")
         if not path.exists():
             raise HTTPException(404, "需求文档未随部署提供")
         return FileResponse(path, media_type="text/html; charset=utf-8")

@@ -1,0 +1,219 @@
+{
+  "status": "passed",
+  "created_at": "2026-10-23T11:31:27.586343+00:00",
+  "runtime": {
+    "python": "3.14.8",
+    "torch": "2.14.1+cpu",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "device": "cpu",
+    "threads": 2
+  },
+  "checkpoint_sha256": "60b87fafe067eeb5a37a4ea6f5e4edded8855354eeae033e9cb01f6283bf95b5",
+  "baseline_runtime": {
+    "python": "3.12.14",
+    "torch": "2.7.1+cpu"
+  },
+  "retrained": false,
+  "sample_image_sex_pairs": 12,
+  "max_prediction_difference_months": 3.814697265625e-05,
+  "tolerances": {
+    "prediction_tolerance_months": 0.001,
+    "heatmap_alpha_mean_tolerance": 0.1,
+    "heatmap_grid_tolerance": 2
+  },
+  "samples": [
+    {
+      "sample": "train11929.png",
+      "sex": "F",
+      "prediction_months": 145.29364013671875,
+      "baseline_months": 145.29364013671875,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1554,
+        1690
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train11929.png",
+      "sex": "M",
+      "prediction_months": 167.54061889648438,
+      "baseline_months": 167.54061889648438,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1554,
+        1690
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1377.png",
+      "sex": "F",
+      "prediction_months": 173.56588745117188,
+      "baseline_months": 173.56588745117188,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1377.png",
+      "sex": "M",
+      "prediction_months": 197.57418823242188,
+      "baseline_months": 197.57418823242188,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1378.png",
+      "sex": "F",
+      "prediction_months": 13.290191650390625,
+      "baseline_months": 13.290153503417969,
+      "absolute_difference_months": 3.814697265625e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1378.png",
+      "sex": "M",
+      "prediction_months": 28.39715576171875,
+      "baseline_months": 28.397117614746094,
+      "absolute_difference_months": 3.814697265625e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train14466.png",
+      "sex": "F",
+      "prediction_months": 149.0373992919922,
+      "baseline_months": 149.0373992919922,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1538,
+        1930
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train14466.png",
+      "sex": "M",
+      "prediction_months": 175.3896942138672,
+      "baseline_months": 175.38970947265625,
+      "absolute_difference_months": 1.52587890625e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1538,
+        1930
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train3806.png",
+      "sex": "F",
+      "prediction_months": 6.482757568359375,
+      "baseline_months": 6.482734680175781,
+      "absolute_difference_months": 2.288818359375e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        906,
+        1189
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train3806.png",
+      "sex": "M",
+      "prediction_months": 12.757209777832031,
+      "baseline_months": 12.757186889648438,
+      "absolute_difference_months": 2.288818359375e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        906,
+        1189
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train6197.png",
+      "sex": "F",
+      "prediction_months": 141.7660369873047,
+      "baseline_months": 141.7660369873047,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1209,
+        1654
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train6197.png",
+      "sex": "M",
+      "prediction_months": 162.26840209960938,
+      "baseline_months": 162.26840209960938,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1209,
+        1654
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    }
+  ],
+  "holdout": null
+}

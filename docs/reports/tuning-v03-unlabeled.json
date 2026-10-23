@@ -1,0 +1,16 @@
+{
+  "model_id": "resnet50-frozen-cpu-224",
+  "checkpoint_sha256": "0a3eb7e2e11b427991d0d9e2ad2f219662a40c8d102147abb761fd788afbfd7b",
+  "model_metadata_sha256": "da384c1e36b37a47cc175517037a48e94e6bbed9fea9c9ac4a3ba3e4235f3069",
+  "architecture": "resnet50-sex-v1",
+  "preprocess_version": "imagenet-gray-letterbox-v1",
+  "image_size": 224,
+  "rows": 200,
+  "valid_rows": 199,
+  "invalid_rows": 1,
+  "device": "cpu",
+  "ground_truth_available": false,
+  "mae_computed": false,
+  "source_image_checksums_verified": true,
+  "predictions_sha256": "f51ddfd3ffb8b3fd32b99defd9585d14f097b87b46d71b5a4ec25bfd577d46af"
+}

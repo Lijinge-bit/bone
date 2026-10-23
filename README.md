@@ -2,16 +2,16 @@
 
 基于 [PRD V0.2](docs/PRD_V0.2.html) 的可运行单时相研究原型：**PNG + 性别 → 骨龄、关注热力图与人工复核记录**。
 
-后续 GPU 训练与模型改造见 [训练升级 PRD V0.3](docs/PRD_V0.3_GPU_TRAINING.html)（静态需求稿，面向 RTX 4060 Laptop 约 8GB / Python 3.14）。[下载离线 HTML 文档包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.3_GPU_Training.zip)，解压后双击 HTML 阅读；该文档版本不代表新模型或训练功能已实现。
+V0.3 已增加 ResNet-50＋性别、版本化预处理、CUDA/AMP 训练、恢复、独立评估、候选注册／回滚及热力图适配。需求依据为 [PRD V0.3](docs/PRD_V0.3_GPU_TRAINING.html)；实际进展、RTX 4060 Laptop 约 8GB 的安装／训练命令见 [训练说明](docs/TRAINING_V0.3.md)。
 
-当前已有真实 CPU 模型和独立留出测试结果，**MAE 19.2524 个月，尚未达到 <6 个月目标**。本项目不是临床产品，不提供成年身高、闭合时间窗、治疗建议或医院签署报告。
+当前活动模型为真实训练的 **ResNet-50 冻结骨干＋回归头、224 输入**：验证 MAE **12.7541 月**，历史固定留出 MAE **12.9245 月**，比原 CNN 的 19.2524 月下降约 32.9%。**仍未达到 <6 月目标**。当前云环境只有 CPU，RTX 4060 全量微调待在本机执行。既有留出已被观察，评估明确为探索用途，患者级隔离未验证。本项目仅供研究。
 
 ## 下载完整研究项目包
 
-- [直接下载 Python 3.14 完整版 BoneAtlas_MVP_0.2_Python314.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.2_Python314.zip)
-- [打开下载文件页面](https://github.com/Lijinge-bit/bone/blob/main/downloads/BoneAtlas_MVP_0.2_Python314.zip)：如直接下载未开始，可点击页面上的 **Download raw file** 下载按钮。
+- [直接下载 V0.3 完整包 BoneAtlas_MVP_0.3_Training.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.3_Training.zip)
+- [打开下载文件页面](https://github.com/Lijinge-bit/bone/blob/main/downloads/BoneAtlas_MVP_0.3_Training.zip)：如直接下载未开始，可点击页面上的 **Download raw file**。
 
-完整包约 7.5 MB，附带真实研究模型权重、六张公开样例、全新待复核样本记录和审计／评估报告。解压后进入 `bone-atlas`，按下文 Windows 或 Python 启动步骤安装依赖并运行。它不包含约 10 GB 原始数据集和虚拟环境。
+完整包附带新 ResNet 研究权重、旧 CNN 回滚版本、六张公开样例、全新待质检数据库、固定数据清单、真实训练／评估证据和 GPU 默认配置。解压到新目录后进入 `bone-atlas`，按下文安装依赖并运行。包内不含约 10GB 原图、训练缓存、虚拟环境或私有上传；新模型权重使下载体积明显大于旧版。
 
 GitHub 的 **Code → Download ZIP** 下载的是源码快照；上面的链接下载的是带模型的研究项目包。项目包采用版本化的 ZIP 作为明确的分发例外，普通 `var/` 运行目录、私有上传与数据库仍不提交到源码仓库。
 
@@ -19,7 +19,7 @@ GitHub 的 **Code → Download ZIP** 下载的是源码快照；上面的链接�
 
 ```bash
 cd /workspace/bone
-.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+/workspace/bone-data/venvs/py314/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
 服务默认仅监听本机。启动后通过本机浏览器访问端口 8000；云环境需使用其提供的端口访问能力，聊天中的本机地址不是公开预览链接。
@@ -28,7 +28,7 @@ cd /workspace/bone
 
 ## 新环境安装
 
-使用标准 64 位 CPython 3.14，运行依赖已升级至 **PyTorch 2.14.1+cpu**。Linux 实测版本为 Python 3.14.8；Windows x64 的 Python 3.14 安装包依赖已验证可解析，原生 Windows 运行需由该平台确认。完整验证结果见 [Python 3.14 升级记录](docs/PYTHON314.md)。
+使用标准 64 位 CPython 3.14。CPU 锁定 **torch 2.14.1+cpu / torchvision 0.29.1+cpu**；默认 GPU 训练单独锁定 **cu130** 构建。Linux 实测为 Python 3.14.8；用户已在 Windows 3.14.0 通过旧模型兼容检查。新 GPU 运行需要在 RTX 4060 上执行真实预检，不能用依赖解析代替。历史兼容记录见 [Python 3.14 升级记录](docs/PYTHON314.md)。
 
 ```bash
 python3.14 -m venv .venv
@@ -48,8 +48,11 @@ python3.14 -m venv .venv
 # 全量匹配、CRC、解码、精确重复与相同 dHash 候选分组，生成固定分区
 .venv/bin/python scripts/prepare_data.py
 
-# 真实 CPU 小模型；按验证集选最佳轮次，再执行有标签留出测试
-.venv/bin/python scripts/train.py --epochs 20 --threads 3
+# 从原图生成新的固定 224 缓存
+.venv/bin/python scripts/prepare_training_data.py --data /workspace/bone-data --size 224
+
+# 可选 CPU 小模型对照；只按验证选择，不读留出，不替换活动模型
+.venv/bin/python scripts/train.py --config configs/train_cnn60_cpu.json --data /workspace/bone-data --output experiments --device cpu
 
 # 仅生成 200 张无标签图的预测，不计算 MAE
 .venv/bin/python scripts/predict_unlabeled.py
@@ -58,7 +61,7 @@ python3.14 -m venv .venv
 .venv/bin/python scripts/seed_samples.py
 ```
 
-原始 ZIP 约 9.97 GB，缓存约 0.21 GB；需要额外工作空间。完整图片未全部解压，原图保留在 ZIP 内，应用只存用户实际导入的图片。
+原始 ZIP 约 9.97 GB；224 灰度缓存约 0.63 GB，还需模型、优化器检查点及临时工作空间。完整图片未全部解压，原图保留在 ZIP 内，应用只存用户实际导入的图片。
 
 表格检查：训练 12,611 条、测试 200 条；全量 12,811 张图片已匹配，0 解码异常。固定有标签分区：训练 10,091、验证 1,260、留出测试 1,260。没有患者 ID，因此不能宣称患者级隔离已验证。完整指标和限制见 [模型说明](docs/MODEL_CARD.md) 与 [验收记录](docs/ACCEPTANCE.md)。
 
@@ -105,7 +108,7 @@ PyCharm 的项目解释器选择 `bone-atlas\.venv314\Scripts\python.exe`。以�
 app/main.py          FastAPI、版本化记录、任务与复核
 app/static/          无构建依赖的中文浏览器工作台
 app/imaging.py       PNG 验证、可复核质控提示与等比填充
-app/network.py       真实 CPU CNN
+app/network.py       CNN／ResNet-50＋性别模型适配
 app/predictor.py     权重校验、预测与 Grad-CAM
 scripts/             下载、审计、训练、预测与浏览器检查
 tests/               流程与真实模型集成测试

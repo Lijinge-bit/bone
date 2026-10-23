@@ -1,0 +1,396 @@
+{
+  "created_at": "2026-10-23T11:17:23.865160+00:00",
+  "status": "early_stopped",
+  "architecture": "resnet50-sex-v1",
+  "training_protocol": "frozen_backbone_head_only",
+  "training_samples": 10091,
+  "validation_samples": 1260,
+  "test_samples": null,
+  "epochs": 56,
+  "configured_epochs": 60,
+  "best_epoch": 48,
+  "best_validation_mae_months": 12.754102385990203,
+  "training": {
+    "n": 10091,
+    "finite_n": 10091,
+    "finite_prediction_n": 10091,
+    "finite_label_n": 10091,
+    "invalid_n": 0,
+    "nonfinite_prediction_n": 0,
+    "nonfinite_label_n": 0,
+    "out_of_range_n": 5,
+    "complete": true,
+    "mae_months": 10.437,
+    "rmse_months": 13.3653,
+    "median_absolute_error": 8.5261,
+    "p90_absolute_error": 21.9309,
+    "signed_bias_months": 0.4632,
+    "mae_ci95_months": [
+      10.2791,
+      10.5899
+    ],
+    "unknown_sex_n": 0,
+    "by_sex": {
+      "M": {
+        "n": 5469,
+        "finite_n": 5469,
+        "finite_prediction_n": 5469,
+        "finite_label_n": 5469,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 2,
+        "complete": true,
+        "mae_months": 10.3695,
+        "rmse_months": 13.3086,
+        "median_absolute_error": 8.4019,
+        "p90_absolute_error": 21.7944,
+        "signed_bias_months": 0.5623,
+        "mae_ci95_months": [
+          10.1564,
+          10.6012
+        ]
+      },
+      "F": {
+        "n": 4622,
+        "finite_n": 4622,
+        "finite_prediction_n": 4622,
+        "finite_label_n": 4622,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 3,
+        "complete": true,
+        "mae_months": 10.5169,
+        "rmse_months": 13.4321,
+        "median_absolute_error": 8.6803,
+        "p90_absolute_error": 22.028,
+        "signed_bias_months": 0.3459,
+        "mae_ci95_months": [
+          10.296,
+          10.758
+        ]
+      }
+    },
+    "by_boneage": {
+      "0-24": {
+        "n": 73,
+        "finite_n": 73,
+        "finite_prediction_n": 73,
+        "finite_label_n": 73,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 3,
+        "complete": true,
+        "mae_months": 11.4686,
+        "rmse_months": 15.5777,
+        "median_absolute_error": 8.4396,
+        "p90_absolute_error": 22.8758,
+        "signed_bias_months": 5.8871,
+        "mae_ci95_months": [
+          9.3646,
+          14.4567
+        ]
+      },
+      "24-72": {
+        "n": 993,
+        "finite_n": 993,
+        "finite_prediction_n": 993,
+        "finite_label_n": 993,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 2,
+        "complete": true,
+        "mae_months": 11.8486,
+        "rmse_months": 15.1446,
+        "median_absolute_error": 9.7361,
+        "p90_absolute_error": 24.0688,
+        "signed_bias_months": 5.9294,
+        "mae_ci95_months": [
+          11.2834,
+          12.4749
+        ]
+      },
+      "72-120": {
+        "n": 2366,
+        "finite_n": 2366,
+        "finite_prediction_n": 2366,
+        "finite_label_n": 2366,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 11.6025,
+        "rmse_months": 14.6055,
+        "median_absolute_error": 9.8854,
+        "p90_absolute_error": 23.7181,
+        "signed_bias_months": 6.8261,
+        "mae_ci95_months": [
+          11.2773,
+          11.9542
+        ]
+      },
+      "120-168": {
+        "n": 4980,
+        "finite_n": 4980,
+        "finite_prediction_n": 4980,
+        "finite_label_n": 4980,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 9.3906,
+        "rmse_months": 11.9368,
+        "median_absolute_error": 7.7661,
+        "p90_absolute_error": 19.6441,
+        "signed_bias_months": -1.912,
+        "mae_ci95_months": [
+          9.1595,
+          9.5964
+        ]
+      },
+      "168-+": {
+        "n": 1679,
+        "finite_n": 1679,
+        "finite_prediction_n": 1679,
+        "finite_label_n": 1679,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 11.0186,
+        "rmse_months": 14.2888,
+        "median_absolute_error": 8.5399,
+        "p90_absolute_error": 23.9022,
+        "signed_bias_months": -4.9271,
+        "mae_ci95_months": [
+          10.5508,
+          11.4936
+        ]
+      }
+    },
+    "bootstrap": {
+      "samples": 200,
+      "seed": 20261023,
+      "confidence": 0.95,
+      "unit": "image",
+      "method": "percentile"
+    },
+    "prediction_range_months": [
+      0.0,
+      360.0
+    ],
+    "metrics_use_unclipped_predictions": true
+  },
+  "validation": {
+    "n": 1260,
+    "finite_n": 1260,
+    "finite_prediction_n": 1260,
+    "finite_label_n": 1260,
+    "invalid_n": 0,
+    "nonfinite_prediction_n": 0,
+    "nonfinite_label_n": 0,
+    "out_of_range_n": 3,
+    "complete": true,
+    "mae_months": 12.7541,
+    "rmse_months": 16.5511,
+    "median_absolute_error": 10.1764,
+    "p90_absolute_error": 27.2502,
+    "signed_bias_months": -0.1347,
+    "mae_ci95_months": [
+      12.2297,
+      13.3084
+    ],
+    "unknown_sex_n": 0,
+    "by_sex": {
+      "M": {
+        "n": 682,
+        "finite_n": 682,
+        "finite_prediction_n": 682,
+        "finite_label_n": 682,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 12.7299,
+        "rmse_months": 16.6404,
+        "median_absolute_error": 9.8851,
+        "p90_absolute_error": 27.6058,
+        "signed_bias_months": -0.3473,
+        "mae_ci95_months": [
+          11.901,
+          13.466
+        ]
+      },
+      "F": {
+        "n": 578,
+        "finite_n": 578,
+        "finite_prediction_n": 578,
+        "finite_label_n": 578,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 2,
+        "complete": true,
+        "mae_months": 12.7826,
+        "rmse_months": 16.4451,
+        "median_absolute_error": 10.4353,
+        "p90_absolute_error": 26.8408,
+        "signed_bias_months": 0.1161,
+        "mae_ci95_months": [
+          12.0426,
+          13.653
+        ]
+      }
+    },
+    "by_boneage": {
+      "0-24": {
+        "n": 9,
+        "finite_n": 9,
+        "finite_prediction_n": 9,
+        "finite_label_n": 9,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 3,
+        "complete": true,
+        "mae_months": 19.9364,
+        "rmse_months": 25.5468,
+        "median_absolute_error": 12.04,
+        "p90_absolute_error": 43.2133,
+        "signed_bias_months": -6.0018,
+        "mae_ci95_months": [
+          10.2561,
+          31.3427
+        ]
+      },
+      "24-72": {
+        "n": 124,
+        "finite_n": 124,
+        "finite_prediction_n": 124,
+        "finite_label_n": 124,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 14.6434,
+        "rmse_months": 18.6049,
+        "median_absolute_error": 13.1667,
+        "p90_absolute_error": 29.4336,
+        "signed_bias_months": 7.0363,
+        "mae_ci95_months": [
+          12.6353,
+          16.6824
+        ]
+      },
+      "72-120": {
+        "n": 295,
+        "finite_n": 295,
+        "finite_prediction_n": 295,
+        "finite_label_n": 295,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 14.8338,
+        "rmse_months": 18.5932,
+        "median_absolute_error": 12.9114,
+        "p90_absolute_error": 29.8067,
+        "signed_bias_months": 7.4825,
+        "mae_ci95_months": [
+          13.5876,
+          16.1546
+        ]
+      },
+      "120-168": {
+        "n": 621,
+        "finite_n": 621,
+        "finite_prediction_n": 621,
+        "finite_label_n": 621,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 11.0307,
+        "rmse_months": 14.4001,
+        "median_absolute_error": 9.1663,
+        "p90_absolute_error": 22.7081,
+        "signed_bias_months": -2.8264,
+        "mae_ci95_months": [
+          10.3343,
+          11.7365
+        ]
+      },
+      "168-+": {
+        "n": 211,
+        "finite_n": 211,
+        "finite_prediction_n": 211,
+        "finite_label_n": 211,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 13.502,
+        "rmse_months": 17.6341,
+        "median_absolute_error": 9.8015,
+        "p90_absolute_error": 30.9909,
+        "signed_bias_months": -6.8267,
+        "mae_ci95_months": [
+          11.9915,
+          15.0309
+        ]
+      }
+    },
+    "bootstrap": {
+      "samples": 1000,
+      "seed": 20261023,
+      "confidence": 0.95,
+      "unit": "image",
+      "method": "percentile"
+    },
+    "prediction_range_months": [
+      0.0,
+      360.0
+    ],
+    "metrics_use_unclipped_predictions": true
+  },
+  "test": null,
+  "target_mae_months": 6,
+  "target_passed": false,
+  "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+  "grouping": "decoded raster equality and exact dHash candidates; patient grouping unavailable",
+  "limitations": [
+    "Research model; not clinically validated",
+    "Patient independence depends on the dataset audit",
+    "Final holdout has not been evaluated; validation was used for model selection",
+    "Frozen pretrained backbone with trained head only; not full fine-tuning",
+    "No image augmentation; fixed train/validation selection only"
+  ],
+  "data_reference": {
+    "manifest_sha256": "bf4f9f51d30d08e0c3a89d9bf69e5347af2ec6570c246dbe7a6147e6d49cecb5",
+    "split_sha256": "d53beae480a3c36ed83d77f183e4bede6aa9da1d4a08f5f7ad919fdd893333a5",
+    "audit_sha256": "4a672b0bffd0acc945a982d58c875e193bd1c93da3a7dc8bd992cc53f56167be",
+    "source_sha256": "ac0e5ea4cc5dc9dc4e513f857a7ffb455455425fe0c9e872fdc4d59523e081cf",
+    "cache_sha256": "4a79203844c51cb2efdf0b5151289df4f6cb3c77b29382f93675c8be22c86000",
+    "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+    "grouping": "decoded raster equality and exact dHash candidates; patient grouping unavailable",
+    "split_counts": {
+      "train": 10091,
+      "validation": 1260,
+      "test": 1260
+    }
+  },
+  "selection_split": "validation",
+  "metrics_use_unclipped_predictions": true,
+  "preprocess_version": "imagenet-gray-letterbox-v1"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "boneage-training-cache-v1",
+  "created_at": "2026-10-23T07:39:52.077151+00:00",
+  "image_size": 224,
+  "dtype": "uint8",
+  "shape": [
+    12611,
+    224,
+    224
+  ],
+  "label_columns": [
+    "boneage_months",
+    "male"
+  ],
+  "preprocess_version": "gray-letterbox-v1",
+  "splits": {
+    "train": 10091,
+    "validation": 1260,
+    "test": 1260
+  },
+  "source_archive": "/workspace/bone-data/rsna-bone-age-v2.zip",
+  "source_archive_bytes": 9972356463,
+  "files": {
+    "images.npy": {
+      "sha256": "519602e6b237aba68a14ad172071e6f64cfca6b068a934fcb61ba4cf6901f187",
+      "bytes": 632769664
+    },
+    "labels.npy": {
+      "sha256": "158c2b7aac63214f0b1ef202b59727653ce2c2ade2244791bd520ad5160bb50c",
+      "bytes": 101016
+    },
+    "ids.json": {
+      "sha256": "a26fcc05e93127a5537c315a65a67fdd548ea9d64c6c512afb196553ed04b06c",
+      "bytes": 199237
+    }
+  },
+  "audit_sha256": "4a672b0bffd0acc945a982d58c875e193bd1c93da3a7dc8bd992cc53f56167be",
+  "manifest_sha256": "bf4f9f51d30d08e0c3a89d9bf69e5347af2ec6570c246dbe7a6147e6d49cecb5",
+  "split_sha256": "d53beae480a3c36ed83d77f183e4bede6aa9da1d4a08f5f7ad919fdd893333a5",
+  "source_sha256": "ac0e5ea4cc5dc9dc4e513f857a7ffb455455425fe0c9e872fdc4d59523e081cf",
+  "source_pixels": "original PNG archive; per-image SHA256 and CRC verified",
+  "elapsed_seconds": 356.25
+}

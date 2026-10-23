@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "zip": "BoneAtlas_MVP_0.3_Training.zip",
+  "bytes": 100096791,
+  "sha256": "a896e394a7fe632d0903388647023cee21809b7ee51208ba5d8e22114bfa3f56",
+  "github_100_mib_limit_passed": true,
+  "crc": "passed",
+  "entries": 121,
+  "source_files_byte_identical": 97,
+  "fresh_database": {
+    "cases": 6,
+    "pending": 6,
+    "evaluations": 0
+  },
+  "checkpoint_sha256": "0a3eb7e2e11b427991d0d9e2ad2f219662a40c8d102147abb761fd788afbfd7b",
+  "model_id": "resnet50-frozen-cpu-224",
+  "active_weights_copies": 1,
+  "full_dataset_and_training_caches_included": false
+}

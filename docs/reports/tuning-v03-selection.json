@@ -1,0 +1,23 @@
+{
+  "locked_at": "2026-10-23T11:21:09.213690+00:00",
+  "selection_split": "validation",
+  "selection_reason": "Lowest validation MAE among completed candidates; no candidate holdout was evaluated for selection",
+  "historical_validation_mae_months": 18.7502,
+  "candidates": [
+    {
+      "model_id": "cnn-20261023T073753Z-842fc28d",
+      "validation_mae_months": 18.3299
+    },
+    {
+      "model_id": "resnet50-frozen-cpu-224",
+      "validation_mae_months": 12.7541
+    }
+  ],
+  "selected_model_id": "resnet50-frozen-cpu-224",
+  "selected_checkpoint_sha256": "0a3eb7e2e11b427991d0d9e2ad2f219662a40c8d102147abb761fd788afbfd7b",
+  "candidate_metadata_sha256": "4f4d6d3cb54cbf23c2f70fd870c5f554e13ebadadc9603ca7b56619dce9671ce",
+  "training_protocol": "frozen_backbone_head_only",
+  "gpu_finetuning_completed": false,
+  "target_mae_months": 6,
+  "target_passed": false
+}

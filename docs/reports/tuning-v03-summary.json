@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-10-23T19:37:23.527612+08:00",
+  "status": "research_candidate_registered",
+  "active_model_id": "resnet50-frozen-cpu-224",
+  "checkpoint_sha256": "0a3eb7e2e11b427991d0d9e2ad2f219662a40c8d102147abb761fd788afbfd7b",
+  "architecture": "resnet50-sex-v1",
+  "training_protocol": "frozen_backbone_head_only",
+  "training_device": "cpu",
+  "full_gpu_finetuning_completed": false,
+  "old_validation_mae_months": 18.7502,
+  "cnn60_validation_mae_months": 18.3299,
+  "validation_mae_months": 12.7541,
+  "historical_holdout_mae_months": 19.2524,
+  "holdout_mae_months": 12.9245,
+  "relative_holdout_mae_reduction_percent": 32.87,
+  "holdout_n": 1260,
+  "evaluation_role": "exploratory_previously_seen_test",
+  "holdout_out_of_range_n": 3,
+  "mae_ci95_months": [
+    12.2627,
+    13.5453
+  ],
+  "target_mae_months": 6,
+  "target_passed": false,
+  "independent_final_test": false,
+  "patient_independence_verified": false,
+  "rollback_legacy_check": "passed",
+  "official_pretrained_weights": "ResNet50_Weights.IMAGENET1K_V2",
+  "pretrained_sha256": "11ad3fa62ca79e40addfd354a8ec4b7c75143b3038b8d2a807fbc68deab379ca"
+}

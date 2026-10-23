@@ -47,10 +47,10 @@ class WorkbenchTest(unittest.TestCase):
         return {'model_id':'unit-test-model','checkpoint_sha256':'checked-in-test',
                 'preprocess_version':'gray-letterbox-v1'}
 
-    def assess_test_double(self,c,result=None):
+    def assess_test_double(self,c,result=None,meta=None):
         # This double tests task persistence, not model accuracy. Real model is checked separately.
         if result is None:result=(123.5,Image.new('RGBA',(128,192),(255,0,0,80)),None)
-        with patch.object(self.app.state.predictor,'metadata',return_value=self.model_meta()), \
+        with patch.object(self.app.state.predictor,'metadata',return_value=meta or self.model_meta()), \
              patch.object(self.app.state.predictor,'assess',return_value=result):
             r=self.client.post(f"/api/cases/{c['id']}/assess",json={'revision':c['revision']})
             self.assertEqual(r.status_code,202,r.text)
@@ -147,6 +147,69 @@ class WorkbenchTest(unittest.TestCase):
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content,path.read_bytes())
         self.assertIn('attachment',response.headers['content-disposition'])
+
+    def test_new_architecture_and_preprocessing_are_snapshotted(self):
+        c=self.ready()
+        meta={**self.model_meta(),'architecture':'resnet50-sex-v1',
+              'preprocess_version':'imagenet-gray-letterbox-v1','explanation_method':'Grad-CAM'}
+        detail=self.assess_test_double(c,meta=meta);e=detail['evaluations'][0]
+        self.assertEqual(e['architecture'],'resnet50-sex-v1')
+        self.assertEqual(e['preprocess_version'],'imagenet-gray-letterbox-v1')
+        self.assertEqual(e['checkpoint_sha256'],'checked-in-test')
+        self.assertEqual(e['explanation_method'],'Grad-CAM')
+        self.assertEqual(len(e['model_metadata_sha256']),64)
+
+    def test_queued_model_configuration_change_stops_inference(self):
+        c=self.ready();original=self.model_meta()
+        changed={**original,'preprocess_version':'another-input-contract'}
+        calls=[]
+        def metadata():
+            calls.append(1)
+            return original if len(calls)==1 else changed
+        with patch.object(self.app.state.predictor,'metadata',side_effect=metadata), \
+             patch.object(self.app.state.predictor,'assess') as infer:
+            response=self.client.post(f"/api/cases/{c['id']}/assess",json={'revision':c['revision']})
+            self.assertEqual(response.status_code,202)
+            for _ in range(100):
+                result=self.client.get(f"/api/cases/{c['id']}").json()['evaluations'][0]
+                if result['status']=='failed':break
+                time.sleep(.01)
+            self.assertEqual(result['status'],'failed')
+            self.assertIsNone(result['prediction_months'])
+            self.assertIn('模型配置已变更',result['error'])
+            infer.assert_not_called()
+
+    def test_registered_report_and_csv_cannot_leak_previous_model_results(self):
+        meta={**self.model_meta(),'architecture':'resnet50-sex-v1',
+              'schema_version':2,'evaluation':{'test':None,'validation':{'n':12,'mae_months':12},
+                                               'target_passed':False}}
+        directory=self.settings.storage/'models'
+        (directory/'evaluation.json').write_text(json.dumps({'model_id':'old-model',
+            'checkpoint_sha256':'old-sha','test':{'n':1,'mae_months':1}}),encoding='utf-8')
+        (self.settings.storage/'unlabeled-predictions.csv').write_text(
+            'Case ID,Sex,predicted_boneage_months,model_id,status\n4360,M,120,old-model,research_prediction\n')
+        with patch.object(self.app.state.predictor,'metadata',return_value=meta):
+            report=self.client.get('/api/dataset-report').json()['evaluation']
+            self.assertEqual(report['model_id'],'unit-test-model')
+            self.assertIsNone(report['test'])
+            self.assertEqual(report['validation']['mae_months'],12)
+            self.assertFalse(self.client.get('/api/status').json()['unlabeled_predictions_available'])
+            self.assertEqual(self.client.get('/api/unlabeled-predictions').status_code,409)
+
+    def test_additive_schema_migration_preserves_old_prediction_and_review(self):
+        from app.database import initialize
+        c=self.ready();detail=self.assess_test_double(c);e=detail['evaluations'][0]
+        response=self.client.post(f"/api/evaluations/{e['id']}/reviews",json={
+            'reviewer':'migration test','decision':'question','note':'preserve original review'})
+        self.assertEqual(response.status_code,201)
+        with transaction(self.settings.database) as db:
+            for name in ('checkpoint_sha256','model_metadata_sha256','architecture','explanation_method'):
+                db.execute(f'ALTER TABLE evaluations DROP COLUMN {name}')
+        initialize(self.settings.database)
+        restored=self.client.get(f"/api/cases/{c['id']}").json()['evaluations'][0]
+        self.assertEqual(restored['prediction_months'],123.5)
+        self.assertEqual(restored['reviews'][0]['note'],'preserve original review')
+        self.assertIsNone(restored['checkpoint_sha256'])
 
 
 class ImagingTest(unittest.TestCase):

@@ -4,14 +4,18 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import sys
 import time
 from urllib.request import Request, urlopen
 from zipfile import ZipFile
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app.config import Settings
+
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--output', type=Path, default=Path('/workspace/bone-data'))
+    ap.add_argument('--output', type=Path, default=Settings.from_env().dataset)
     args = ap.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     target = args.output / 'rsna-bone-age-v2.zip'
