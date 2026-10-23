@@ -4,6 +4,8 @@
 
 V0.3 已增加 ResNet-50＋性别、版本化预处理、CUDA/AMP 训练、恢复、独立评估、候选注册／回滚及热力图适配。需求依据为 [PRD V0.3](docs/PRD_V0.3_GPU_TRAINING.html)；实际进展、RTX 4060 Laptop 约 8GB 的安装／训练命令见 [训练说明](docs/TRAINING_V0.3.md)。
 
+最新需求修订见 [PRD V0.4：实验复盘与下一轮调校](docs/PRD_V0.4_EXPERIMENT_REVIEW.html)（[下载离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.4_Experiment_Review.zip)）。文档对照原 Word 和归档实测结果，明确精度差距、GPU 成对实验、独立评估前提与验收清单；当前应用／模型包版本仍为 V0.3。
+
 当前活动模型为真实训练的 **ResNet-50 冻结骨干＋回归头、224 输入**：验证 MAE **12.7541 月**，历史固定留出 MAE **12.9245 月**，比原 CNN 的 19.2524 月下降约 32.9%。**仍未达到 <6 月目标**。当前云环境只有 CPU，RTX 4060 全量微调待在本机执行。既有留出已被观察，评估明确为探索用途，患者级隔离未验证。本项目仅供研究。
 
 ## 下载完整研究项目包

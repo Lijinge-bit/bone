@@ -1,5 +1,7 @@
 # 完整研究项目包
 
+最新需求文档：[PRD V0.4 实验复盘与下一轮调校 · 离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.4_Experiment_Review.zip)。解压后双击 HTML 阅读，包含原要求对照、真实曲线、后续实验与验收。文档为 V0.4，下面的完整应用／模型包为 V0.3。
+
 [下载 V0.3 完整版 BoneAtlas_MVP_0.3_Training.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.3_Training.zip)
 
 大小：100,096,791 字节（约 100.1 MB / 95.5 MiB）。
