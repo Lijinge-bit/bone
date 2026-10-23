@@ -1,0 +1,271 @@
+{
+  "status": "passed",
+  "created_at": "2026-10-23T06:19:50.043620+00:00",
+  "runtime": {
+    "python": "3.14.8",
+    "torch": "2.14.1+cpu",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "device": "cpu",
+    "threads": 2
+  },
+  "checkpoint_sha256": "60b87fafe067eeb5a37a4ea6f5e4edded8855354eeae033e9cb01f6283bf95b5",
+  "baseline_runtime": {
+    "python": "3.12.14",
+    "torch": "2.7.1+cpu"
+  },
+  "retrained": false,
+  "sample_image_sex_pairs": 12,
+  "max_prediction_difference_months": 2.288818359375e-05,
+  "tolerances": {
+    "prediction_tolerance_months": 0.001,
+    "heatmap_alpha_mean_tolerance": 0.1,
+    "heatmap_grid_tolerance": 2
+  },
+  "samples": [
+    {
+      "sample": "train11929.png",
+      "sex": "F",
+      "prediction_months": 145.29364013671875,
+      "baseline_months": 145.29364013671875,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1554,
+        1690
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train11929.png",
+      "sex": "M",
+      "prediction_months": 167.54061889648438,
+      "baseline_months": 167.54061889648438,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1554,
+        1690
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1377.png",
+      "sex": "F",
+      "prediction_months": 173.56588745117188,
+      "baseline_months": 173.56588745117188,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1377.png",
+      "sex": "M",
+      "prediction_months": 197.57418823242188,
+      "baseline_months": 197.57418823242188,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1378.png",
+      "sex": "F",
+      "prediction_months": 13.2901611328125,
+      "baseline_months": 13.290153503417969,
+      "absolute_difference_months": 7.62939453125e-06,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train1378.png",
+      "sex": "M",
+      "prediction_months": 28.397132873535156,
+      "baseline_months": 28.397117614746094,
+      "absolute_difference_months": 1.52587890625e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1514,
+        2044
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train14466.png",
+      "sex": "F",
+      "prediction_months": 149.0373992919922,
+      "baseline_months": 149.0373992919922,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1538,
+        1930
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train14466.png",
+      "sex": "M",
+      "prediction_months": 175.38970947265625,
+      "baseline_months": 175.38970947265625,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1538,
+        1930
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train3806.png",
+      "sex": "F",
+      "prediction_months": 6.482749938964844,
+      "baseline_months": 6.482734680175781,
+      "absolute_difference_months": 1.52587890625e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        906,
+        1189
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train3806.png",
+      "sex": "M",
+      "prediction_months": 12.757209777832031,
+      "baseline_months": 12.757186889648438,
+      "absolute_difference_months": 2.288818359375e-05,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        906,
+        1189
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train6197.png",
+      "sex": "F",
+      "prediction_months": 141.7660369873047,
+      "baseline_months": 141.7660369873047,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1209,
+        1654
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    },
+    {
+      "sample": "train6197.png",
+      "sex": "M",
+      "prediction_months": 162.26840209960938,
+      "baseline_months": 162.26840209960938,
+      "absolute_difference_months": 0.0,
+      "repeat_difference_months": 0.0,
+      "heatmap_size": [
+        1209,
+        1654
+      ],
+      "heatmap_mode": "RGBA",
+      "heatmap_pixels_identical": true,
+      "heatmap_alpha_grid_max_difference": 0,
+      "heatmap_alpha_mean_difference": 0.0
+    }
+  ],
+  "holdout": {
+    "cache_sha256": "4a79203844c51cb2efdf0b5151289df4f6cb3c77b29382f93675c8be22c86000",
+    "comparison": "Original rounded CSV, same fixed split; no model selection",
+    "metrics_use_unclipped_predictions": true,
+    "out_of_range_count": 3,
+    "out_of_range_guard_verified": 3,
+    "out_of_range_source_ids": [
+      "1559",
+      "4249",
+      "15479"
+    ],
+    "out_of_range_policy": "Existing model limitation, unchanged; app Predictor rejects outside 0..360 months",
+    "max_prediction_difference_months": 7.137451171956855e-05,
+    "metrics": {
+      "n": 1260,
+      "mae_months": 19.2524,
+      "rmse_months": 25.5958,
+      "median_absolute_error": 14.3468,
+      "p90_absolute_error": 42.7537,
+      "by_sex": {
+        "M": {
+          "n": 682,
+          "mae_months": 19.2557
+        },
+        "F": {
+          "n": 578,
+          "mae_months": 19.2486
+        }
+      },
+      "by_boneage": {
+        "0-24": {
+          "n": 9,
+          "mae_months": 33.0096
+        },
+        "24-72": {
+          "n": 124,
+          "mae_months": 30.6775
+        },
+        "72-120": {
+          "n": 295,
+          "mae_months": 19.8229
+        },
+        "120-168": {
+          "n": 621,
+          "mae_months": 15.2088
+        },
+        "168-+": {
+          "n": 211,
+          "mae_months": 23.0549
+        }
+      }
+    }
+  }
+}

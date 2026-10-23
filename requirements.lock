@@ -1,10 +1,11 @@
-# Validated Python 3.12 CPU runtime; generated in a clean environment.
+# Validated Python 3.14 CPU runtime (Linux); Windows cp314 wheel resolution checked.
 --extra-index-url https://download.pytorch.org/whl/cpu
 annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.15.1
 certifi==2026.10.19
 click==8.5.0
+colorama==0.4.6; sys_platform == "win32"
 fastapi==0.141.1
 filelock==4.2.4
 fsspec==2026.9.0
@@ -24,7 +25,7 @@ python-multipart==0.0.32
 setuptools==84.2.1
 starlette==1.9.0
 sympy==1.14.0
-torch==2.7.1+cpu
+torch==2.14.1+cpu
 typing-inspection==0.4.4
 typing_extensions==4.16.0
 uvicorn==0.52.1

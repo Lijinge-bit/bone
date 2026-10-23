@@ -98,4 +98,4 @@ class Predictor:
             rgba[:, :, 1] = np.uint8(np.clip(1.5 - abs(intensity * 2 - 1), 0, 1) * 160)
             rgba[:, :, 2] = np.uint8((1 - intensity) * 220)
             rgba[:, :, 3] = np.uint8(intensity * 160)
-            return value, Image.fromarray(rgba, "RGBA"), None
+            return value, Image.fromarray(rgba), None

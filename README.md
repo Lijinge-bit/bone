@@ -6,8 +6,8 @@
 
 ## 下载完整研究项目包
 
-- [直接下载 BoneAtlas_MVP_0.1.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.1.zip)
-- [打开下载文件页面](https://github.com/Lijinge-bit/bone/blob/main/downloads/BoneAtlas_MVP_0.1.zip)：如直接下载未开始，可点击页面上的 **Download raw file** 下载按钮。
+- [直接下载 Python 3.14 完整版 BoneAtlas_MVP_0.2_Python314.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.2_Python314.zip)
+- [打开下载文件页面](https://github.com/Lijinge-bit/bone/blob/main/downloads/BoneAtlas_MVP_0.2_Python314.zip)：如直接下载未开始，可点击页面上的 **Download raw file** 下载按钮。
 
 完整包约 7.5 MB，附带真实研究模型权重、六张公开样例、全新待复核样本记录和审计／评估报告。解压后进入 `bone-atlas`，按下文 Windows 或 Python 启动步骤安装依赖并运行。它不包含约 10 GB 原始数据集和虚拟环境。
 
@@ -26,10 +26,10 @@ cd /workspace/bone
 
 ## 新环境安装
 
-推荐 Python 3.12。当前任务已有隔离环境，无需创建 Git worktree。
+使用标准 64 位 CPython 3.14，运行依赖已升级至 **PyTorch 2.14.1+cpu**。Linux 实测版本为 Python 3.14.8；Windows x64 的 Python 3.14 安装包依赖已验证可解析，原生 Windows 运行需由该平台确认。完整验证结果见 [Python 3.14 升级记录](docs/PYTHON314.md)。
 
 ```bash
-python3 -m venv .venv
+python3.14 -m venv .venv
 .venv/bin/python -m pip install -r requirements.lock
 ```
 
@@ -66,6 +66,7 @@ python3 -m venv .venv
 
 ```bash
 .venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python scripts/check_runtime.py
 node --check app/static/app.js
 
 # 可选浏览器闭环，需已安装 Playwright 和系统 Chromium
@@ -85,15 +86,18 @@ node --check app/static/app.js
 
 ### Windows 启动项目包
 
-解压后，在项目目录打开 PowerShell（建议 Python 3.12）：
+下载新版完整包并解压，在包含 `requirements.lock` 和 `app` 的 `bone-atlas` 目录打开 PowerShell。使用新的 `.venv314` 环境，避免沿用其他 Python 版本的旧环境：
 
 ```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.lock
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+py -3.14 -m venv .venv314
+.\.venv314\Scripts\python.exe -m pip install -r requirements.lock
+.\.venv314\Scripts\python.exe scripts/check_runtime.py
+.\.venv314\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
 在本机浏览器访问 `http://127.0.0.1:8000`。项目包附带真实 CPU 研究权重、六张已下载的公开样例及其研究记录，可以在安装依赖后直接查看和评估；不包含约 10 GB 完整图片或虚拟环境。完整数据重新准备时可用脚本参数指定本地目录，例如 `--output ./data`、`--data ./data` 和 `--archive ./data/rsna-bone-age-v2.zip`。
+
+PyCharm 的项目解释器选择 `bone-atlas\.venv314\Scripts\python.exe`。以上命令直接调用该解释器，无需先激活虚拟环境。升级的是运行依赖，已有权重没有重训；原有精度限制仍适用。
 
 ```text
 app/main.py          FastAPI、版本化记录、任务与复核

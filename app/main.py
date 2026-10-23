@@ -55,7 +55,7 @@ def create_app(settings=None):
         yield
         executor.shutdown(wait=True, cancel_futures=False)
 
-    app = FastAPI(title="Bone Age Research Workbench", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Bone Age Research Workbench", version="0.2.0", lifespan=lifespan)
     app.state.settings = settings
     app.state.predictor = predictor
 
@@ -116,7 +116,7 @@ def create_app(settings=None):
                 audit = json.loads(audit_path.read_text())
             except (OSError, ValueError):
                 pass
-        return {"app_version": "0.1.0", "scope": "single-image-research", "stats": stats,
+        return {"app_version": "0.2.0", "scope": "single-image-research", "stats": stats,
                 "model": meta, "dataset_audit": audit,
                 "dataset_archive_available": (settings.dataset / "rsna-bone-age-v2.zip").is_file(),
                 "unlabeled_predictions_available": (settings.storage / "unlabeled-predictions.csv").is_file(),

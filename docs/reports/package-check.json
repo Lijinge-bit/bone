@@ -1,9 +1,11 @@
 {
   "status": "passed",
   "clean_dependency_install": true,
-  "unit_tests": 14,
+  "unit_tests": 15,
   "unit_skipped": 0,
   "unpacked_fresh_database_samples": 6,
+  "initial_qc_pending": 6,
+  "initial_evaluations": 0,
   "private_runtime_database_copied": false,
   "raw_dataset_required_for_inference": false,
   "real_inference": true,
@@ -11,6 +13,12 @@
     1514,
     2044
   ],
+  "runtime_reference_pairs": 12,
+  "browser_real_model_flow": "passed",
   "unlabeled_export_rows": 200,
-  "platform": "Linux / Python 3.12 / CPU"
+  "unlabeled_valid_rows": 198,
+  "unlabeled_rejected_rows": 2,
+  "platform": "Linux / Python 3.14.8 / PyTorch 2.14.1+cpu",
+  "windows_x64_cp314_binary_dependency_resolution": "passed",
+  "windows_native_execution": false
 }

@@ -1,6 +1,5 @@
-/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
-  from starlette.testclient import TestClient as TestClient  # noqa
 test_corrupt_weights_are_rejected (test_predictor.TrainedModelIntegration.test_corrupt_weights_are_rejected) ... ok
+test_original_runtime_predictions_and_spatial_heatmaps (test_predictor.TrainedModelIntegration.test_original_runtime_predictions_and_spatial_heatmaps) ... ok
 test_real_prediction_explanation_and_repeatability (test_predictor.TrainedModelIntegration.test_real_prediction_explanation_and_repeatability) ... ok
 test_bad_png_and_bomb_limit (test_workbench.ImagingTest.test_bad_png_and_bomb_limit) ... ok
 test_letterbox_keeps_aspect_and_transform (test_workbench.ImagingTest.test_letterbox_keeps_aspect_and_transform) ... ok
@@ -16,6 +15,6 @@ test_text_fields_cannot_inject_sql (test_workbench.WorkbenchTest.test_text_field
 test_unlabeled_prediction_export_is_an_artifact_not_an_accuracy (test_workbench.WorkbenchTest.test_unlabeled_prediction_export_is_an_artifact_not_an_accuracy) ... ok
 
 ----------------------------------------------------------------------
-Ran 14 tests in 1.838s
+Ran 15 tests in 2.428s
 
 OK

@@ -22,7 +22,7 @@ from app.imaging import quality_check,validate_png
 def main():
     root=Path(__file__).resolve().parents[1]
     ap=argparse.ArgumentParser()
-    ap.add_argument('--output',type=Path,default=Path('/workspace/deliverables/BoneAtlas_MVP_0.1.zip'))
+    ap.add_argument('--output',type=Path,default=Path('/workspace/deliverables/BoneAtlas_MVP_0.2_Python314.zip'))
     ap.add_argument('--samples',type=Path,default=Path('/workspace/rsna-image-review'))
     args=ap.parse_args();args.output.parent.mkdir(parents=True,exist_ok=True)
     meta=json.loads((root/'var/models/active.json').read_text())
@@ -70,7 +70,8 @@ def main():
                 path=Path('/workspace/bone-data')/name
                 if path.exists():out.write(path,base+'data/'+name)
             out.writestr(base+'PACKAGE.json',json.dumps({
-                'version':'0.1.0','scope':'single-image research prototype','public_samples':6,
+                'version':'0.2.0','python':'3.14','torch':'2.14.1+cpu',
+                'scope':'single-image research prototype','public_samples':6,
                 'operational_database_included':False,'private_uploads_included':False,
                 'model_id':meta['model_id'],'model_sha256':meta['checkpoint_sha256'],
                 'test_mae_months':meta['evaluation']['test']['mae_months'],

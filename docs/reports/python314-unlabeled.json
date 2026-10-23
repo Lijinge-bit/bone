@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "rows": 200,
+  "valid_prediction_rows": 198,
+  "rejected_output_rows": 2,
+  "rejected_source_ids": [
+    "4455",
+    "4464"
+  ],
+  "python": "3.14.8",
+  "torch": "2.14.1+cpu",
+  "max_prediction_difference_months": 0.00010000000000331966,
+  "mae_computed": false,
+  "ground_truth_available": false,
+  "rejected_output_status_unchanged": true
+}

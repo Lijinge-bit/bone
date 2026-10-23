@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 import shutil
 import tempfile
@@ -10,10 +11,9 @@ from PIL import Image
 from app.predictor import Predictor, ModelUnavailable
 
 ROOT=Path(__file__).resolve().parents[1]
-MODEL=ROOT/'var/models'
-SAMPLE=Path('/workspace/rsna-image-review/train1377.png')
-if not SAMPLE.exists():
-    SAMPLE=ROOT/'var/images/1491b3be5411ca33dbbe5c80ec2595886b537bdceb7f77b1a3c635a1f9c586d8.png'
+STORAGE=Path(os.environ.get('BONE_TEST_STORAGE',ROOT/'var'))
+MODEL=STORAGE/'models'
+SAMPLE=STORAGE/'images/1491b3be5411ca33dbbe5c80ec2595886b537bdceb7f77b1a3c635a1f9c586d8.png'
 
 
 @unittest.skipUnless((MODEL/'active.json').is_file() and SAMPLE.is_file(),
@@ -40,6 +40,15 @@ class TrainedModelIntegration(unittest.TestCase):
             with Image.open(SAMPLE) as im:
                 with self.assertRaisesRegex(ModelUnavailable,'校验失败'):
                     Predictor(directory).assess(im,'F',meta['model_id'],meta['checkpoint_sha256'])
+
+    def test_original_runtime_predictions_and_spatial_heatmaps(self):
+        from scripts.check_runtime import check_samples
+        reference=json.loads((ROOT/'docs/reports/runtime-reference.json').read_text(encoding='utf-8'))
+        if not all((STORAGE/'images'/(r['image_sha256']+'.png')).is_file()
+                   for r in reference['samples']):
+            self.skipTest('Six public samples required; use the complete research bundle')
+        results=check_samples(Predictor(MODEL),STORAGE,reference)
+        self.assertEqual(len(results),12)
 
 
 if __name__=='__main__':unittest.main()

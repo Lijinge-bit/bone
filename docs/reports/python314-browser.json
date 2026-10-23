@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "browser_errors": [],
+  "checks": [
+    "homepage",
+    "duplicate upload opens original",
+    "quality review",
+    "real model inference",
+    "real heatmap",
+    "image controls",
+    "review persistence",
+    "search",
+    "data report",
+    "mobile width",
+    "print CSS"
+  ],
+  "server_python": "3.14.8",
+  "server_torch": "2.14.1+cpu",
+  "server_platform": "Linux",
+  "server_storage": "isolated unpacked 0.2 research bundle",
+  "browser_client_python": "3.12.14",
+  "browser": "system Chromium / Playwright 1.62.0"
+}

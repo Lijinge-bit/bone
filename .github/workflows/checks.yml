@@ -4,19 +4,33 @@ permissions:
   contents: read
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      BONE_TEST_STORAGE: var
+      PYTHONUTF8: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.14'
           cache: pip
           cache-dependency-path: requirements.lock
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - run: python -m pip install -r requirements.lock
+      - run: python -m pip check
+      - name: Verify real model, predictions and Grad-CAM against original runtime
+        run: python scripts/check_runtime.py --bundle downloads/BoneAtlas_MVP_0.2_Python314.zip --storage "${{ env.BONE_TEST_STORAGE }}" --output "${{ runner.temp }}/runtime-check.json"
       - run: python -m unittest discover -s tests -v
       - run: node --check app/static/app.js
-      # Real-model checks explicitly skip on source-only CI without prepared weights.
-      # Clinical or ML accuracy is not claimed by this workflow.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-check-${{ matrix.os }}-py314
+          path: ${{ runner.temp }}/runtime-check.json
+      # Public bundled fixtures are checked with current checkout code on both OSes.
+      # Runtime compatibility does not establish clinical or ML accuracy.

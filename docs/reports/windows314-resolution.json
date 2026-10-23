@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "check": "uv target-platform binary-wheel dependency resolution",
+  "target_python": "3.14",
+  "target_platform": "x86_64-pc-windows-msvc",
+  "torch": "2.14.1+cpu",
+  "packages": 29,
+  "source_distributions_allowed": false,
+  "native_windows_execution": false,
+  "official_torch_wheel": "torch-2.14.1+cpu-cp314-cp314-win_amd64.whl",
+  "torch_index": "https://download.pytorch.org/whl/cpu",
+  "lock": "requirements.lock",
+  "ci": "Python 3.14 Ubuntu/Windows matrix configured; native result belongs to respective CI run"
+}
