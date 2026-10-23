@@ -406,7 +406,7 @@
     "training_seed_count": 1,
     "claim": "Within-cohort image uncertainty only, not cross-seed stability or patient-independent final validation"
   },
-  "unit_tests": 85,
+  "unit_tests": 89,
   "unit_skipped": 0,
   "cpu_integration": "passed: six originals x F/M",
   "browser_flow": "passed: isolated public database",
@@ -417,5 +417,6 @@
   "train_validation_gap_months": 3.9139389253292833,
   "unlabeled_prediction_rows": 200,
   "unlabeled_valid_rows": 198,
-  "unlabeled_invalid_rows": 2
+  "unlabeled_invalid_rows": 2,
+  "distribution": "Small update ZIP plus automatic SHA256-verified checkpoint parts"
 }

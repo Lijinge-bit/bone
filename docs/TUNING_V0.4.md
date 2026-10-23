@@ -69,7 +69,7 @@
 
 ## 集成、发布与可回滚性
 
-软件测试 **85 项通过、0 跳过**；新候选另外通过六张公开原图×F/M 的 **12 组真实预测／Grad-CAM**、重复／损坏权重拒绝及原图坐标检查。隔离的六张公开样例数据库完成质检、预测、热力图、复核、搜索、数据页、移动／打印浏览器闭环。测试记录不代表医院或临床验证。
+软件测试 **89 项通过、0 跳过**；新候选另外通过六张公开原图×F/M 的 **12 组真实预测／Grad-CAM**、重复／损坏权重拒绝及原图坐标检查。隔离的六张公开样例数据库完成质检、预测、热力图、复核、搜索、数据页、移动／打印浏览器闭环。测试记录不代表医院或临床验证。
 
 隔离存储已实际执行新模型 → V0.3 初始化 → 新模型双向回滚。完成评估和浏览器检查后，云端以 `research_only` 显式注册新候选；原有模型／版本保留，现有业务数据库 SHA 在注册前后完全一致。[部署记录](reports/tuning-v04-deployment.json)
 
@@ -77,16 +77,17 @@
 
 ## 在你的电脑使用本轮更新
 
-[下载 V0.4 调校更新包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Model_Tuning_V0.4.zip)。它包含新权重、匹配的训练／评估／集成证据和新增训练工具，**需要 V0.3 完整项目**；未打包你的私有上传、数据库、旧权重、虚拟环境或原图缓存。
+[下载 V0.4 调校更新包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Model_Tuning_V0.4.zip)。它包含匹配的训练／评估／集成证据和训练／权重更新工具，权重由工具从本仓库自动下载并校验，**需要 V0.3 完整项目**；未打包你的私有上传、数据库、旧权重、虚拟环境或原图缓存。
 
-若本机仍为 V0.2，先将 [V0.3 完整包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.3_Training.zip) 解压到新目录。将更新包另解压到临时目录，再把其中 `bone-atlas` 文件夹**内部的文件和子目录**复制到 V0.3 项目的 `bone-atlas` 目录，合并同名目录。更新包没有 `var/`，解压不会切换活动模型或替换现有业务数据库。在项目目录确认候选并执行研究注册：
+若本机仍为 V0.2，先将 [V0.3 完整包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.3_Training.zip) 解压到新目录。将更新包另解压到临时目录，再把其中 `bone-atlas` 文件夹**内部的文件和子目录**复制到 V0.3 项目的 `bone-atlas` 目录，合并同名目录。更新包没有 `var/`，解压不会切换活动模型或替换现有业务数据库。GitHub 大对象传输曾连续超时，因此更新工具包不内嵌约 96MB 的 `model.pt`；同一权重以三个校验绑定的资源发布，由工具自动还原。无需手动拼接。在项目目录先下载权重，再执行研究注册：
 
 ```powershell
+.\.venv314\Scripts\python.exe scripts/fetch_tuned_weights.py
 .\.venv314\Scripts\python.exe scripts/register_model.py --candidate .\candidates\tail-adapt-seed20261023\export --evaluation .\candidates\tail-adapt-seed20261023\holdout-evaluation --integration .\candidates\tail-adapt-seed20261023\integration-check.json --storage .\var --research-only --operator Machenike --reason "V0.4 成对微调、评估与集成证据通过；研究用途，目标未达标"
 .\.venv314\Scripts\python.exe scripts/check_runtime.py
 ```
 
-解释器不存在时先按 V0.3 说明建立 CPU 环境并安装 `requirements.lock`。注册核对绑定的源码、权重和报告字节；缺项／不一致应按错误核查，不改校验值绕过。旧结果／复核保留；需要回滚时使用旧模型 ID `resnet50-frozen-cpu-224`。包内候选目录还提供与新模型绑定的 `unlabeled-predictions.csv` 和 sidecar，按需复制到 `var` 后可恢复界面中的 200 张预测导出；回滚后应使用对应模型版本的文件。
+解释器不存在时先按 V0.3 说明建立 CPU 环境并安装 `requirements.lock`。下载工具仅接受本仓库 HTTPS 资源，核对每段与最终权重的 SHA；中断可复用已校验的段，失败不会发布半个模型或覆盖已有不同权重。首次还原需联网；Git 克隆包含本地权重段时会优先校验并复用。注册核对绑定的源码、权重和报告字节；缺项／不一致应按错误核查，不改校验值绕过。旧结果／复核保留；需要回滚时使用旧模型 ID `resnet50-frozen-cpu-224`。包内候选目录还提供与新模型绑定的 `unlabeled-predictions.csv` 和 sidecar，按需复制到 `var` 后可恢复界面中的 200 张预测导出；回滚后应使用对应模型版本的文件。
 
 ## 下一步按 PRD 继续
 

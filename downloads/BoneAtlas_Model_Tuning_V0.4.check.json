@@ -1,15 +1,12 @@
 {
   "status": "passed",
-  "bytes": 91093979,
-  "sha256": "ed4dffce70d51bfc17afea7ce58b660104c63131d7f4b5f4aacec7dddc3a41e2",
-  "entries": 73,
+  "bytes": 1452735,
+  "sha256": "f4b8f00ceb270503d1a37bdf22030e8c700b19ee68778bcc8e8be0f15f6a4bfc",
+  "entries": 75,
   "crc": "passed",
-  "one_checkpoint": true,
+  "checkpoint_downloaded_and_verified_by_tool": true,
+  "checkpoint_in_zip": false,
   "existing_var_or_database_overwritten": false,
-  "source_files_byte_identical": 50,
-  "checkpoint_sha256": "b16003c3d89a9dbb8d79083ce7d1642c1eefc3042bf83e10543d1ef29ba43a9c",
-  "clean_v03_plus_update_registration": "passed",
-  "clean_install_runtime_check": "passed",
-  "runtime_sample_image_sex_pairs": 12,
-  "runtime_model_id": "tail-adapt-seed20261023"
+  "source_files_byte_identical": 52,
+  "checkpoint_sha256": "b16003c3d89a9dbb8d79083ce7d1642c1eefc3042bf83e10543d1ef29ba43a9c"
 }

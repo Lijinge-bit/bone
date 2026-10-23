@@ -15,7 +15,7 @@ V0.3 已增加 ResNet-50＋性别、版本化预处理、CUDA/AMP 训练、恢�
 
 V0.3 完整包附带冻结 ResNet 基线、旧 CNN 回滚版本、六张公开样例、全新待质检数据库、固定数据清单、真实训练／评估证据和 GPU 默认配置。解压到新目录后进入 `bone-atlas`，按下文安装依赖并运行。包内不含约 10GB 原图、训练缓存、虚拟环境或私有上传。
 
-本轮新权重和训练工具另见 [V0.4 调校更新包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Model_Tuning_V0.4.zip)。它需要 V0.3 完整项目，包含候选和匹配证据；按 [调校报告](docs/TUNING_V0.4.md) 合并文件并显式研究注册。更新包不包含 `var/`，解压不更改现有数据库或活动模型。文档／调校轮次为 V0.4，应用版本仍为 V0.3。
+本轮新权重和训练工具另见 [V0.4 调校更新包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Model_Tuning_V0.4.zip)。它需要 V0.3 完整项目，包含候选元数据、匹配证据和权重下载校验工具；按 [调校报告](docs/TUNING_V0.4.md) 合并文件，自动下载还原权重后显式研究注册。更新包不包含 `var/`，解压不更改现有数据库或活动模型。文档／调校轮次为 V0.4，应用版本仍为 V0.3。
 
 GitHub 的 **Code → Download ZIP** 下载的是源码快照；上面的链接下载的是带模型的研究项目包。项目包采用版本化的 ZIP 作为明确的分发例外，普通 `var/` 运行目录、私有上传与数据库仍不提交到源码仓库。
 

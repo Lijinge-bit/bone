@@ -53,15 +53,15 @@ test_nonfinite_gradient_does_not_update_parameters (test_training.TrainingIntegr
 test_unique_output_and_existing_explicit_run_are_preserved (test_training.TrainingIntegrityTests.test_unique_output_and_existing_explicit_run_are_preserved) ... ok
 test_cache_byte_corruption_is_rejected (test_training_data.TrainingDataTest.test_cache_byte_corruption_is_rejected) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
 Prepared 4/4 PNGs; elapsed 0.0s
-Prepared cache: /tmp/bone training y68njbtp/training-cache-224
+Prepared cache: /tmp/bone training 8vbbndn5/training-cache-224
 ok
 test_duplicate_training_source_ids_are_rejected (test_training_data.TrainingDataTest.test_duplicate_training_source_ids_are_rejected) ... ok
 test_larger_supported_sizes_keep_holdout_partition (test_training_data.TrainingDataTest.test_larger_supported_sizes_keep_holdout_partition) ... Preparing 4 original PNGs at 384px; preserving {'train': 2, 'validation': 1, 'test': 1}
 Prepared 4/4 PNGs; elapsed 0.0s
-Prepared cache: /tmp/bone training sx88pclb/training-cache-384
+Prepared cache: /tmp/bone training gzj7eu1r/training-cache-384
 Preparing 4 original PNGs at 512px; preserving {'train': 2, 'validation': 1, 'test': 1}
 Prepared 4/4 PNGs; elapsed 0.0s
-Prepared cache: /tmp/bone training sx88pclb/training-cache-512
+Prepared cache: /tmp/bone training gzj7eu1r/training-cache-512
 ok
 test_legacy_cache_retains_fixed_ids_labels_and_uint8_tensor_contract (test_training_data.TrainingDataTest.test_legacy_cache_retains_fixed_ids_labels_and_uint8_tensor_contract) ... ok
 test_legacy_checksum_id_and_partition_mismatches_are_rejected (test_training_data.TrainingDataTest.test_legacy_checksum_id_and_partition_mismatches_are_rejected) ... ok
@@ -71,26 +71,30 @@ test_original_png_hash_mismatch_cannot_be_cached (test_training_data.TrainingDat
 ok
 test_prepared_cache_cannot_follow_a_changed_source_manifest (test_training_data.TrainingDataTest.test_prepared_cache_cannot_follow_a_changed_source_manifest) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
 Prepared 4/4 PNGs; elapsed 0.0s
-Prepared cache: /tmp/bone training oxgtw498/training-cache-224
+Prepared cache: /tmp/bone training xf20iaq3/training-cache-224
 ok
 test_prepared_cache_uses_original_pngs_and_survives_archive_removal (test_training_data.TrainingDataTest.test_prepared_cache_uses_original_pngs_and_survives_archive_removal) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
 Prepared 4/4 PNGs; elapsed 0.0s
-Prepared cache: /tmp/bone training bnlopaba/training-cache-224
+Prepared cache: /tmp/bone training w98619ch/training-cache-224
 ok
 test_prepared_index_must_match_manifest_even_with_updated_file_hash (test_training_data.TrainingDataTest.test_prepared_index_must_match_manifest_even_with_updated_file_hash) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
 Prepared 4/4 PNGs; elapsed 0.0s
-Prepared cache: /tmp/bone training luyy0vjt/training-cache-224
+Prepared cache: /tmp/bone training vi4nzsm0/training-cache-224
 ok
 test_reference_preserves_audited_split_and_excludes_unlabeled (test_training_data.TrainingDataTest.test_reference_preserves_audited_split_and_excludes_unlabeled) ... ok
 test_spawn_worker_reads_cache_without_original_zip (test_training_data.TrainingDataTest.test_spawn_worker_reads_cache_without_original_zip) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
 Prepared 4/4 PNGs; elapsed 0.0s
-Prepared cache: /tmp/bone training xy5qumv8/training-cache-224
+Prepared cache: /tmp/bone training ny9okn0_/training-cache-224
 ok
 test_unsafe_archive_member_paths_are_rejected (test_training_data.TrainingDataTest.test_unsafe_archive_member_paths_are_rejected) ... ok
 test_all_ids_and_tail_batch_are_exported_with_model_identity_and_no_accuracy (test_unlabeled.UnlabeledExportTests.test_all_ids_and_tail_batch_are_exported_with_model_identity_and_no_accuracy) ... ok
 test_corrupt_weights_and_model_changes_preserve_previous_export (test_unlabeled.UnlabeledExportTests.test_corrupt_weights_and_model_changes_preserve_previous_export) ... ok
 test_duplicate_ids_and_audited_image_mismatch_are_refused (test_unlabeled.UnlabeledExportTests.test_duplicate_ids_and_audited_image_mismatch_are_refused) ... ok
 test_negative_predictions_preserve_rows_and_are_marked_invalid (test_unlabeled.UnlabeledExportTests.test_negative_predictions_preserve_rows_and_are_marked_invalid) ... ok
+test_bad_part_never_publishes_model_and_verified_parts_are_reused (test_weight_fetch.WeightFetchTests.test_bad_part_never_publishes_model_and_verified_parts_are_reused) ... ok
+test_local_git_parts_are_verified_without_network (test_weight_fetch.WeightFetchTests.test_local_git_parts_are_verified_without_network) ... ok
+test_mismatch_and_untrusted_url_preserve_existing_checkpoint (test_weight_fetch.WeightFetchTests.test_mismatch_and_untrusted_url_preserve_existing_checkpoint) ... ok
+test_reconstructs_exact_checkpoint_and_skips_existing_valid_weights (test_weight_fetch.WeightFetchTests.test_reconstructs_exact_checkpoint_and_skips_existing_valid_weights) ... ok
 test_bad_png_and_bomb_limit (test_workbench.ImagingTest.test_bad_png_and_bomb_limit) ... ok
 test_letterbox_keeps_aspect_and_transform (test_workbench.ImagingTest.test_letterbox_keeps_aspect_and_transform) ... ok
 test_actual_snapshot_review_and_staleness (test_workbench.WorkbenchTest.test_actual_snapshot_review_and_staleness) ... ok
@@ -109,6 +113,6 @@ test_text_fields_cannot_inject_sql (test_workbench.WorkbenchTest.test_text_field
 test_unlabeled_prediction_export_is_an_artifact_not_an_accuracy (test_workbench.WorkbenchTest.test_unlabeled_prediction_export_is_an_artifact_not_an_accuracy) ... ok
 
 ----------------------------------------------------------------------
-Ran 85 tests in 47.654s
+Ran 89 tests in 28.429s
 
 OK
