@@ -1,0 +1,9 @@
+{
+  "active_model_id": "tail-adapt-seed20261023",
+  "checkpoint_sha256": "b16003c3d89a9dbb8d79083ce7d1642c1eefc3042bf83e10543d1ef29ba43a9c",
+  "database_sha256_before": "eb54fe96cb9e89c51afc2ca5f553c8e07a290f67462e9dec9156e87c5b055563",
+  "database_sha256_after": "eb54fe96cb9e89c51afc2ca5f553c8e07a290f67462e9dec9156e87c5b055563",
+  "database_unchanged": true,
+  "usage": "research_only",
+  "target_passed": false
+}

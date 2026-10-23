@@ -1,0 +1,253 @@
+{
+  "schema_version": 2,
+  "model_id": "tail-adapt-seed20261023",
+  "architecture": "resnet50-sex-v1",
+  "checkpoint_sha256": "b16003c3d89a9dbb8d79083ce7d1642c1eefc3042bf83e10543d1ef29ba43a9c",
+  "metadata_sha256": "ce17b962e12e26c8ca50631218a8a7631c151b8507a16c7b1147286f5c6fed0b",
+  "preprocess_version": "imagenet-gray-letterbox-v1",
+  "image_size": 224,
+  "code_sha256": {
+    "app/imaging.py": "b8a200917473f0c2d98356571efbead470b2cc6a1fcc759fddec628ad0f5d503",
+    "app/network.py": "a93fe499eee36a33668747b432b0d2be1d9131c29b501f59c8200cca35463bdf",
+    "app/metrics.py": "7fe23355993592dc47528b6c2651cf45ac3005c08aff4669996f649618c68b04",
+    "app/training_data.py": "7fff4d9ad6ea23c07d12b43a069423c6b9835b26b187f1e67d3818506ea0001e",
+    "scripts/evaluate_model.py": "77bad22bc5e255b893b8101b773cd45027c093565d6a8d354bdd90f19cc3e72c"
+  },
+  "data_reference": {
+    "manifest_sha256": "bf4f9f51d30d08e0c3a89d9bf69e5347af2ec6570c246dbe7a6147e6d49cecb5",
+    "split_sha256": "d53beae480a3c36ed83d77f183e4bede6aa9da1d4a08f5f7ad919fdd893333a5",
+    "audit_sha256": "4a672b0bffd0acc945a982d58c875e193bd1c93da3a7dc8bd992cc53f56167be",
+    "source_sha256": "ac0e5ea4cc5dc9dc4e513f857a7ffb455455425fe0c9e872fdc4d59523e081cf",
+    "split_counts": {
+      "train": 10091,
+      "validation": 1260,
+      "test": 1260
+    },
+    "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+    "grouping": "decoded raster equality and exact dHash candidates; patient grouping unavailable",
+    "cache_sha256": "4a79203844c51cb2efdf0b5151289df4f6cb3c77b29382f93675c8be22c86000"
+  },
+  "split": "test",
+  "evaluation_role": "exploratory_previously_seen_test",
+  "independent_final_test": false,
+  "patient_independence_verified": false,
+  "test_previously_seen": true,
+  "metrics_use_unclipped_predictions": true,
+  "target_mae_months": 6,
+  "limitations": [
+    "Previously inspected public research data; no new independent final cohort",
+    "Patient identifiers are absent; patient independence remains unverified",
+    "Bootstrap intervals resample images, not verified independent patients",
+    "Labels are public RSNA research labels, not an adjudicated clinical standard"
+  ],
+  "created_at": "2026-10-23T12:57:30.391796+00:00",
+  "kind": "candidate_evaluation",
+  "status": "evaluated",
+  "n_expected": 1260,
+  "n_evaluated": 1260,
+  "finite_predictions": 1260,
+  "metrics": {
+    "n": 1260,
+    "finite_n": 1260,
+    "finite_prediction_n": 1260,
+    "finite_label_n": 1260,
+    "invalid_n": 0,
+    "nonfinite_prediction_n": 0,
+    "nonfinite_label_n": 0,
+    "out_of_range_n": 2,
+    "complete": true,
+    "mae_months": 12.4175,
+    "rmse_months": 16.2354,
+    "median_absolute_error": 9.8442,
+    "p90_absolute_error": 25.6156,
+    "signed_bias_months": 0.8992,
+    "mae_ci95_months": [
+      11.7918,
+      13.0555
+    ],
+    "unknown_sex_n": 0,
+    "by_sex": {
+      "M": {
+        "n": 682,
+        "finite_n": 682,
+        "finite_prediction_n": 682,
+        "finite_label_n": 682,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 11.9519,
+        "rmse_months": 15.7489,
+        "median_absolute_error": 9.616,
+        "p90_absolute_error": 24.9108,
+        "signed_bias_months": 1.0135,
+        "mae_ci95_months": [
+          11.2185,
+          12.7569
+        ]
+      },
+      "F": {
+        "n": 578,
+        "finite_n": 578,
+        "finite_prediction_n": 578,
+        "finite_label_n": 578,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 12.9669,
+        "rmse_months": 16.7912,
+        "median_absolute_error": 10.1339,
+        "p90_absolute_error": 26.3422,
+        "signed_bias_months": 0.7643,
+        "mae_ci95_months": [
+          12.0803,
+          13.9186
+        ]
+      }
+    },
+    "by_boneage": {
+      "0-24": {
+        "n": 9,
+        "finite_n": 9,
+        "finite_prediction_n": 9,
+        "finite_label_n": 9,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 19.9022,
+        "rmse_months": 22.6612,
+        "median_absolute_error": 16.75,
+        "p90_absolute_error": 33.053,
+        "signed_bias_months": 8.74,
+        "mae_ci95_months": [
+          13.1964,
+          26.7614
+        ]
+      },
+      "24-72": {
+        "n": 124,
+        "finite_n": 124,
+        "finite_prediction_n": 124,
+        "finite_label_n": 124,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 15.7692,
+        "rmse_months": 20.3859,
+        "median_absolute_error": 12.5454,
+        "p90_absolute_error": 28.6329,
+        "signed_bias_months": 8.4767,
+        "mae_ci95_months": [
+          13.7053,
+          18.248
+        ]
+      },
+      "72-120": {
+        "n": 295,
+        "finite_n": 295,
+        "finite_prediction_n": 295,
+        "finite_label_n": 295,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 13.8545,
+        "rmse_months": 17.6141,
+        "median_absolute_error": 12.046,
+        "p90_absolute_error": 28.4963,
+        "signed_bias_months": 8.0145,
+        "mae_ci95_months": [
+          12.6104,
+          15.1926
+        ]
+      },
+      "120-168": {
+        "n": 621,
+        "finite_n": 621,
+        "finite_prediction_n": 621,
+        "finite_label_n": 621,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 10.7038,
+        "rmse_months": 13.9109,
+        "median_absolute_error": 8.6055,
+        "p90_absolute_error": 22.6256,
+        "signed_bias_months": -1.6937,
+        "mae_ci95_months": [
+          10.0637,
+          11.4315
+        ]
+      },
+      "168-+": {
+        "n": 211,
+        "finite_n": 211,
+        "finite_prediction_n": 211,
+        "finite_label_n": 211,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 13.1635,
+        "rmse_months": 17.4524,
+        "median_absolute_error": 10.518,
+        "p90_absolute_error": 28.1296,
+        "signed_bias_months": -6.2051,
+        "mae_ci95_months": [
+          11.6807,
+          14.8116
+        ]
+      }
+    },
+    "bootstrap": {
+      "samples": 1000,
+      "seed": 20261023,
+      "confidence": 0.95,
+      "unit": "image",
+      "method": "percentile"
+    },
+    "prediction_range_months": [
+      0.0,
+      360.0
+    ],
+    "metrics_use_unclipped_predictions": true
+  },
+  "mae_target_met": false,
+  "target_passed": false,
+  "gates": {
+    "G01": {
+      "passed": false,
+      "reason": "No new independent final data; public test was previously inspected and patient isolation is unverified"
+    }
+  },
+  "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+  "runtime": {
+    "python": "3.14.8",
+    "torch": "2.14.1+cpu",
+    "device": "cpu",
+    "threads": 4,
+    "batch_size": 16,
+    "workers": 0
+  },
+  "elapsed_seconds": 127.132,
+  "artifacts": {
+    "predictions.csv": {
+      "sha256": "c77f86e5184a1f11cb229ffe18b88633f9c5f0db717a4d7ae428ddf8ab3419bc",
+      "rows": 1260
+    },
+    "frozen-protocol.json": {
+      "sha256": "714e52f54e52329cb1489cc1f6931c1463a3e8bfb210c912a76c988ae6a95c82"
+    }
+  }
+}

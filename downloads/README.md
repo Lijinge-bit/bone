@@ -2,6 +2,8 @@
 
 最新需求文档：[PRD V0.4 实验复盘与下一轮调校 · 离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.4_Experiment_Review.zip)。解压后双击 HTML 阅读，包含原要求对照、真实曲线、后续实验与验收。文档为 V0.4，下面的完整应用／模型包为 V0.3。
 
+最新调校权重：[V0.4 模型与训练更新包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Model_Tuning_V0.4.zip)。需要下方的 V0.3 完整项目；按 [在线调校报告](../docs/TUNING_V0.4.md) 合并文件并注册。新模型为 CPU 末残差块微调，验证 MAE 12.1334 月、同一历史留出 MAE 12.4175 月；仍未达到 <6 月目标，0–<24 月误差未改善，完整 4060 全骨干训练待本机执行。更新包不包含 `var/`，解压不会替换数据库或切换活动模型。
+
 [下载 V0.3 完整版 BoneAtlas_MVP_0.3_Training.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.3_Training.zip)
 
 大小：100,096,791 字节（约 100.1 MB / 95.5 MiB）。

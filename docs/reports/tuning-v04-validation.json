@@ -1,0 +1,396 @@
+{
+  "created_at": "2026-10-23T12:52:43.617360+00:00",
+  "status": "completed",
+  "architecture": "resnet50-sex-v1",
+  "training_protocol": "cpu_last_residual_block_finetuning",
+  "training_samples": 10091,
+  "validation_samples": 1260,
+  "test_samples": null,
+  "epochs": 3,
+  "configured_epochs": 3,
+  "best_epoch": 3,
+  "best_validation_mae_months": 12.13339217049735,
+  "training": {
+    "n": 10091,
+    "finite_n": 10091,
+    "finite_prediction_n": 10091,
+    "finite_label_n": 10091,
+    "invalid_n": 0,
+    "nonfinite_prediction_n": 0,
+    "nonfinite_label_n": 0,
+    "out_of_range_n": 1,
+    "complete": true,
+    "mae_months": 8.2195,
+    "rmse_months": 10.5722,
+    "median_absolute_error": 6.7052,
+    "p90_absolute_error": 17.267,
+    "signed_bias_months": 0.7783,
+    "mae_ci95_months": [
+      8.0967,
+      8.3458
+    ],
+    "unknown_sex_n": 0,
+    "by_sex": {
+      "M": {
+        "n": 5469,
+        "finite_n": 5469,
+        "finite_prediction_n": 5469,
+        "finite_label_n": 5469,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 8.0448,
+        "rmse_months": 10.4232,
+        "median_absolute_error": 6.4878,
+        "p90_absolute_error": 16.9472,
+        "signed_bias_months": 1.025,
+        "mae_ci95_months": [
+          7.8912,
+          8.2301
+        ]
+      },
+      "F": {
+        "n": 4622,
+        "finite_n": 4622,
+        "finite_prediction_n": 4622,
+        "finite_label_n": 4622,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 8.4261,
+        "rmse_months": 10.7459,
+        "median_absolute_error": 6.9763,
+        "p90_absolute_error": 17.5898,
+        "signed_bias_months": 0.4864,
+        "mae_ci95_months": [
+          8.2755,
+          8.6087
+        ]
+      }
+    },
+    "by_boneage": {
+      "0-24": {
+        "n": 73,
+        "finite_n": 73,
+        "finite_prediction_n": 73,
+        "finite_label_n": 73,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 7.8781,
+        "rmse_months": 11.1929,
+        "median_absolute_error": 6.4225,
+        "p90_absolute_error": 13.7133,
+        "signed_bias_months": 4.9794,
+        "mae_ci95_months": [
+          6.2652,
+          10.2152
+        ]
+      },
+      "24-72": {
+        "n": 993,
+        "finite_n": 993,
+        "finite_prediction_n": 993,
+        "finite_label_n": 993,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 8.219,
+        "rmse_months": 10.7579,
+        "median_absolute_error": 6.5772,
+        "p90_absolute_error": 17.0558,
+        "signed_bias_months": 4.2812,
+        "mae_ci95_months": [
+          7.7835,
+          8.6463
+        ]
+      },
+      "72-120": {
+        "n": 2366,
+        "finite_n": 2366,
+        "finite_prediction_n": 2366,
+        "finite_label_n": 2366,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 9.3563,
+        "rmse_months": 11.8641,
+        "median_absolute_error": 7.8705,
+        "p90_absolute_error": 19.2293,
+        "signed_bias_months": 5.566,
+        "mae_ci95_months": [
+          9.0752,
+          9.6448
+        ]
+      },
+      "120-168": {
+        "n": 4980,
+        "finite_n": 4980,
+        "finite_prediction_n": 4980,
+        "finite_label_n": 4980,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 7.6493,
+        "rmse_months": 9.7579,
+        "median_absolute_error": 6.273,
+        "p90_absolute_error": 15.9142,
+        "signed_bias_months": -0.9461,
+        "mae_ci95_months": [
+          7.4715,
+          7.8325
+        ]
+      },
+      "168-+": {
+        "n": 1679,
+        "finite_n": 1679,
+        "finite_prediction_n": 1679,
+        "finite_label_n": 1679,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 8.3237,
+        "rmse_months": 10.8213,
+        "median_absolute_error": 6.7317,
+        "p90_absolute_error": 17.8607,
+        "signed_bias_months": -3.108,
+        "mae_ci95_months": [
+          7.9978,
+          8.7117
+        ]
+      }
+    },
+    "bootstrap": {
+      "samples": 200,
+      "seed": 20261023,
+      "confidence": 0.95,
+      "unit": "image",
+      "method": "percentile"
+    },
+    "prediction_range_months": [
+      0.0,
+      360.0
+    ],
+    "metrics_use_unclipped_predictions": true
+  },
+  "validation": {
+    "n": 1260,
+    "finite_n": 1260,
+    "finite_prediction_n": 1260,
+    "finite_label_n": 1260,
+    "invalid_n": 0,
+    "nonfinite_prediction_n": 0,
+    "nonfinite_label_n": 0,
+    "out_of_range_n": 2,
+    "complete": true,
+    "mae_months": 12.1334,
+    "rmse_months": 15.8334,
+    "median_absolute_error": 9.6582,
+    "p90_absolute_error": 26.0064,
+    "signed_bias_months": 0.002,
+    "mae_ci95_months": [
+      11.6368,
+      12.6765
+    ],
+    "unknown_sex_n": 0,
+    "by_sex": {
+      "M": {
+        "n": 682,
+        "finite_n": 682,
+        "finite_prediction_n": 682,
+        "finite_label_n": 682,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 11.9781,
+        "rmse_months": 15.7438,
+        "median_absolute_error": 9.3541,
+        "p90_absolute_error": 25.9976,
+        "signed_bias_months": 0.1458,
+        "mae_ci95_months": [
+          11.184,
+          12.7058
+        ]
+      },
+      "F": {
+        "n": 578,
+        "finite_n": 578,
+        "finite_prediction_n": 578,
+        "finite_label_n": 578,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 1,
+        "complete": true,
+        "mae_months": 12.3166,
+        "rmse_months": 15.9385,
+        "median_absolute_error": 10.0169,
+        "p90_absolute_error": 25.9315,
+        "signed_bias_months": -0.1677,
+        "mae_ci95_months": [
+          11.537,
+          13.1548
+        ]
+      }
+    },
+    "by_boneage": {
+      "0-24": {
+        "n": 9,
+        "finite_n": 9,
+        "finite_prediction_n": 9,
+        "finite_label_n": 9,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 2,
+        "complete": true,
+        "mae_months": 19.746,
+        "rmse_months": 24.1029,
+        "median_absolute_error": 20.3504,
+        "p90_absolute_error": 41.1546,
+        "signed_bias_months": -1.8158,
+        "mae_ci95_months": [
+          11.2127,
+          29.9167
+        ]
+      },
+      "24-72": {
+        "n": 124,
+        "finite_n": 124,
+        "finite_prediction_n": 124,
+        "finite_label_n": 124,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 13.3605,
+        "rmse_months": 17.2811,
+        "median_absolute_error": 10.5073,
+        "p90_absolute_error": 27.1325,
+        "signed_bias_months": 6.7514,
+        "mae_ci95_months": [
+          11.5123,
+          15.26
+        ]
+      },
+      "72-120": {
+        "n": 295,
+        "finite_n": 295,
+        "finite_prediction_n": 295,
+        "finite_label_n": 295,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 14.19,
+        "rmse_months": 17.8928,
+        "median_absolute_error": 11.9308,
+        "p90_absolute_error": 30.275,
+        "signed_bias_months": 6.8664,
+        "mae_ci95_months": [
+          12.9431,
+          15.4359
+        ]
+      },
+      "120-168": {
+        "n": 621,
+        "finite_n": 621,
+        "finite_prediction_n": 621,
+        "finite_label_n": 621,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 10.5282,
+        "rmse_months": 13.8509,
+        "median_absolute_error": 8.4418,
+        "p90_absolute_error": 20.7399,
+        "signed_bias_months": -2.567,
+        "mae_ci95_months": [
+          9.879,
+          11.2161
+        ]
+      },
+      "168-+": {
+        "n": 211,
+        "finite_n": 211,
+        "finite_prediction_n": 211,
+        "finite_label_n": 211,
+        "invalid_n": 0,
+        "nonfinite_prediction_n": 0,
+        "nonfinite_label_n": 0,
+        "out_of_range_n": 0,
+        "complete": true,
+        "mae_months": 12.9364,
+        "rmse_months": 16.8681,
+        "median_absolute_error": 10.5851,
+        "p90_absolute_error": 28.0313,
+        "signed_bias_months": -5.9234,
+        "mae_ci95_months": [
+          11.5333,
+          14.4111
+        ]
+      }
+    },
+    "bootstrap": {
+      "samples": 1000,
+      "seed": 20261023,
+      "confidence": 0.95,
+      "unit": "image",
+      "method": "percentile"
+    },
+    "prediction_range_months": [
+      0.0,
+      360.0
+    ],
+    "metrics_use_unclipped_predictions": true
+  },
+  "test": null,
+  "target_mae_months": 6,
+  "target_passed": false,
+  "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+  "grouping": "decoded raster equality and exact dHash candidates; patient grouping unavailable",
+  "limitations": [
+    "Research model; not clinically validated",
+    "Patient independence depends on the dataset audit",
+    "Final holdout has not been evaluated; validation was used for model selection",
+    "Only features.layer4.2 and sex/regression head are trainable; not full-backbone GPU training",
+    "Three-epoch diagnostic; single seed; validation selection only"
+  ],
+  "data_reference": {
+    "manifest_sha256": "bf4f9f51d30d08e0c3a89d9bf69e5347af2ec6570c246dbe7a6147e6d49cecb5",
+    "split_sha256": "d53beae480a3c36ed83d77f183e4bede6aa9da1d4a08f5f7ad919fdd893333a5",
+    "audit_sha256": "4a672b0bffd0acc945a982d58c875e193bd1c93da3a7dc8bd992cc53f56167be",
+    "source_sha256": "ac0e5ea4cc5dc9dc4e513f857a7ffb455455425fe0c9e872fdc4d59523e081cf",
+    "cache_sha256": "4a79203844c51cb2efdf0b5151289df4f6cb3c77b29382f93675c8be22c86000",
+    "patient_isolation": "UNVERIFIED: no patient identifiers or exam dates supplied",
+    "grouping": "decoded raster equality and exact dHash candidates; patient grouping unavailable",
+    "split_counts": {
+      "train": 10091,
+      "validation": 1260,
+      "test": 1260
+    }
+  },
+  "selection_split": "validation",
+  "metrics_use_unclipped_predictions": true,
+  "preprocess_version": "imagenet-gray-letterbox-v1"
+}

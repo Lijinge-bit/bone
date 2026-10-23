@@ -1,0 +1,23 @@
+{
+  "changed_state_keys": [
+    "features.layer4.2.conv1.weight",
+    "features.layer4.2.bn1.weight",
+    "features.layer4.2.bn1.bias",
+    "features.layer4.2.conv2.weight",
+    "features.layer4.2.bn2.weight",
+    "features.layer4.2.bn2.bias",
+    "features.layer4.2.conv3.weight",
+    "features.layer4.2.bn3.weight",
+    "features.layer4.2.bn3.bias",
+    "sex_embedding.0.weight",
+    "sex_embedding.0.bias",
+    "head.0.weight",
+    "head.0.bias",
+    "head.3.weight",
+    "head.3.bias"
+  ],
+  "frozen_prefix_unchanged": true,
+  "batchnorm_running_statistics_unchanged": true,
+  "image_block_actually_changed": true,
+  "sex_or_regression_head_changed": true
+}

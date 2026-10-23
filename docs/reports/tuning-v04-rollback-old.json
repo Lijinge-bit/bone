@@ -1,0 +1,8 @@
+{
+  "operation": "rollback",
+  "model_id": "resnet50-frozen-cpu-224",
+  "checkpoint_sha256": "0a3eb7e2e11b427991d0d9e2ad2f219662a40c8d102147abb761fd788afbfd7b",
+  "usage": "research_only",
+  "target_passed": false,
+  "active": "/tmp/bone-v04-browser-store/var/models/active.json"
+}

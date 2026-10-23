@@ -1,0 +1,20 @@
+{
+  "model_id": "tail-adapt-seed20261023",
+  "checkpoint_sha256": "b16003c3d89a9dbb8d79083ce7d1642c1eefc3042bf83e10543d1ef29ba43a9c",
+  "model_metadata_sha256": "0f49770f115c8ac031c6513b3950adf49160d6f30f32beac651f292ffd987ef9",
+  "architecture": "resnet50-sex-v1",
+  "preprocess_version": "imagenet-gray-letterbox-v1",
+  "image_size": 224,
+  "rows": 200,
+  "valid_rows": 198,
+  "invalid_rows": 2,
+  "device": "cpu",
+  "ground_truth_available": false,
+  "mae_computed": false,
+  "source_image_checksums_verified": true,
+  "predictions_sha256": "cac195e3f6807c6fa831185ea06b2aebc4160639600636b0f9fe09e42d21987e",
+  "invalid_source_ids": [
+    "4389",
+    "4539"
+  ]
+}

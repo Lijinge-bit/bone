@@ -1,0 +1,8 @@
+{
+  "operation": "rollback",
+  "model_id": "tail-adapt-seed20261023",
+  "checkpoint_sha256": "b16003c3d89a9dbb8d79083ce7d1642c1eefc3042bf83e10543d1ef29ba43a9c",
+  "usage": "research_only",
+  "target_passed": false,
+  "active": "/tmp/bone-v04-browser-store/var/models/active.json"
+}

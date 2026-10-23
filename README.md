@@ -6,14 +6,16 @@ V0.3 已增加 ResNet-50＋性别、版本化预处理、CUDA/AMP 训练、恢�
 
 最新需求修订见 [PRD V0.4：实验复盘与下一轮调校](docs/PRD_V0.4_EXPERIMENT_REVIEW.html)（[下载离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.4_Experiment_Review.zip)）。文档对照原 Word 和归档实测结果，明确精度差距、GPU 成对实验、独立评估前提与验收清单；当前应用／模型包版本仍为 V0.3。
 
-当前活动模型为真实训练的 **ResNet-50 冻结骨干＋回归头、224 输入**：验证 MAE **12.7541 月**，历史固定留出 MAE **12.9245 月**，比原 CNN 的 19.2524 月下降约 32.9%。**仍未达到 <6 月目标**。当前云环境只有 CPU，RTX 4060 全量微调待在本机执行。既有留出已被观察，评估明确为探索用途，患者级隔离未验证。本项目仅供研究。
+当前云端活动研究模型已更新为 **ResNet-50 末残差块＋性别／回归头微调、224 输入**：验证 MAE **12.7541 → 12.1334 月**，历史固定留出 MAE **12.9245 → 12.4175 月**。本轮为真实 CPU 单种子、3 轮成对实验；低龄段仍有较大误差，**<6 月目标未通过**，患者独立性未验证。结果、限制、安装新权重和后续训练见 [V0.4 调校报告](docs/TUNING_V0.4.md)。RTX 4060 全骨干 CUDA 对照入口见 [本机实验说明](docs/E1_4060.md)，尚未在云端实机执行。
 
 ## 下载完整研究项目包
 
 - [直接下载 V0.3 完整包 BoneAtlas_MVP_0.3_Training.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.3_Training.zip)
 - [打开下载文件页面](https://github.com/Lijinge-bit/bone/blob/main/downloads/BoneAtlas_MVP_0.3_Training.zip)：如直接下载未开始，可点击页面上的 **Download raw file**。
 
-完整包附带新 ResNet 研究权重、旧 CNN 回滚版本、六张公开样例、全新待质检数据库、固定数据清单、真实训练／评估证据和 GPU 默认配置。解压到新目录后进入 `bone-atlas`，按下文安装依赖并运行。包内不含约 10GB 原图、训练缓存、虚拟环境或私有上传；新模型权重使下载体积明显大于旧版。
+V0.3 完整包附带冻结 ResNet 基线、旧 CNN 回滚版本、六张公开样例、全新待质检数据库、固定数据清单、真实训练／评估证据和 GPU 默认配置。解压到新目录后进入 `bone-atlas`，按下文安装依赖并运行。包内不含约 10GB 原图、训练缓存、虚拟环境或私有上传。
+
+本轮新权重和训练工具另见 [V0.4 调校更新包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Model_Tuning_V0.4.zip)。它需要 V0.3 完整项目，包含候选和匹配证据；按 [调校报告](docs/TUNING_V0.4.md) 合并文件并显式研究注册。更新包不包含 `var/`，解压不更改现有数据库或活动模型。文档／调校轮次为 V0.4，应用版本仍为 V0.3。
 
 GitHub 的 **Code → Download ZIP** 下载的是源码快照；上面的链接下载的是带模型的研究项目包。项目包采用版本化的 ZIP 作为明确的分发例外，普通 `var/` 运行目录、私有上传与数据库仍不提交到源码仓库。
 
@@ -104,7 +106,7 @@ py -3.14 -m venv .venv314
 
 在本机浏览器访问 `http://127.0.0.1:8000`。项目包附带真实 CPU 研究权重、六张已下载的公开样例及其研究记录，可以在安装依赖后直接查看和评估；不包含约 10 GB 完整图片或虚拟环境。完整数据重新准备时可用脚本参数指定本地目录，例如 `--output ./data`、`--data ./data` 和 `--archive ./data/rsna-bone-age-v2.zip`。
 
-PyCharm 的项目解释器选择 `bone-atlas\.venv314\Scripts\python.exe`。以上命令直接调用该解释器，无需先激活虚拟环境。升级的是运行依赖，已有权重没有重训；原有精度限制仍适用。
+PyCharm 的项目解释器选择 `bone-atlas\.venv314\Scripts\python.exe`。以上命令直接调用该解释器，无需先激活虚拟环境。这组命令安装 CPU 推理环境；V0.3 完整包提供冻结基线，V0.4 调校更新提供新的末残差块微调候选，实际效果和限制以对应报告为准。
 
 ```text
 app/main.py          FastAPI、版本化记录、任务与复核

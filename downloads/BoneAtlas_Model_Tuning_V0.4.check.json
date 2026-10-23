@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "bytes": 91093979,
+  "sha256": "ed4dffce70d51bfc17afea7ce58b660104c63131d7f4b5f4aacec7dddc3a41e2",
+  "entries": 73,
+  "crc": "passed",
+  "one_checkpoint": true,
+  "existing_var_or_database_overwritten": false,
+  "source_files_byte_identical": 50,
+  "checkpoint_sha256": "b16003c3d89a9dbb8d79083ce7d1642c1eefc3042bf83e10543d1ef29ba43a9c",
+  "clean_v03_plus_update_registration": "passed",
+  "clean_install_runtime_check": "passed",
+  "runtime_sample_image_sex_pairs": 12,
+  "runtime_model_id": "tail-adapt-seed20261023"
+}

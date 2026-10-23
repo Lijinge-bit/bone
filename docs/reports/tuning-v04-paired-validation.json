@@ -1,0 +1,15 @@
+{
+  "split": "validation",
+  "n": 1260,
+  "mean_absolute_error_reduction_months": 0.6207119139413985,
+  "ci95_months": [
+    0.43153172470274426,
+    0.8133809112367176
+  ],
+  "method": "paired percentile bootstrap over images",
+  "resamples": 1000,
+  "seed": 20261023,
+  "patient_independence_verified": false,
+  "training_seed_count": 1,
+  "claim": "Within-cohort image uncertainty only, not cross-seed stability or patient-independent final validation"
+}
