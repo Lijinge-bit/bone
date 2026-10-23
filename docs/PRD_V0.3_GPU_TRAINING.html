@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Bone Atlas PRD V0.3：面向 Windows、Python 3.14 与 RTX 4060 Laptop 8GB 的骨龄模型训练升级需求，包含预训练模型、实验协议、独立评估、推理和热力图适配及验收矩阵。">
+<meta name="color-scheme" content="light">
+<title>Bone Atlas · 骨龄模型训练升级 PRD V0.3</title>
+<style>
+:root{--ink:#182f32;--muted:#617575;--teal:#125c54;--deep:#123c37;--mint:#e8f1eb;--paper:#fffefa;--bg:#f1f3ee;--line:#d9e2d9;--amber:#925b20;--amber-bg:#faf1e3;--red:#a44639;--red-bg:#faeee9;--blue:#365f77;--blue-bg:#edf3f6;--radius:15px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;font-size:14px;line-height:1.85}a{color:var(--teal);text-underline-offset:4px}a:focus-visible{outline:3px solid #b78439;outline-offset:4px}::selection{background:#cfe5d7}p{margin:10px 0}strong{font-weight:700}aside{position:fixed;inset:0 auto 0 0;width:244px;background:var(--deep);color:#d5e4d9;padding:30px 21px;overflow:auto;display:flex;flex-direction:column;gap:25px}.identity{display:flex;align-items:center;gap:12px}.mark{width:43px;height:43px;border:1px solid #6c9b85;border-radius:12px;display:grid;place-items:center;font-family:Georgia,serif;font-size:32px;color:#f8f4df}.identity b{font-size:14px;letter-spacing:2px;color:#fff}.identity small{display:block;color:#a8c1b2;font-size:11px;letter-spacing:1px}.nav-label{font-size:10px;letter-spacing:2px;color:#9fbcaa;margin:2px 10px 12px}nav{display:grid;gap:2px}nav a{color:#d5e4d9;text-decoration:none;display:flex;gap:12px;align-items:center;padding:8px 10px;border-radius:7px;font-size:12px}nav a span{font-family:ui-monospace,Consolas,monospace;color:#8cba9e;font-size:10px}nav a:hover{background:#285247}.aside-bottom{margin-top:auto;border-top:1px solid #3d6151;padding:18px 9px 0;font-size:11px;color:#a8c1b2}.aside-bottom strong{display:block;color:#e2eee1;font-size:12px;margin-bottom:7px}main{margin-left:244px;padding:30px 40px 55px;max-width:1660px}.topline{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:24px;color:var(--muted);font-size:11px;letter-spacing:.5px}.topline .doc-id{font-family:ui-monospace,Consolas,monospace}.toplinks{display:flex;gap:18px}.toplinks a{font-size:12px}.hero{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px 30px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:0 0 auto;height:5px;background:var(--teal)}.eyebrow{color:var(--teal);font-size:11px;letter-spacing:2px;font-weight:700}.hero-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:38px;align-items:center}.hero h1{font-size:clamp(29px,3.3vw,43px);letter-spacing:-1px;line-height:1.35;margin:16px 0}.hero h1 span{font-weight:400;font-size:22px;color:var(--muted);display:block;margin-top:10px;letter-spacing:0}.lead{color:var(--muted);max-width:690px;font-size:14px}.tags{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 0}.tag,.badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;line-height:1.7;background:var(--mint);color:var(--teal);border:1px solid #d0e3d5}.badge.plan{background:var(--amber-bg);color:var(--amber);border-color:#e9d8bd}.badge.fail{background:var(--red-bg);color:var(--red);border-color:#eacac0}.badge.info{background:var(--blue-bg);color:var(--blue);border-color:#d5e3eb}.compare{border:1px solid var(--line);border-radius:12px;background:#f6f8f2;padding:22px}.compare h2{font-size:13px;letter-spacing:.5px;margin:0 0 19px}.bar-row{margin:14px 0}.bar-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}.bar-label b{font-family:ui-monospace,Consolas,monospace;font-size:15px}.track{height:13px;background:#e4e9df;border-radius:3px;overflow:hidden}.bar{height:100%;background:#b17e50;width:80.2183%}.bar.target{background:repeating-linear-gradient(135deg,#548b69 0,#548b69 5px,#83ac8c 5px,#83ac8c 8px);width:25%;border-right:2px solid var(--teal)}.axis{display:flex;justify-content:space-between;color:var(--muted);font-family:ui-monospace,Consolas,monospace;font-size:10px;margin-top:6px}.compare .caption{font-size:11px;color:var(--muted);margin:14px 0 0}.meta{display:flex;flex-wrap:wrap;gap:10px 25px;border-top:1px solid var(--line);margin-top:28px;padding-top:18px;font-size:11px;color:var(--muted)}.meta b{color:var(--ink);margin-right:7px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:17px 0 24px}.stat{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:17px 19px}.stat .label{font-size:11px;color:var(--muted)}.stat strong{display:block;font-size:26px;line-height:1.5;font-family:ui-monospace,Consolas,monospace;font-weight:600;letter-spacing:-1px;color:var(--teal)}.stat small{font-size:10px;color:var(--muted)}section{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:27px 31px;margin:20px 0;scroll-margin-top:25px}.section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:15px}.section-head .num{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--teal);border-bottom:2px solid #9fbd9d;padding-bottom:5px}.section-head h2{font-size:22px;letter-spacing:-.5px;line-height:1.5;margin:0}.section-note{font-size:12px;color:var(--muted);margin:-5px 0 17px}h3{font-size:15px;margin:24px 0 9px}h4{font-size:14px;margin:20px 0 9px}ul,ol{padding-left:22px;margin:9px 0}li{margin:6px 0}code{font-family:ui-monospace,Consolas,monospace;background:#edf1e9;border:1px solid #dfe6d9;padding:1px 4px;border-radius:3px;font-size:11px;overflow-wrap:anywhere}.callout{padding:14px 17px;border-left:3px solid var(--teal);background:#eef4eb;margin:15px 0;border-radius:0 7px 7px 0;font-size:13px}.callout.warn{border-color:#b58137;background:var(--amber-bg)}.callout.info{border-color:#5b8097;background:var(--blue-bg)}.callout strong:first-child{display:block;margin-bottom:4px}.small{font-size:11px;color:var(--muted)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.panel{border:1px solid var(--line);border-radius:9px;padding:16px 18px;background:#f8faf4}.panel h3{margin:0 0 9px}.panel p{font-size:12px}.table-wrap{width:100%;overflow-x:auto;margin:13px 0 17px;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.75}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);border-right:1px solid #e5e9e0;overflow-wrap:anywhere}th{background:#edf2e8;font-weight:700;color:#28483d}tr:last-child td{border-bottom:0}th:last-child,td:last-child{border-right:0}tbody tr:nth-child(even){background:#fafbf6}.id{font-family:ui-monospace,Consolas,monospace;color:var(--teal);white-space:nowrap;font-size:10px}.wide{min-width:760px}.medium{min-width:590px}.nowrap{white-space:nowrap}.workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:17px 0}.flow-step{padding:14px;border:1px solid var(--line);border-top:3px solid #8eae8f;border-radius:7px;background:#f5f8ef}.flow-step span{font-family:ui-monospace,Consolas,monospace;font-size:10px;color:var(--muted)}.flow-step b{display:block;margin:5px 0;font-size:13px}.flow-step p{font-size:11px;color:var(--muted);margin:0}.codeblock{background:#183d35;color:#dfecdf;border:1px solid #3c5b4b;padding:17px 19px;border-radius:8px;font-family:ui-monospace,Consolas,monospace;line-height:1.8;font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere}.legend{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;font-size:11px;color:var(--muted)}.milestones{counter-reset:milestone;display:grid;gap:11px}.milestone{display:grid;grid-template-columns:38px 1fr;gap:14px;padding:15px 17px;border:1px solid var(--line);border-radius:8px;background:#f8faf3}.milestone:before{counter-increment:milestone;content:"0" counter(milestone);font-family:ui-monospace,Consolas,monospace;font-size:19px;color:var(--teal);border-right:1px solid var(--line)}.milestone b{font-size:13px}.milestone p{font-size:12px;margin:3px 0;color:var(--muted)}.footer{display:flex;justify-content:space-between;gap:20px;font-size:10px;color:var(--muted);padding:17px 4px}.footer a{color:var(--muted)}.source-list{font-size:12px}.status-word{font-weight:700;color:var(--amber)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1700px){main{margin-left:max(244px,calc((100vw - 1416px)/2));max-width:1416px}aside{width:max(244px,calc((100vw - 1416px)/2));padding-left:max(21px,calc((100vw - 1550px)/2))}}
+@media(max-width:1150px){main{padding:24px}aside{width:220px}main{margin-left:220px}.hero{padding:30px}.hero-grid{grid-template-columns:1fr;gap:20px}.compare{max-width:none}.stats{gap:9px}.stat{padding:14px}.stat strong{font-size:23px}section{padding:24px}.workflow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){aside{position:static;width:auto;padding:19px;gap:15px}.identity{gap:10px}.mark{width:35px;height:35px;font-size:27px}.identity small{display:inline;margin-left:10px}.nav-label,.aside-bottom{display:none}nav{display:flex;flex-wrap:wrap;gap:4px}nav a{padding:4px 7px;font-size:10px;gap:5px;background:#234b40}nav a span{font-size:9px}main{margin:0;padding:15px}.topline{font-size:10px;align-items:flex-start}.toplinks{gap:10px;flex-wrap:wrap;justify-content:flex-end}.toplinks a{font-size:10px}.hero{padding:27px 22px 22px}.hero h1{font-size:30px}.hero h1 span{font-size:18px}.lead{font-size:13px}.meta{gap:8px 18px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:18px}.stat strong{font-size:25px}.stat .label{font-size:10px}.grid2{grid-template-columns:1fr}.section-head h2{font-size:20px}section{padding:21px 18px;margin:16px 0}.section-note{font-size:11px}.workflow{gap:8px}.flow-step{padding:11px}.flow-step b{font-size:12px}.flow-step p{font-size:10px}.footer{display:block}.footer span{display:block;margin:6px 0}.callout{font-size:12px}.table-wrap{border-radius:5px}th,td{padding:10px}.codeblock{font-size:10px;padding:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{@page{size:A4;margin:13mm 12mm}html{scroll-behavior:auto}body{font-family:"Microsoft YaHei",sans-serif;font-size:9pt;line-height:1.65;background:white;color:#142920}aside,.toplinks{display:none!important}main{margin:0!important;padding:0!important;max-width:none}.topline{margin:0 0 12px;font-size:8pt}.hero{padding:20px;border:1px solid #a7b6a7;border-radius:0}.hero-grid{display:block}.hero h1{font-size:27pt}.hero h1 span{font-size:16pt}.lead{font-size:10pt}.compare{margin-top:15px;max-width:none;padding:14px;break-inside:avoid}.compare h2{font-size:10pt}.bar-label{font-size:8pt}.bar-label b{font-size:11pt}.hero:before{height:3px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:12px 0}.stat{padding:9px;border-radius:0;break-inside:avoid}.stat strong{font-size:19pt}.stat .label,.stat small{font-size:7pt}section{border:0;border-top:1px solid #a9b8a9;border-radius:0;padding:18px 0 0;margin:17px 0}.section-head h2{font-size:16pt}.section-head{margin-bottom:11px}.section-head .num{font-size:9pt}.section-note{font-size:8pt}.grid2{display:block}.panel{padding:11px;margin:10px 0;break-inside:avoid}h2,h3,h4{break-after:avoid}h3{font-size:11pt}.table-wrap{overflow:visible;border-radius:0}.wide,.medium{min-width:0}table{font-size:7.6pt;line-height:1.6}th,td{padding:7px 6px;overflow-wrap:anywhere}thead{display:table-header-group}tr{break-inside:avoid}.id{font-size:7pt;white-space:normal}.callout{font-size:9pt;padding:11px;break-inside:avoid}.tag,.badge{font-size:7pt}.workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.flow-step{break-inside:avoid;padding:10px}.flow-step b{font-size:9pt}.flow-step p{font-size:8pt}.small,.compare .caption{font-size:8pt}.codeblock{font-size:7.8pt;color:#17392e;background:#f1f5ee;border:1px solid #a9b8a9;padding:12px;break-inside:avoid}.milestone{break-inside:avoid;padding:10px}.milestone p{font-size:8pt}.footer{font-size:7pt;display:flex}a{color:inherit;text-decoration:none}code{font-size:7.8pt}.source-list{font-size:9pt}}
+</style>
+</head>
+<body id="top">
+<aside aria-label="需求文档导航">
+  <div class="identity"><div class="mark" aria-hidden="true">b</div><div><b>BONE ATLAS</b><small>骨龄研究 · 训练升级</small></div></div>
+  <div><div class="nav-label">PRODUCT REQUIREMENTS / 03</div><nav>
+    <a href="#context"><span>01</span>背景与证据</a><a href="#goals"><span>02</span>目标与范围</a><a href="#workflow"><span>03</span>用户与流程</a><a href="#environment"><span>04</span>硬件与环境</a><a href="#data"><span>05</span>数据与分区</a><a href="#training"><span>06</span>训练需求与配置</a><a href="#experiments"><span>07</span>实验与效果评估</a><a href="#integration"><span>08</span>推理与热力图</a><a href="#release"><span>09</span>注册与回滚</a><a href="#changes"><span>10</span>修改清单与交付</a><a href="#acceptance"><span>11</span>验收矩阵</a><a href="#schedule"><span>12</span>实施顺序与依赖</a><a href="#risks"><span>13</span>风险与待确认</a><a href="#sources"><span>14</span>依据与使用说明</a>
+  </nav></div>
+  <div class="aside-bottom"><strong>先冻结协议，再验证收益。</strong>当前：CPU 原型已运行。<br>下一阶段：GPU 训练与模型适配。<br>本文：静态需求稿，待实施。</div>
+</aside>
+<main>
+<div class="topline"><span class="doc-id">BA / PRD / V0.3 / 2026-10-23</span><div class="toplinks"><a href="#acceptance">查看验收矩阵</a><a href="#print-guide">离线阅读与打印</a></div></div>
+<header class="hero">
+  <div class="hero-grid"><div><div class="eyebrow">MODEL DEVELOPMENT · REQUIREMENTS</div><h1>骨龄模型训练升级<span>产品需求文档 · V0.3</span></h1><p class="lead">面向 Windows、Python 3.14 与 RTX 4060 Laptop 约 8GB 显存，建立预训练模型、可复现实验、独立效果评估和安全模型切换的完整升级要求。</p><div class="tags"><span class="badge plan">需求稿 · 待开发</span><span class="tag">ResNet-50 ＋ 性别</span><span class="tag">224 起步 / AMP</span><span class="tag">研究用途</span></div></div>
+    <div class="compare" role="img" aria-label="既有模型留出 MAE 为19.2524个月，PRD目标小于6个月。横轴0到24个月，误差越低越好。目标不是已取得结果。"><h2>效果差距 · MAE，越低越好</h2><div class="bar-row"><div class="bar-label"><span>既有 CPU 模型 · 已实测</span><b>19.2524 月</b></div><div class="track"><div class="bar"></div></div></div><div class="bar-row"><div class="bar-label"><span>原 PRD 门槛 · 尚未达到</span><b>&lt; 6 月</b></div><div class="track"><div class="bar target"></div></div></div><div class="axis"><span>0</span><span>6</span><span>12</span><span>18</span><span>24 月</span></div><p class="caption">斜纹表示目标。更换环境和预训练骨干均不构成精度达标证明；结果以冻结协议后的真实评估为准。</p></div>
+  </div>
+  <div class="meta"><span><b>文档状态</b>后续修改需求</span><span><b>目标平台</b>Windows 11 / Python 3.14</span><span><b>硬件依据</b>用户提供 RTX 4060 Laptop，7957MB</span><span><b>适用范围</b>单张 PNG 骨龄模型</span></div>
+</header>
+<div class="stats" aria-label="关键事实"><div class="stat"><span class="label">原型输入分辨率</span><strong>96 × 96</strong><small>三层卷积，从零训练</small></div><div class="stat"><span class="label">新模型起步分辨率</span><strong>224 × 224</strong><small>建议配置，尚未实测</small></div><div class="stat"><span class="label">目标设备显存</span><strong>≈ 8 GB</strong><small>可用余量由环境预检测量</small></div><div class="stat"><span class="label">有标签原始样本</span><strong>12,611</strong><small>完整包中的六张仅为演示样例</small></div></div>
+
+<section id="context"><div class="section-head"><span class="num">01</span><h2>背景、现状与证据</h2></div><p class="section-note">将历史事实、用户本机证据和下一阶段计划分别记录。</p>
+<p>既有 Bone Atlas 已实现“PNG＋性别 → 质量复核 → 真实骨龄预测 → Grad-CAM → 人工意见”的研究闭环。当前模型为轻量 CNN，尚未达到原 PRD 的 MAE &lt;6 个月目标。本次需求聚焦训练与模型集成升级。</p>
+<div class="table-wrap"><table class="medium"><thead><tr><th>事项</th><th>当前证据</th><th>状态与边界</th></tr></thead><tbody>
+<tr><td>既有模型与训练</td><td>灰度 96×96、三层卷积、性别嵌入；20 轮 CPU 训练。最佳验证 MAE 18.7502 月，最后一轮为最佳。</td><td><span class="badge">已有</span> 未采用预训练骨干；最后一轮最优提示可研究训练日程，不证明延长训练一定改善。</td></tr>
+<tr><td>原模型留出效果</td><td>1,260 张：MAE 19.2524 月、RMSE 25.5958 月；3 张有限原始输出为负。</td><td><span class="badge fail">效果未达目标</span> 负值计入原始误差，应用拒绝展示为有效骨龄。</td></tr>
+<tr><td>全量数据检查</td><td>12,811 张 PNG 与表格匹配，0 解码异常；固定 10,091 / 1,260 / 1,260 分区。</td><td><span class="badge">已有云端证据</span> 用户本地完整图片／缓存尚未确认。</td></tr>
+<tr><td>Windows 兼容检查</td><td>用户终端截图：Windows 11、Python 3.14.0、torch 2.14.1+cpu；12 组图片／性别检查 passed，最大预测差异约 0.0000458 月。</td><td><span class="badge">用户本机通过</span> 覆盖旧模型预测与热力图；截图 holdout=null，未证明本机完成 1,260 张复测或 GPU 训练。</td></tr>
+<tr><td>Linux 兼容检查</td><td>Python 3.14.8 / torch 2.14.1 CPU；15 项测试无跳过；1,260 张回归 MAE 仍为 19.2524 月。</td><td><span class="badge">已有报告</span> 属于旧模型兼容性，不是新模型效果。</td></tr>
+<tr><td>GPU 训练升级</td><td>预训练 ResNet-50、CUDA、AMP、新预处理及相应推理／解释适配。</td><td><span class="badge plan">待实施</span> 显卡型号不等于 CUDA 环境已经可用。</td></tr>
+</tbody></table></div>
+<div class="callout info"><strong>版本关系</strong>V0.3 补充并更新 V0.2 中的模型开发、评估、集成和验收要求。V0.2 保留为历史需求；其中“未训练／仅抽查七张”等是当时状态。当前事实以本节及已有报告为准。本次交付只生成静态 PRD，不修改训练或应用业务代码，也不启动训练。</div>
+</section>
+
+<section id="goals"><div class="section-head"><span class="num">02</span><h2>目标、范围与成功定义</h2></div>
+<div class="table-wrap"><table class="medium"><thead><tr><th>目标</th><th>本阶段要求</th><th>通过条件</th></tr></thead><tbody>
+<tr><td class="id">G-01 · 效果目标</td><td>保留总体 MAE &lt;6 个月的原门槛。</td><td>冻结模型／预处理／评估协议后，在独立有标签评估中达到目标；报告总体、分层、样本数、置信区间和失败情况。未达标须如实标记。</td></tr>
+<tr><td class="id">G-02 · GPU 可训练</td><td>在用户 RTX 4060 Laptop 上执行可恢复的真实训练与验证。</td><td>CUDA 实际可用、梯度更新有效、有限 loss、训练和验证完成、显存及耗时有记录；启动脚本或检测显卡不单独算通过。</td></tr>
+<tr><td class="id">G-03 · 可复现实验</td><td>分区、配置、日志、权重与逐样本预测可追溯。</td><td>每个实验独立存储，可识别训练配置、阶段、随机种子、数据和环境；调参默认不读取留出集。</td></tr>
+<tr><td class="id">G-04 · 可集成与回滚</td><td>候选模型可执行骨龄预测、原图坐标热力图及版本记录。</td><td>新旧架构均有适配；候选完整验证后显式注册，失败候选不替换活动模型；旧版本与历史结果可保留、回滚。</td></tr>
+</tbody></table></div>
+<div class="grid2"><div class="panel"><h3>P0 · 本轮必须规划</h3><p>GPU 环境预检、完整数据路径、预训练骨干＋性别、版本化预处理、阶段训练、验证集选优、断点恢复、分层评估、模型注册／回滚、预测与 Grad-CAM 适配、文档与测试。</p></div><div class="panel"><h3>P1 / P2 · 后续独立研究</h3><p>P1：更高分辨率、经验证手部裁剪、ROI 标注／检测、DICOM、可视化实验管理。P2：同患者时序、身高、成年结局和闭合时间窗。当前单张模型调参不能替代这些数据。</p></div></div>
+<div class="callout warn"><strong>验收分开判定</strong>GPU 能运行、训练流程通过、模型效果达标、临床可用是四项不同结论。候选即使功能通过，MAE 未达 6 月时仍标为“研究候选／效果未达标”。本阶段不承诺医院使用有效性。</div>
+</section>
+
+<section id="workflow"><div class="section-head"><span class="num">03</span><h2>使用角色与工作流程</h2></div>
+<div class="table-wrap"><table><thead><tr><th>角色</th><th>主要任务</th><th>产出</th></tr></thead><tbody><tr><td>项目使用者</td><td>在 Windows / PyCharm 配置环境、选择数据路径、启动／恢复实验。</td><td>环境预检、训练日志、候选模型与运行问题。</td></tr><tr><td>模型开发者</td><td>定义可比实验、检查训练曲线、比较验证结果、冻结方案。</td><td>实验配置、候选说明、可复现记录。</td></tr><tr><td>评估／复核人员</td><td>核对数据、独立评估、检查误差与热力图、确认研究使用状态。</td><td>完整效果报告、异常清单、注册决定。</td></tr></tbody></table></div>
+<div class="workflow" aria-label="实施流程"><div class="flow-step"><span>01 / PREFLIGHT</span><b>检查环境与数据</b><p>驱动、CUDA、显存；全量图片、CSV、清单与固定分区。</p></div><div class="flow-step"><span>02 / EXPERIMENT</span><b>训练独立候选</b><p>固定配置；训练集更新参数，验证集记录效果与选优。</p></div><div class="flow-step"><span>03 / FREEZE</span><b>冻结方案并评估</b><p>停止调参；记录协议、权重与总体／分层结果。</p></div><div class="flow-step"><span>04 / REGISTER</span><b>集成验证与注册</b><p>加载、预测、解释、回滚测试；显式切换并保留历史。</p></div></div>
+<p>P0 优先提供可重复执行的命令行与静态／JSON 报告。现有 Web 工作台继续承担导入、质检、评估和复核，不把完整训练控制台作为本轮必需开发项。</p>
+</section>
+
+<section id="environment"><div class="section-head"><span class="num">04</span><h2>硬件、环境与资源约束</h2></div>
+<div class="table-wrap"><table class="medium"><thead><tr><th>条件</th><th>要求</th><th>检查与处置</th></tr></thead><tbody>
+<tr><td>目标硬件</td><td>NVIDIA GeForce RTX 4060 Laptop GPU，用户报告 7957MB，按约 8GB 规划。</td><td>记录实际 GPU 名称、总／空闲显存、驱动、峰值显存；桌面及其他进程会占用余量。</td></tr>
+<tr><td>Python 与依赖</td><td>标准 64 位 Python 3.14；本机旧环境为 3.14.0。</td><td>选择官方有对应 Windows wheel、互相兼容的 CUDA 版 PyTorch 与 torchvision；验证后单独锁定 GPU 训练依赖。具体组合待驱动预检后确定。</td></tr>
+<tr><td>CUDA 可用性</td><td>记录 <code>nvidia-smi</code>、PyTorch 构建 CUDA、<code>torch.cuda.is_available()</code> 与实际设备。</td><td>以真实张量运算、前向／反向更新为最终预检；系统报告的 CUDA 支持版本不等于 PyTorch 使用的运行时。现 <code>+cpu</code> 构建不能使用 GPU。</td></tr>
+<tr><td>环境隔离</td><td>新建 GPU 训练虚拟环境，例如 <code>.venv314-gpu</code>，保留现有 CPU 运行环境。</td><td>提供 PyCharm 解释器选择与 Windows 路径说明；不默认卸载旧环境，也不把 GPU 成功建立在关闭 TLS／校验上。</td></tr>
+<tr><td>Windows 数据加载</td><td>从 <code>num_workers=0</code> 起步，确认稳定后试验增加；入口满足 Windows 多进程启动要求。</td><td>支持含空格／中文路径，文件句柄和工作进程独立；性能优化前先验证无重复／遗漏样本。</td></tr>
+<tr><td>资源与耗时</td><td>先短跑测量 step 时间、整轮估算、GPU 峰值、RAM 和磁盘占用。</td><td>完整包不含约 10GB 数据；根据原图、缓存、临时文件和候选数检查空间。笔记本插电并使用稳定散热模式，耗时以实测为准。</td></tr>
+</tbody></table></div>
+<div class="callout"><strong>ENV-01 · 环境验收</strong>请求 CUDA 训练而设备不可用时，应明确失败并给出诊断；不得静默转为 CPU 后仍报告“GPU 训练成功”。CPU 训练／推理作为显式独立模式。官方预编译 wheel 通常自带所需 CUDA 运行依赖，不将完整 CUDA Toolkit 作为默认必装条件。</div>
+</section>
+
+<section id="data"><div class="section-head"><span class="num">05</span><h2>数据准备、预处理与固定分区</h2></div>
+<div class="table-wrap"><table class="wide"><thead><tr><th>编号</th><th>需求</th><th>验收要点</th></tr></thead><tbody>
+<tr><td class="id">DATA-01</td><td>使用完整 12,611 条有骨龄标签的原始图片及对应 CSV；200 张无标签图单独保留。</td><td>显式指定本地数据路径；核对 ID、骨龄、性别、缺图、解码、重复和哈希。六张演示图片不能代替训练数据。无标签图不参与误差计算和模型选择。</td></tr>
+<tr><td class="id">DATA-02</td><td>沿用已保存的源图片 ID 分区：训练 10,091、验证 1,260、留出 1,260，种子 20261022。</td><td>从固定清单读取分区并核对哈希；改变分辨率／缓存实现时不得重新随机分区。重复／近重复候选保持同区；新增分组证据导致变化须建立新协议并说明可比性。</td></tr>
+<tr><td class="id">DATA-03</td><td>从原始 PNG 生成 224 输入，保留宽高比，以填充达到正方形。</td><td>不得把既有 96 缓存放大冒充高分辨率实验。记录原始尺寸、缩放、有效区域和填充变换；后续 384／512 也从原图生成并独立版本化。</td></tr>
+<tr><td class="id">DATA-04</td><td>为预训练 ResNet 定义灰度转三通道和归一化协议。</td><td>初始方案：同一灰度复制为 RGB 三通道，转 [0,1] 后使用所选 ImageNet 权重的归一化参数；标签仍为月，性别 M=1/F=0。训练、验证、推理和解释使用相同处理版本。</td></tr>
+<tr><td class="id">DATA-05</td><td>训练增强、统计估计和采样只作用于训练分区。</td><td>保留原图；先比较轻度亮度／对比度增强。小角度旋转／平移另立实验，检查指尖、腕部不被裁掉；验证与测试无随机训练增强。不默认镜像或强制左右侧统一。</td></tr>
+<tr><td class="id">DATA-06</td><td>管理缓存、异常与数据限制。</td><td>缓存含输入版本、源数据／分区哈希、尺寸与数据类型；避免整库 RGB 浮点张量常驻显存。每个排除有预定义理由并保留记录，不能按预测误差剔除难例。</td></tr>
+</tbody></table></div>
+<h3>既有分层表现：为实验提供问题线索</h3>
+<div class="table-wrap"><table><thead><tr><th>参考骨龄（月）</th><th>训练数量</th><th>验证／留出数量</th><th>旧留出 MAE（月）</th></tr></thead><tbody><tr><td>0–&lt;24</td><td>73</td><td>9 / 9</td><td>33.0096</td></tr><tr><td>24–&lt;72</td><td>993</td><td>124 / 124</td><td>30.6775</td></tr><tr><td>72–&lt;120</td><td>2,366</td><td>295 / 295</td><td>19.8229</td></tr><tr><td>120–&lt;168</td><td>4,980</td><td>621 / 621</td><td>15.2088</td></tr><tr><td>≥168</td><td>1,679</td><td>211 / 211</td><td>23.0549</td></tr></tbody></table></div>
+<p class="small">数量来自既有固定缓存；误差来自原始 CPU 模型报告。低龄留出仅 9 张，不能据此给出稳定的低龄精度结论。年龄重采样应仅在训练集实验，最终总体误差仍按评估集原分布计算。</p>
+<div class="callout warn"><strong>数据隔离的已知限制</strong>没有患者 ID／检查日期，患者级隔离仍未验证。当前相同 256 位 dHash 候选分组不是穷尽近重复搜索。后续应补充相似度候选核查和可取得的患者分组信息；不得将图片 ID 当作患者 ID，也不得把上述分组描述为已经消除所有泄漏。</div>
+</section>
+
+<section id="training"><div class="section-head"><span class="num">06</span><h2>训练功能需求与起步配置</h2></div><p class="section-note">本节是下一版需要开发的能力，参数是可验证的初始提案。当前脚本尚不支持其中的预训练骨干、CUDA 和 AMP。</p>
+<div class="table-wrap"><table class="medium"><thead><tr><th>配置项</th><th>初始提案</th><th>说明</th></tr></thead><tbody>
+<tr><td>模型与输入</td><td>预训练 ResNet-50 ＋ 性别嵌入；224×224</td><td>移除原分类头，池化图像特征后与性别特征融合为回归头；新架构标识与旧 CNN 分开。</td></tr>
+<tr><td>预训练权重</td><td>官方 ImageNet 权重；固定具体版本与校验值</td><td>记录下载来源、标识和许可。下载失败应明确停止；不能随机初始化后仍标记“预训练”。</td></tr>
+<tr><td>物理／有效 batch</td><td>物理 batch=8，梯度累积=1，有效 batch=8</td><td>显存有余量再独立尝试 16。OOM 时可改 4×2 或 2×4，记录变化与最后不足批次的损失缩放。</td></tr>
+<tr><td>训练精度</td><td>CUDA AMP；按实现使用梯度缩放</td><td>记录实际精度和缩放状态，检查非有限 loss／梯度；导出和默认部署使用 CPU 可加载的权重。</td></tr>
+<tr><td>阶段一</td><td>冻结骨干，训练回归头约 3 轮；学习率 3e-4</td><td>冻结参数时同时明确 BatchNorm 运行统计策略；预训练骨干不发生意外更新。</td></tr>
+<tr><td>阶段二</td><td>解冻微调；骨干 3e-5、回归头 3e-4</td><td>可逐层解冻，但阶段、可训练层、参数组与学习率必须进入配置和日志。</td></tr>
+<tr><td>优化器／衰减</td><td>AdamW；weight_decay=5e-4</td><td>作为初值；所有参数组及调度策略固定记录。小 batch 下先评估冻结 BatchNorm 统计的策略。</td></tr>
+<tr><td>轮数／早停</td><td>总上限 60 轮（含冻结阶段）；patience=10</td><td>建议验证 MAE 改善 0.05 月才重置早停计数；每次最低验证 MAE 的权重仍单独保存。阈值是拟定配置，不是既有实测结论。</td></tr>
+<tr><td>目标与损失</td><td>保留月标签；初始归一化 (y−120)/60，SmoothL1 β=0.5</td><td>与旧目标尺度一致；β=0.5 对应 30 月转折。后续单独比较 L1 或 β=0.1（6 月），不得把 β 本身当作精度承诺。</td></tr>
+<tr><td>学习率日程</td><td>明确阶段边界的余弦或验证集降率日程</td><td>选一种并固定所有参数。更改总轮数会改变余弦轨迹，实验中标为训练日程变化。</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table class="wide"><thead><tr><th>编号</th><th>功能需求</th><th>完成判据</th></tr></thead><tbody>
+<tr><td class="id">TRAIN-01</td><td>配置驱动训练</td><td>模型、数据／清单、尺寸、设备、AMP、阶段、batch／累积、学习率、损失、种子、输出目录均能配置；启动时校验组合并输出解析后的完整配置。</td></tr>
+<tr><td class="id">TRAIN-02</td><td>独立运行与训练日志</td><td>唯一 run_id；记录每轮训练 loss、无增强 eval 模式的训练 MAE、验证 MAE／分层偏差、阶段、各组 LR、时长、显存和有效 batch。归一化 loss 不与月 MAE 混为一谈。</td></tr>
+<tr><td class="id">TRAIN-03</td><td>仅验证模式与最佳模型</td><td>调参默认只用训练和验证集；按验证 MAE 选 checkpoint。日常训练不会自动读取留出集或更新活动模型。</td></tr>
+<tr><td class="id">TRAIN-04</td><td>中断、断点恢复与导出</td><td>区分 best、latest 和仅推理导出；恢复必要的模型、优化器、调度器、AMP、阶段／轮数、早停计数和随机状态。恢复时核对配置与数据版本，变更配置应新建运行。</td></tr>
+<tr><td class="id">TRAIN-05</td><td>OOM／数值错误处置</td><td>异常有明确状态、发生位置和最后有效 checkpoint。减 batch／累积须显式记录并从有效点恢复，不在残留梯度上继续。不得静默降低分辨率或产生“成功”记录；非有限结果不得注册。</td></tr>
+<tr><td class="id">TRAIN-06</td><td>随机性与可复现</td><td>保存 Python、NumPy、PyTorch、CUDA 随机种子与后端确定性设置、版本和设备；记录不可避免的非确定性。不同训练种子的模型不要求逐像素完全相同。</td></tr>
+</tbody></table></div>
+<div class="callout"><strong>8GB 显存的工程约束</strong>先验证完整训练／验证批次与参数更新，再扩大实验。显存受分辨率、batch、优化器状态、其他进程和解释梯度影响；不能仅根据“4060”保证 batch=16 或 384／512 能运行。当前 GPU 依赖和参数尚未在用户显卡上验证。</div>
+</section>
+
+<section id="experiments"><div class="section-head"><span class="num">07</span><h2>实验路线与效果评估协议</h2></div>
+<h3>7.1 最小可解释实验序列</h3>
+<div class="table-wrap"><table class="wide"><thead><tr><th>实验</th><th>主要配置／改变</th><th>目的与条件</th><th>结果状态</th></tr></thead><tbody>
+<tr><td class="id">A0 · 历史基线</td><td>小 CNN，96，20 轮，旧 CPU 权重。</td><td>固定参照：验证 18.7502 月，留出 19.2524 月。不能把其留出分数与新模型验证分数直接比较。</td><td><span class="badge">已有报告</span></td></tr>
+<tr><td class="id">A1 · 日程对照</td><td>同一小 CNN 与 96 输入；60 轮上限。</td><td>可在 CPU 或显式 GPU 模式复现，检查训练日程是否限制效果；保存 LR 轨迹和训练／验证 MAE。</td><td><span class="badge plan">可选诊断</span></td></tr>
+<tr><td class="id">A2 · 分辨率对照</td><td>与 A1 同模型、同日程；原图生成 192 输入。</td><td>隔离分辨率因素；固定源 ID 分区。与新骨干实验分开解释。</td><td><span class="badge plan">可选诊断</span></td></tr>
+<tr><td class="id">B1 · 主线候选</td><td>预训练 ResNet-50＋性别，224，阶段微调，AMP。</td><td>优先在 4060 上建立有能力的新基线。与 A 系列比较时属于整套方案变化；若研究预训练单独收益，再加同骨干随机初始化对照。</td><td><span class="badge plan">优先实施</span></td></tr>
+<tr><td class="id">B2 · 细节保留</td><td>与 B1 相同骨干和协议；原图生成 384 输入。</td><td>显存预检后开展；若减物理 batch，记录有效 batch 和 BN 策略。512 留作资源允许后的独立实验。</td><td><span class="badge plan">有条件开展</span></td></tr>
+<tr><td class="id">C · 后续对照</td><td>一次比较一项：手部裁剪、损失、轻度增强、低龄采样。</td><td>以最优验证方案为参照。保留腕部／指尖，不能依赖测试误差选择裁剪或排除样本；不提前上复杂 ROI 检测。</td><td><span class="badge plan">后续研究</span></td></tr>
+</tbody></table></div>
+<p>新实验的验证／测试结果均为<strong>待训练、待评估</strong>，本文不填预测性分数。先短跑预检，再完成 B1 的可用基线；A1/A2 作为资源允许时的诊断对照，避免在弱基线上无限搜索。</p>
+<h3>7.2 训练选择与最终检验</h3>
+<ol><li>先冻结数据清单、分区、输入范围、标签标准／单位、指标和异常处理规则。若参考标准尚未核实，明确研究限制。</li><li>学习率、轮数、尺寸、损失、增强、采样及模型选择只根据训练／验证信息。最终候选可用多个固定种子检查验证表现，记录所有尝试。</li><li>冻结最终配置、权重 SHA-256、代码版本、预处理与解释方法，独立执行最终评估，结果落盘后不得静默改模型。</li><li>既有留出集的总体和分层结果已被观察；若进一步根据这些结果改方案，应明确其探索用途，并新增独立最终／外部检验。不能通过换随机种子或把已用于调参的样本重新命名为测试集获得“独立”结论。</li></ol>
+<div class="table-wrap"><table class="medium"><thead><tr><th>编号</th><th>评估要求</th><th>报告内容</th></tr></thead><tbody>
+<tr><td class="id">EVAL-01</td><td>完整总体指标</td><td>MAE＝平均 |预测月−标签月|；同时报告 RMSE、中位绝对误差、P90、平均有符号偏差、总样本量、完成／失败／无效数。训练 loss 不替代这些指标。</td></tr>
+<tr><td class="id">EVAL-02</td><td>分层与不确定性</td><td>按 M/F、0–&lt;24／24–&lt;72／72–&lt;120／120–&lt;168／≥168 月报告 n、MAE 和偏差。报告 95% 置信区间及方法；有患者组时按患者抽样，否则注明仅图片级及独立性限制。</td></tr>
+<tr><td class="id">EVAL-03</td><td>完整性与失败口径</td><td>总体误差覆盖协议内全部样本；有限负值／超范围原始预测也计入，同时单列无效输出率。若有缺失、NaN／Inf 或预测未完成，不得把成功子集 MAE 标成完整总体达标。</td></tr>
+<tr><td class="id">EVAL-04</td><td>后处理与目标判定</td><td>默认不裁剪原始输出。任何有界输出／后处理均须预先定义、验证集选择、冻结并如实报告，不能测试后临时截断来追求达标。原 G-01 采用总体 MAE &lt;6 的门槛，同时披露区间和限制；不把区间上界擅自改为原 PRD 的已确认门槛。</td></tr>
+<tr><td class="id">EVAL-05</td><td>逐样本与无标签预测</td><td>有标签导出含 ID、分区、性别、参考月、预测月、误差、模型／输入版本和状态；200 张无标签预测独立文件，不伪造标签，不参与 MAE 或选模型。</td></tr>
+</tbody></table></div>
+<div class="callout warn"><strong>研究提升与最终验收分开</strong>在现有固定分区上取得更低验证 MAE，属于候选方案证据。只有在符合独立性要求的评估中冻结方案、完整运行并达到门槛，才能记录“G-01 通过”。没有新独立数据时如实披露当前研究结果，不保证达到临床或患者级验证。</div>
+</section>
+
+<section id="integration"><div class="section-head"><span class="num">08</span><h2>推理、热力图与工作台适配</h2></div>
+<p>现有推理器仅识别 <code>BoneAgeCNN</code>，使用单通道预处理和特定特征接口。ResNet 候选需要架构、输入处理和解释路径成套适配；仅替换权重文件或 <code>active.json</code> 不满足集成条件。</p>
+<div class="table-wrap"><table class="wide"><thead><tr><th>编号</th><th>后续修改</th><th>验收要求</th></tr></thead><tbody>
+<tr><td class="id">INFER-01</td><td>支持版本化模型工厂／架构分发，保留旧 CNN。</td><td>按元数据构建正确网络，校验架构／性别编码／输入／权重 SHA，安全加载 state_dict；未知架构、缺失配置或损坏权重拒绝加载。</td></tr>
+<tr><td class="id">INFER-02</td><td>预处理、目标反归一化、有效性与设备策略。</td><td>224／384、通道复制、ImageNet 归一化、填充变换和目标尺度与训练一致。沿用有限值且 0–360 月的研究输出检查；范围外或 NaN／Inf 不展示为有效评估，不静默裁剪。该范围不代表临床适用年龄，变更须版本化。研究部署可继续 CPU；GPU 训练权重必须可 map 到 CPU。显示调节不修改模型输入。</td></tr>
+<tr><td class="id">INFER-03</td><td>真实预测与数值回归。</td><td>涵盖六张公开原图、F/M 两种输入、重复预测、异常与历史版本。旧 CNN 沿用原参考预测容差 0.001 月；新模型用其冻结参考，不要求输出等于旧模型。新模型同设备 FP32 重复差异暂定 ≤0.001 月，CPU/GPU FP32 差异暂定 ≤0.01 月，作为待实施验证的工程阈值记录。</td></tr>
+<tr><td class="id">CAM-01</td><td>ResNet Grad-CAM 特征／梯度适配。</td><td>初始目标层为 ResNet 最后一组卷积特征，位置随具体实现冻结。按预测骨龄求梯度、去除填充、映射回原图；不得全程使用禁用梯度的推理上下文导致解释失效。</td></tr>
+<tr><td class="id">CAM-02</td><td>解释有效性与失败隔离。</td><td>输出原图大小的 RGBA，空间有有效变化、透明度合法、无拉伸偏移；检查正方形／长宽不同图片。平坦梯度或解释失败时保留有效骨龄并显示“解释不可用”，不伪造热力图。</td></tr>
+<tr><td class="id">UI-01</td><td>继续使用现有工作台，显示真实模型状态。</td><td>结果记录模型 ID、权重与预处理版本、解释方法和研究状态；新模型无报告时不得沿用旧 MAE。输入更正后旧结果标为历史；AI 原值与人工意见分开。</td></tr>
+<tr><td class="id">UI-02</td><td>数据／效果页面与研究记录。</td><td>读取对应模型的真实总体／分层结果，标明目标是否通过与数据限制。无候选、训练中、失败、效果未达标状态清楚；训练成功不能自动显示“精度达标”。</td></tr>
+</tbody></table></div>
+<div class="callout info"><strong>解释方法名称与含义</strong>本阶段继续规划 Grad-CAM，不能自动标为 Grad-CAM++。热力图是相对关注，不是骨骼定位框、生长板分割或精度证明。检查文字／边框敏感性应结合遮挡与误差分析，不能只凭“看起来关注正确”判定模型达标。</div>
+</section>
+
+<section id="release"><div class="section-head"><span class="num">09</span><h2>候选模型、注册与回滚</h2></div>
+<p>现有训练脚本会写入活动模型。下一版须将“实验产物”“完整评估”“研究注册”分开，训练结束不能自动替换正在使用的模型。</p>
+<div class="table-wrap"><table class="wide"><thead><tr><th>编号</th><th>规则</th><th>检查方式</th></tr></thead><tbody>
+<tr><td class="id">REG-01</td><td>独立候选目录</td><td>每个运行保存配置、日志、best／latest、推理权重、元数据、数据清单引用、验证报告与逐样本结果；默认不写活动目录。不完整运行标为失败／中断。</td></tr>
+<tr><td class="id">REG-02</td><td>注册产物完整性</td><td>权重、匹配的效果报告／预测 CSV、架构与预处理、解释方法、运行环境、版本、用途、校验和全部准备后，再执行注册命令／操作。所有引用属于同一候选，缺项阻止切换。</td></tr>
+<tr><td class="id">REG-03</td><td>显式决定与原子切换</td><td>记录操作者、时间、候选、用途、门槛状态与原活动版本；校验和集成测试通过后原子切换指针。未达 MAE 目标的候选只能显式标为研究候选，界面保留未达标状态。</td></tr>
+<tr><td class="id">REG-04</td><td>回滚与历史一致性</td><td>保留旧模型和元数据；回滚后可重现旧模型参考预测。已生成结果继续引用当时模型，切换／回滚不重写原值或人工意见；模型变更期间的任务使用快照并检测冲突。</td></tr>
+<tr><td class="id">REG-05</td><td>安全加载与故障处理</td><td>权重哈希错误、不兼容架构／预处理、路径越界或缺失文件时拒绝加载。仅使用可信来源和安全 state_dict 导出；训练恢复文件与部署权重分开，不要求开放不可信 pickle 加载。</td></tr>
+</tbody></table></div>
+<h3>候选目录结构示意 · 待实现约定</h3>
+<div class="codeblock" aria-label="未来实验目录结构">experiments/&lt;run_id&gt;/
+  config.json              完整训练配置、阶段、种子
+  environment.json         Python / torch / torchvision / CUDA / 驱动 / GPU
+  data-reference.json      源数据、清单、分区与预处理哈希
+  history.jsonl            每轮 loss、月 MAE、LR、显存、耗时、事件
+  checkpoints/             best / latest 恢复状态
+  export/                  CPU 可加载权重、模型元数据与校验
+  validation/              总体／分层报告、逐样本预测
+  final-evaluation/        冻结协议后的独立评估，调参阶段不生成
+  integration-check.json   预测、热力图、旧模型兼容与回滚证据</div>
+<p class="small">目录用于说明交付内容，不表示这些文件或新命令已存在。报告中不得写入真实私有图片或操作数据库的内容；公开演示与本地运行数据分开分发。</p>
+</section>
+
+<section id="changes"><div class="section-head"><span class="num">10</span><h2>后续修改清单与交付物</h2></div><p class="section-note">修改点以现有仓库为依据；文件拆分可在实施时调整，但需求编号和验收映射须保留。</p>
+<div class="table-wrap"><table class="wide"><thead><tr><th>模块／当前路径</th><th>需要修改的内容</th><th>关联需求</th></tr></thead><tbody>
+<tr><td><code>requirements-ml.txt</code>、依赖锁定与环境文档</td><td>区分现有 CPU 运行与 GPU 训练依赖，验证 Python 3.14 / Windows / 驱动对应的官方 torch＋torchvision 组合；提供预检与安装说明。</td><td class="id">ENV-01</td></tr>
+<tr><td><code>scripts/prepare_data.py</code>、数据读取／清单模块</td><td>支持可移植本地路径、冻结分区、从原图生成新尺寸、版本化缓存／变换；突破当前 256 尺寸上限须显式适配和验证。</td><td class="id">DATA-01…06</td></tr>
+<tr><td><code>app/network.py</code> 或新增模型模块</td><td>新增预训练 ResNet＋性别回归架构和模型工厂，保留旧 CNN；将结构、输入与目标尺度写入可识别元数据。</td><td class="id">TRAIN-01 / INFER-01</td></tr>
+<tr><td><code>scripts/train.py</code></td><td>设备／AMP、阶段冻结、参数组、早停、断点恢复、OOM、日志、独立运行目录；日常训练仅验证，不写活动模型。</td><td class="id">TRAIN-01…06</td></tr>
+<tr><td>新增／拆分独立评估与注册模块</td><td>把最终评估、报告／CSV 生成、注册和回滚从日常训练分离；核对冻结协议、产物完整性和审计。</td><td class="id">EVAL-01…05 / REG-01…05</td></tr>
+<tr><td><code>app/predictor.py</code>、<code>app/imaging.py</code></td><td>按模型分发预处理与解释目标层、CPU 加载／可选设备、原图映射、校验、错误和部分成功路径。</td><td class="id">INFER-01…03 / CAM-01…02</td></tr>
+<tr><td><code>app/main.py</code>、<code>app/static/</code></td><td>候选对应的真实效果、版本和目标状态；任务模型快照、注册变更边界、历史与人工复核保留。</td><td class="id">UI-01…02 / REG-04</td></tr>
+<tr><td><code>scripts/predict_unlabeled.py</code></td><td>复用对应架构／预处理，保留无标签输出状态、版本与异常；200 张无标签数据不输出 MAE。</td><td class="id">EVAL-05 / INFER-01…02</td></tr>
+<tr><td><code>scripts/check_runtime.py</code>、<code>tests/</code>、CI／浏览器检查</td><td>保留旧模型冻结基准；增加新模型加载、预测／解释、损坏／不兼容拒绝、恢复、注册／回滚。GPU 专项须有实际 GPU 证据，CPU CI 通过不冒充 GPU 通过。</td><td class="id">AC-01…16</td></tr>
+<tr><td><code>docs/MODEL_CARD.md</code>、验收／报告、打包脚本与 README</td><td>提供真实新指标和限制、Windows 安装／训练／恢复步骤、环境／数据引用、旧包保留与新包版本；只打包经过核验的公开样例和候选产物。</td><td class="id">G-01…04 / REG-02</td></tr>
+</tbody></table></div>
+<h3>阶段交付清单</h3>
+<div class="table-wrap"><table><thead><tr><th>交付</th><th>内容</th><th>当前状态</th></tr></thead><tbody><tr><td>本次文档</td><td>本 HTML：范围、配置、实验、修改点、验收与依赖。</td><td><span class="badge">本次交付</span></td></tr><tr><td>训练工具与环境</td><td>GPU 预检、配置训练、恢复、独立评估／注册与 Windows 文档。</td><td><span class="badge plan">待开发</span></td></tr><tr><td>候选模型与证据</td><td>真实训练权重、数据／环境／运行记录、验证和最终评估、模型卡。</td><td><span class="badge plan">待训练／评估</span></td></tr><tr><td>集成及研究包</td><td>架构与解释适配、旧模型兼容、注册／回滚、真实浏览器闭环与版本化研究包。</td><td><span class="badge plan">待集成</span></td></tr></tbody></table></div>
+</section>
+
+<section id="acceptance"><div class="section-head"><span class="num">11</span><h2>验收矩阵与交付门槛</h2></div>
+<div class="legend"><span class="badge plan">全部为未来验收</span><span>下表定义应执行的检查；没有将新功能标记为已通过。</span></div>
+<div class="table-wrap"><table class="wide"><thead><tr><th>编号</th><th>场景／动作</th><th>预期与证据</th><th>关联</th></tr></thead><tbody>
+<tr><td class="id">AC-01</td><td>在用户 Windows / Python 3.14 GPU 环境执行预检和真实训练更新。</td><td>记录匹配依赖、驱动、实际 CUDA 设备；有限 loss、有效梯度和权重变化、完整训练／验证批次、显存和耗时。请求 GPU 失败时明确诊断。</td><td class="id">ENV-01 / TRAIN-01</td></tr>
+<tr><td class="id">AC-02</td><td>核对全量数据与新尺寸缓存。</td><td>有标签／无标签分开；10,091／1,260／1,260 的源 ID 与固定清单一致；新输入来自原图；缺图、缓存或分区哈希错误时停止。</td><td class="id">DATA-01…06</td></tr>
+<tr><td class="id">AC-03</td><td>检查预训练、冻结／解冻与配置记录。</td><td>权重来源可追溯；冻结阶段骨干参数与 BN 行为符合配置，解冻后指定层可更新；参数组、目标尺度与 LR 轨迹正确。</td><td class="id">TRAIN-01…02</td></tr>
+<tr><td class="id">AC-04</td><td>执行多个调参实验。</td><td>输出目录独立，仅按验证选优；训练 MAE 为无增强 eval 指标；留出集未被日常训练读取，活动模型不变。</td><td class="id">TRAIN-02…03 / REG-01</td></tr>
+<tr><td class="id">AC-05</td><td>中断后恢复；制造／模拟 OOM 和非有限 loss。</td><td>从匹配的有效 checkpoint 恢复阶段与状态；错误可追溯，不写成功／注册记录；减 batch 与累积可追溯，不静默改输入尺寸。</td><td class="id">TRAIN-04…06</td></tr>
+<tr><td class="id">AC-06</td><td>冻结候选后执行有标签评估。</td><td>保留协议、权重／数据哈希、完整逐样本输出、总体／分层 MAE、偏差、区间、失败／无效数；明确现有测试暴露与独立性限制。</td><td class="id">EVAL-01…04</td></tr>
+<tr><td class="id">AC-07</td><td>对 G-01 作效果判定。</td><td>独立评估按冻结协议完整完成，全部样本有有限原始输出，总体 MAE &lt;6 月；否则记未通过／不完整。不能用训练误差、优势子组或成功子集替代。</td><td class="id">G-01 / EVAL-03…04</td></tr>
+<tr><td class="id">AC-08</td><td>对 200 张无标签图导出预测。</td><td>恰当对应 200 个源 ID，含模型／状态及有限有效值或 invalid_output；没有参考标签和 MAE；不用于挑选模型。</td><td class="id">EVAL-05</td></tr>
+<tr><td class="id">AC-09</td><td>在 CPU 上加载新候选，对六张原图各测试 F/M，并检查有效性失败路径。</td><td>架构／输入／目标尺度匹配；重复与跨设备差异按冻结工程阈值检查。正常输出有限且在 0–360 月内；范围外或 NaN／Inf 被拒绝，不生成有效评估。离线误差仍计入有限原始预测。</td><td class="id">INFER-01…03</td></tr>
+<tr><td class="id">AC-10</td><td>检查真实 Grad-CAM 和解释失败。</td><td>原图大小 RGBA、去填充映射、有效空间变化、透明度正确；平坦梯度／解释故障可部分成功，保留有效骨龄并提示解释不可用。</td><td class="id">CAM-01…02</td></tr>
+<tr><td class="id">AC-11</td><td>尝试注册缺项、损坏或不兼容候选。</td><td>缺报告、CSV、元数据或集成证据，哈希／架构不匹配均阻止切换；活动模型仍能使用，不产生伪成功。</td><td class="id">REG-02…03 / REG-05</td></tr>
+<tr><td class="id">AC-12</td><td>注册完整候选，再回滚旧模型。</td><td>显式操作及审计；原子切换；旧模型按 0.001 月容差通过原参考。模型切换中的任务有快照一致性或明确冲突处理。</td><td class="id">REG-03…04</td></tr>
+<tr><td class="id">AC-13</td><td>检查历史、输入更正与人工复核。</td><td>旧模型结果及人工意见保留；输入更正产生过时标记；当前页面显示对应模型真实报告，切换不重写历史数值。</td><td class="id">UI-01…02 / REG-04</td></tr>
+<tr><td class="id">AC-14</td><td>浏览器完成新模型闭环。</td><td>原图导入→质量确认→真实预测→热力图→保存意见成功；页面显示准确版本及研究／效果状态，显示调节不改变预测。</td><td class="id">INFER / CAM / UI</td></tr>
+<tr><td class="id">AC-15</td><td>检查分发与环境说明。</td><td>提供 Windows／PyCharm 环境、数据路径、训练／恢复与推理说明；不带虚拟环境、私有上传、操作数据库或未经核验的大数据副本。</td><td class="id">ENV-01 / REG-02</td></tr>
+<tr><td class="id">AC-16</td><td>检查独立性、临床与后续功能表述。</td><td>未知患者分组、测试暴露、稀疏低龄和标准限制明确；不声称已临床验证，不生成虚构身高／闭合／纵向结论。</td><td class="id">G-01 / DATA-02 / EVAL-02</td></tr>
+</tbody></table></div>
+<div class="grid2"><div class="panel"><h3>D1 · 工程交付门槛</h3><p>GPU 训练与恢复可用；新模型完整产物、CPU 推理、解释、旧模型兼容和回滚通过；所有结果和失败有证据。允许以“效果未达标”的研究状态交付真实候选。</p></div><div class="panel"><h3>D2 · 效果交付门槛</h3><p>在符合独立性要求的最终评估中完整运行并达到 MAE &lt;6 月，同时披露分层与区间。未满足 D2 不能把 D1 写成模型达到 PRD；临床试用另设独立条件。</p></div></div>
+</section>
+
+<section id="schedule"><div class="section-head"><span class="num">12</span><h2>实施顺序、负责人及依赖</h2></div><p class="section-note">按退出条件推进。尚未测量用户机器吞吐，不承诺训练时长或达标日期。</p>
+<div class="milestones"><div class="milestone"><div><b>M1 · 冻结协议与环境预检</b><p>开发者＋使用者：核对驱动、依赖、数据路径与分区；完成 CUDA 实际更新和资源短跑。退出条件：环境报告、数据引用与配置模板齐全。</p></div></div><div class="milestone"><div><b>M2 · 训练工具与模型适配</b><p>开发者：实现新骨干、阶段训练、恢复、独立验证及推理／解释适配；保留旧 CNN。退出条件：小规模管线检查通过，未改活动模型。</p></div></div><div class="milestone"><div><b>M3 · 首个完整 GPU 基线</b><p>模型开发者：完成 B1 全训练集运行，查看训练／验证曲线及分层偏差，确认瓶颈。退出条件：真实候选与完整验证产物；此阶段不以留出误差挑模型。</p></div></div><div class="milestone"><div><b>M4 · 有控制的实验与最终检验</b><p>开发者＋评估者：根据验证结果决定 B2／C，保存全部尝试；最终方案锁定后执行独立评估。退出条件：目标通过或失败有明确报告，测试暴露与限制已披露。</p></div></div><div class="milestone"><div><b>M5 · 集成验收与研究包</b><p>开发者＋使用者：完成完整产物检查、浏览器闭环、显式注册、旧模型回滚；交付文档和版本化包。退出条件：工程与效果门槛分别记录。</p></div></div></div>
+<div class="callout info"><strong>依赖不满足时的推进方式</strong>驱动／完整图片尚未就绪时，可以先完成代码、配置、数据清单校验与小规模管线测试，但不能据此报告完整训练或效果验收通过。若无新的独立最终数据，可继续做验证集研究，报告中保留独立评估未完成状态。</div>
+</section>
+
+<section id="risks"><div class="section-head"><span class="num">13</span><h2>风险与待确认事项</h2></div>
+<div class="table-wrap"><table class="wide"><thead><tr><th>事项</th><th>影响／处理</th><th>确认节点</th></tr></thead><tbody>
+<tr><td>显卡驱动与 CUDA wheel 组合</td><td>用户型号已知，驱动／实际 CUDA 未知。安装前核对官方支持、Python wheel 和 torch／torchvision 配套，不凭显卡名称指定未验证版本。</td><td>M1</td></tr>
+<tr><td>本机全量数据、RAM 与磁盘</td><td>云端有审计不代表本机有完整原图。确认现有路径、内存、磁盘余量和数据访问许可，选择合适缓存／读取策略。</td><td>M1</td></tr>
+<tr><td>目标人群、标签与参考标准</td><td>RSNA 月标签与临床标准、适用人群的对应仍需核实。数据单位保留，不把单一公开集效果直接推广至医院／中国儿童。</td><td>协议冻结前；临床扩展前</td></tr>
+<tr><td>患者级隔离与最终独立数据</td><td>当前无患者标识，旧留出结果已观察。取得分组／外部数据；无法取得时披露限制与探索性，不更换随机划分来伪装独立。</td><td>M1 / M4</td></tr>
+<tr><td>少量低龄样本与误差偏差</td><td>低龄训练 73 张、留出 9 张；增强不创造新的独立患者。验证集上比较采样并报告样本量、偏差与不确定性。</td><td>M3 / M4</td></tr>
+<tr><td>文字／边框与裁剪捷径</td><td>人工核查与训练／验证对照；裁剪保持关键解剖，不能以单张热力图证明排除所有非解剖依赖。</td><td>M3 / 后续 C 实验</td></tr>
+<tr><td>数值、AMP、显存与设备差异</td><td>有限性检查、FP32 对照、明确失败状态、OOM 恢复和资源记录；工程阈值需冻结，不能为掩盖缺陷随意放宽。</td><td>M1…M5</td></tr>
+<tr><td>许可与研究范围</td><td>核实原始数据与预训练权重条款；私有临床数据另有授权／隐私要求。ROI 框、DICOM 和纵向结局尚不齐备。</td><td>数据使用／后续扩展前</td></tr>
+</tbody></table></div>
+<p>上述待确认项是后续实施前的依赖记录，不要求本次静态文档暂停交付，也不表示用户已经完成这些检查。</p>
+</section>
+
+<section id="sources"><div class="section-head"><span class="num">14</span><h2>依据、版本说明与离线使用</h2></div>
+<ul class="source-list"><li>用户需求：原 Word 项目要求、既有 V0.2 首版范围，以及本轮提出的模型不达标、Python 3.14 与后续调优方向。</li><li>用户本机证据：Windows 终端兼容检查截图，Python 3.14.0／torch 2.14.1+cpu，12 组 passed；硬件回复 RTX 4060 Laptop、7957MB。此证据未归档成自动化 GPU 报告。</li><li>既有资料：<a href="https://github.com/Lijinge-bit/bone/blob/987d3dde1cad0acf5aa0758b817078baf67e3658/docs/PRD_V0.2.html">PRD V0.2</a>、<a href="https://github.com/Lijinge-bit/bone/blob/987d3dde1cad0acf5aa0758b817078baf67e3658/docs/MODEL_CARD.md">模型卡</a>、<a href="https://github.com/Lijinge-bit/bone/blob/987d3dde1cad0acf5aa0758b817078baf67e3658/docs/reports/model-evaluation.json">原始评估</a>、<a href="https://github.com/Lijinge-bit/bone/blob/987d3dde1cad0acf5aa0758b817078baf67e3658/docs/reports/python314-runtime.json">Linux 3.14 兼容报告</a>、现有训练／预处理／推理实现。</li><li>数据来源：<a href="https://www.kaggle.com/datasets/kmader/rsna-bone-age">RSNA Bone Age / kmader，版本 2</a>。图片数与效果取既有审计和真实报告；新模型结果尚未产生。</li></ul>
+<div class="grid2"><div class="panel"><h3>V0.3 变更摘要</h3><p>明确 GPU 训练环境与 8GB 约束；增加预训练骨干、版本化预处理、可恢复训练、受控实验、独立评估、架构与 Grad-CAM 适配、注册／回滚及逐项验收。保留原 MAE 门槛和研究边界。</p></div><div class="panel" id="print-guide"><h3>离线阅读／导出 PDF</h3><p>这是单个 UTF-8 HTML 文件，样式内嵌，无脚本、字体或图片网络依赖。保存后双击用浏览器打开；按 Ctrl＋P，选择“另存为 PDF”并使用 A4。目录锚点可离线使用，外部依据链接需要联网。</p></div></div>
+<p class="small">本稿是后续需求与拟定配置，未实现新训练功能、未执行新模型训练、未产生新精度或 GPU 验收结论。已有 CPU 原型与历史报告继续有效；后续实现后应另行补充真实模型卡和验收记录，不以修改本页的状态文字替代实测。</p>
+</section>
+<footer class="footer"><span>BONE ATLAS / PRD V0.3 · 2026-10-23 · 研究训练升级需求</span><span>单文件 · 离线阅读 · A4 打印 <a href="#top">返回顶部 ↑</a></span></footer>
+</main>
+</body>
+</html>

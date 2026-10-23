@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "sections": 14,
+  "duplicate_ids": false,
+  "broken_internal_anchors": false,
+  "scripts": 0,
+  "external_resource_requests": 0,
+  "viewport_widths_without_document_overflow": [
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "offline_render_without_network": true,
+  "render_method": "Inline HTML loaded with network offline; file URL scheme restricted by cloud browser policy",
+  "navigation": "passed",
+  "print_pdf_generated": true,
+  "page_errors": [],
+  "document": "docs/PRD_V0.3_GPU_TRAINING.html",
+  "document_sha256": "b09aa0bbb04b8634e2b910e7358830819e7274fd9411468f07d16e4ea1733da2",
+  "a4_print_pages": 12,
+  "archive_members": 1,
+  "application_code_changed": false,
+  "new_model_trained": false,
+  "download_archive": "BoneAtlas_PRD_V0.3_GPU_Training.zip",
+  "download_archive_bytes": 22393,
+  "download_archive_sha256": "c853df264638e1d8257b67608f2cd66f7f8c1bd40ed2a928c6c5fae4b2d8a902"
+}

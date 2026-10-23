@@ -2,6 +2,8 @@
 
 基于 [PRD V0.2](docs/PRD_V0.2.html) 的可运行单时相研究原型：**PNG + 性别 → 骨龄、关注热力图与人工复核记录**。
 
+后续 GPU 训练与模型改造见 [训练升级 PRD V0.3](docs/PRD_V0.3_GPU_TRAINING.html)（静态需求稿，面向 RTX 4060 Laptop 约 8GB / Python 3.14）。[下载离线 HTML 文档包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.3_GPU_Training.zip)，解压后双击 HTML 阅读；该文档版本不代表新模型或训练功能已实现。
+
 当前已有真实 CPU 模型和独立留出测试结果，**MAE 19.2524 个月，尚未达到 <6 个月目标**。本项目不是临床产品，不提供成年身高、闭合时间窗、治疗建议或医院签署报告。
 
 ## 下载完整研究项目包

@@ -1,5 +1,7 @@
 # 完整研究项目包
 
+后续训练升级需求文档另见 [PRD V0.3 离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.3_GPU_Training.zip)。其中只含一份可双击阅读的静态 HTML，面向 RTX 4060 Laptop 约 8GB / Python 3.14，覆盖训练、评估、推理／热力图适配及验收。它是后续需求稿，现有应用完整包仍为下方的 0.2 版本。
+
 [下载 Python 3.14 完整版 BoneAtlas_MVP_0.2_Python314.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.2_Python314.zip)
 
 大小：7,517,235 字节（约 7.5 MB）。
