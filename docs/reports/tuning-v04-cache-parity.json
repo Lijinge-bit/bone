@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "split": "validation",
+  "samples": 8,
+  "max_absolute_prediction_difference_months": 0.0,
+  "tolerance_months": 0.001,
+  "precision": "FP32",
+  "initial_checkpoint_sha256": "0a3eb7e2e11b427991d0d9e2ad2f219662a40c8d102147abb761fd788afbfd7b"
+}

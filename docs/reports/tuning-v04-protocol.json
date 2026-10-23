@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "locked_at": "2026-10-23T12:26:15.446363+00:00",
+  "base_commit": "1a7819d09b971b70e884f108f7c9b9e150bd930e",
+  "problem": "Frozen ImageNet image features cannot adapt to bone-age morphology; investigate last-residual-block adaptation with a matched frozen control",
+  "resource_constraint": "No CUDA GPU in cloud; CPU partial-backbone experiment, not PRD full GPU E1",
+  "initial_model_id": "resnet50-frozen-cpu-224",
+  "initial_checkpoint_sha256": "0a3eb7e2e11b427991d0d9e2ad2f219662a40c8d102147abb761fd788afbfd7b",
+  "data_splits": {
+    "train": 10091,
+    "validation": 1260,
+    "test": 1260
+  },
+  "training_and_selection_splits": [
+    "train",
+    "validation"
+  ],
+  "test_read_for_selection": false,
+  "source_partition_sha256": "d53beae480a3c36ed83d77f183e4bede6aa9da1d4a08f5f7ad919fdd893333a5",
+  "precision": "fp32",
+  "prefix": "through features.layer4.1; fixed FP32 spatial features",
+  "adapted_module": "features.layer4.2 plus sex_embedding/head",
+  "constant_bn_statistics": true,
+  "epochs": 3,
+  "frozen_warmup_epochs": 1,
+  "seed": 20261023,
+  "single_seed_exploratory": true,
+  "arms": [
+    "cpu_matched_frozen_control",
+    "cpu_last_residual_block_finetuning"
+  ],
+  "common_configuration": {
+    "batch_size": 16,
+    "backbone_lr": 3e-05,
+    "head_lr": 0.0001,
+    "loss": "smooth_l1",
+    "loss_beta": 0.5,
+    "augmentation": false,
+    "image_size": 224,
+    "weight_decay": 0.0005,
+    "scheduler": "cosine",
+    "minimum_lr": 1e-06
+  },
+  "checkpoint_selection": "Minimum validation MAE including the unchanged initialization at epoch zero",
+  "primary_evidence": "Adapted candidate must improve validation MAE over both the initialization and matched frozen control; report all arms and whether the best checkpoint actually updated the image block",
+  "registration_minimum_validation_gain_months": 0.05,
+  "research_target_mae_months": 6,
+  "target_passed": false,
+  "holdout_policy": "Only after locking a candidate by validation; any later existing-holdout evaluation explicitly exploratory, never independent final acceptance",
+  "expected_outputs": [
+    "initial validation",
+    "per-epoch train/validation MAE",
+    "best validation raw predictions and metrics",
+    "parameter-change proof",
+    "complete deployment state_dict",
+    "actual CPU integration check"
+  ],
+  "code_and_config_sha256": {
+    "app/tail_training.py": "5b39bf79b8b840408f04293036620a27ce5642aabd2d366c69d5c2dbcf6ef8fc",
+    "scripts/train_tail.py": "f79e5d5b788ca6d92c16bbe88f0eba46649e8aa7acf9ea960700e02ca95d15d7",
+    "configs/train_tail_cpu_control.json": "10443fc4df22e64e25e391b1f01e24ac69bb701270ca91e7cac9d524ae628047",
+    "configs/train_tail_cpu_adapt.json": "0fe29a93eb049accf38ba974ecddf04f0f028e6776767dc6fe7119f4fd21ffb4"
+  },
+  "instrumentation_note": "Code snapshot refreshed before either training arm started; added explicit selected-checkpoint parameter-change and resume-code proofs."
+}

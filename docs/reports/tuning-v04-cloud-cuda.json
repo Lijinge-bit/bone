@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-10-23T12:31:10.416812+00:00",
+  "python": "3.14.8",
+  "python_executable": "/workspace/bone-data/venvs/py314/bin/python",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "torch": "2.14.1+cpu",
+  "torchvision": "0.29.1+cpu",
+  "numpy": "2.3.5",
+  "requested_device": "cuda",
+  "cuda_available": false,
+  "nvidia_driver_versions": null,
+  "torch_cuda_build": null,
+  "cudnn": null,
+  "cuda_devices": [],
+  "threads": 3,
+  "status": "unavailable",
+  "error": "CUDA was requested but is unavailable. Install CUDA-enabled PyTorch and an NVIDIA driver, or explicitly use --device cpu --no-amp."
+}

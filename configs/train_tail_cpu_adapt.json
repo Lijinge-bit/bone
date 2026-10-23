@@ -1,0 +1,12 @@
+{
+  "architecture": "resnet50-sex-v1", "device": "cpu", "image_size": 224,
+  "epochs": 3, "batch_size": 16, "threads": 4, "seed": 20261023,
+  "adapt_tail": true, "freeze_backbone_epochs": 1,
+  "backbone_lr": 0.00003, "head_lr": 0.0001,
+  "weight_decay": 0.0005, "minimum_lr": 0.000001,
+  "gradient_clip_norm": 5.0, "early_stopping_patience": 3,
+  "early_stopping_min_delta": 0.01, "bn_strategy": "freeze_running_stats",
+  "augmentation": false, "amp": false, "loss": "smooth_l1", "loss_beta": 0.5,
+  "training_protocol": "cpu_last_residual_block_finetuning",
+  "limitations": ["Only features.layer4.2 and sex/regression head are trainable; not full-backbone GPU training", "Three-epoch diagnostic; single seed; validation selection only"]
+}

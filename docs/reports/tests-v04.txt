@@ -1,0 +1,114 @@
+/workspace/bone-data/venvs/py314/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+test_manifest_cannot_omit_public_images (test_candidate_check.CandidateSpatialChecks.test_manifest_cannot_omit_public_images) ... ok
+test_original_geometry_and_spatial_alpha_are_verified (test_candidate_check.CandidateSpatialChecks.test_original_geometry_and_spatial_alpha_are_verified) ... ok
+test_failed_or_non_cuda_preflight_never_starts_training (test_e1_runner.E1RunnerTests.test_failed_or_non_cuda_preflight_never_starts_training) ... ok
+test_gpu_pair_changes_only_the_backbone_freeze_schedule (test_e1_runner.E1RunnerTests.test_gpu_pair_changes_only_the_backbone_freeze_schedule) ... ok
+test_suite_runs_both_arms_per_seed_without_evaluation_or_registration (test_e1_runner.E1RunnerTests.test_suite_runs_both_arms_per_seed_without_evaluation_or_registration) ... ok
+test_bootstrap_is_reproducible_and_nontrivial (test_metrics.MetricsTests.test_bootstrap_is_reproducible_and_nontrivial) ... ok
+test_empty_and_nonfinite_labels_are_explicit (test_metrics.MetricsTests.test_empty_and_nonfinite_labels_are_explicit) ... ok
+test_length_and_bootstrap_configuration_are_validated (test_metrics.MetricsTests.test_length_and_bootstrap_configuration_are_validated) ... ok
+test_missing_and_nonfinite_cases_do_not_disappear_from_denominator (test_metrics.MetricsTests.test_missing_and_nonfinite_cases_do_not_disappear_from_denominator) ... ok
+test_negative_and_out_of_range_outputs_are_in_the_overall_error (test_metrics.MetricsTests.test_negative_and_out_of_range_outputs_are_in_the_overall_error) ... ok
+test_historical_preprocessing_is_exact (test_model_adapters.PreprocessAndLegacyAdapterTests.test_historical_preprocessing_is_exact) ... ok
+test_imagenet_replicates_gray_before_per_channel_normalization (test_model_adapters.PreprocessAndLegacyAdapterTests.test_imagenet_replicates_gray_before_per_channel_normalization) ... ok
+test_old_state_dict_keys_and_roundtrip_are_unchanged (test_model_adapters.PreprocessAndLegacyAdapterTests.test_old_state_dict_keys_and_roundtrip_are_unchanged) ... ok
+test_unknown_or_malformed_preprocessing_is_rejected (test_model_adapters.PreprocessAndLegacyAdapterTests.test_unknown_or_malformed_preprocessing_is_rejected) ... ok
+test_corrupt_incompatible_and_unsafe_checkpoints_are_rejected (test_model_adapters.ResNetAdapterTests.test_corrupt_incompatible_and_unsafe_checkpoints_are_rejected) ... ok
+test_invalid_output_and_sex_are_rejected (test_model_adapters.ResNetAdapterTests.test_invalid_output_and_sex_are_rejected) ... ok
+test_metadata_changes_invalidate_cached_model_identity (test_model_adapters.ResNetAdapterTests.test_metadata_changes_invalidate_cached_model_identity) ... ok
+test_metadata_contract_rejects_mismatch_but_accepts_legacy (test_model_adapters.ResNetAdapterTests.test_metadata_contract_rejects_mismatch_but_accepts_legacy) ... ok
+test_official_pretraining_is_explicit_and_cpu_loading_never_downloads (test_model_adapters.ResNetAdapterTests.test_official_pretraining_is_explicit_and_cpu_loading_never_downloads) ... ok
+test_partial_success_when_explanation_fails_or_is_empty (test_model_adapters.ResNetAdapterTests.test_partial_success_when_explanation_fails_or_is_empty) ... ok
+test_path_escape_and_stale_request_are_rejected (test_model_adapters.ResNetAdapterTests.test_path_escape_and_stale_request_are_rejected) ... ok
+test_real_gradcam_is_repeatable_and_crops_letterbox (test_model_adapters.ResNetAdapterTests.test_real_gradcam_is_repeatable_and_crops_letterbox) ... ok
+test_resnet_forward_contract_and_supported_sizes (test_model_adapters.ResNetAdapterTests.test_resnet_forward_contract_and_supported_sizes) ... ok
+test_corrupt_weights_are_rejected (test_predictor.TrainedModelIntegration.test_corrupt_weights_are_rejected) ... ok
+test_original_runtime_predictions_and_spatial_heatmaps (test_predictor.TrainedModelIntegration.test_original_runtime_predictions_and_spatial_heatmaps) ... ok
+test_real_prediction_explanation_and_repeatability (test_predictor.TrainedModelIntegration.test_real_prediction_explanation_and_repeatability) ... ok
+test_audit_intent_failure_prevents_activation (test_registry.RegistryTests.test_audit_intent_failure_prevents_activation) ... ok
+test_concurrent_processes_publish_complete_versions_and_keep_lock_file (test_registry.RegistryTests.test_concurrent_processes_publish_complete_versions_and_keep_lock_file) ... ok
+test_evidence_changed_after_validation_cannot_be_published (test_registry.RegistryTests.test_evidence_changed_after_validation_cannot_be_published) ... ok
+test_explicit_research_registration_preserves_failure_and_immutable_evidence (test_registry.RegistryTests.test_explicit_research_registration_preserves_failure_and_immutable_evidence) ... ok
+test_legacy_model_is_snapshotted_and_can_be_rolled_back (test_registry.RegistryTests.test_legacy_model_is_snapshotted_and_can_be_rolled_back) ... ok
+test_metadata_or_immutable_version_corruption_is_rejected (test_registry.RegistryTests.test_metadata_or_immutable_version_corruption_is_rejected) ... ok
+test_mismatched_integration_and_false_g01_claim_are_rejected (test_registry.RegistryTests.test_mismatched_integration_and_false_g01_claim_are_rejected) ... ok
+test_missing_protocol_fields_or_forged_independence_are_rejected (test_registry.RegistryTests.test_missing_protocol_fields_or_forged_independence_are_rejected) ... ok
+test_nan_prediction_and_unverified_usage_are_rejected (test_registry.RegistryTests.test_nan_prediction_and_unverified_usage_are_rejected) ... ok
+test_rollback_recovers_corrupt_flat_checkpoint_from_verified_version (test_registry.RegistryTests.test_rollback_recovers_corrupt_flat_checkpoint_from_verified_version) ... ok
+test_tampered_csv_and_missing_cases_refuse_publication (test_registry.RegistryTests.test_tampered_csv_and_missing_cases_refuse_publication) ... ok
+test_test_evaluation_requires_acknowledgment_before_reading_data (test_registry.RegistryTests.test_test_evaluation_requires_acknowledgment_before_reading_data) ... ok
+test_version_manifest_cannot_drop_required_evidence (test_registry.RegistryTests.test_version_manifest_cannot_drop_required_evidence) ... ok
+test_cache_resume_identity_and_tamper_rejection (test_tail_training.TailTrainingTests.test_cache_resume_identity_and_tamper_rejection) ... ok
+test_configs_keep_the_control_comparable_and_reject_unsupported_modes (test_tail_training.TailTrainingTests.test_configs_keep_the_control_comparable_and_reject_unsupported_modes) ... ok
+test_epoch_resume_matches_continuous_training_and_never_opens_test (test_tail_training.TailTrainingTests.test_epoch_resume_matches_continuous_training_and_never_opens_test) ... ok
+test_real_resnet_split_parity_and_only_requested_layers_update (test_tail_training.TailTrainingTests.test_real_resnet_split_parity_and_only_requested_layers_update) ... ok
+test_accumulation_matches_actual_large_batches_including_single_sample_tail (test_training.TrainingIntegrityTests.test_accumulation_matches_actual_large_batches_including_single_sample_tail) ... ok
+test_configuration_and_explicit_cuda_failure (test_training.TrainingIntegrityTests.test_configuration_and_explicit_cuda_failure) ... ok
+test_early_stopping_state_and_resume_data_mismatch (test_training.TrainingIntegrityTests.test_early_stopping_state_and_resume_data_mismatch) ... ok
+test_epoch_resume_restores_rng_optimizer_schedule_and_candidate_contract (test_training.TrainingIntegrityTests.test_epoch_resume_restores_rng_optimizer_schedule_and_candidate_contract) ... ok
+test_freeze_boundary_and_batchnorm_policy (test_training.TrainingIntegrityTests.test_freeze_boundary_and_batchnorm_policy) ... ok
+test_nonfinite_and_oom_have_explicit_failure_status_and_recoverable_boundary (test_training.TrainingIntegrityTests.test_nonfinite_and_oom_have_explicit_failure_status_and_recoverable_boundary) ... ok
+test_nonfinite_gradient_does_not_update_parameters (test_training.TrainingIntegrityTests.test_nonfinite_gradient_does_not_update_parameters) ... ok
+test_unique_output_and_existing_explicit_run_are_preserved (test_training.TrainingIntegrityTests.test_unique_output_and_existing_explicit_run_are_preserved) ... ok
+test_cache_byte_corruption_is_rejected (test_training_data.TrainingDataTest.test_cache_byte_corruption_is_rejected) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
+Prepared 4/4 PNGs; elapsed 0.0s
+Prepared cache: /tmp/bone training y68njbtp/training-cache-224
+ok
+test_duplicate_training_source_ids_are_rejected (test_training_data.TrainingDataTest.test_duplicate_training_source_ids_are_rejected) ... ok
+test_larger_supported_sizes_keep_holdout_partition (test_training_data.TrainingDataTest.test_larger_supported_sizes_keep_holdout_partition) ... Preparing 4 original PNGs at 384px; preserving {'train': 2, 'validation': 1, 'test': 1}
+Prepared 4/4 PNGs; elapsed 0.0s
+Prepared cache: /tmp/bone training sx88pclb/training-cache-384
+Preparing 4 original PNGs at 512px; preserving {'train': 2, 'validation': 1, 'test': 1}
+Prepared 4/4 PNGs; elapsed 0.0s
+Prepared cache: /tmp/bone training sx88pclb/training-cache-512
+ok
+test_legacy_cache_retains_fixed_ids_labels_and_uint8_tensor_contract (test_training_data.TrainingDataTest.test_legacy_cache_retains_fixed_ids_labels_and_uint8_tensor_contract) ... ok
+test_legacy_checksum_id_and_partition_mismatches_are_rejected (test_training_data.TrainingDataTest.test_legacy_checksum_id_and_partition_mismatches_are_rejected) ... ok
+test_manifest_checksum_and_declared_counts_are_enforced (test_training_data.TrainingDataTest.test_manifest_checksum_and_declared_counts_are_enforced) ... ok
+test_missing_high_resolution_cache_requires_preparation (test_training_data.TrainingDataTest.test_missing_high_resolution_cache_requires_preparation) ... ok
+test_original_png_hash_mismatch_cannot_be_cached (test_training_data.TrainingDataTest.test_original_png_hash_mismatch_cannot_be_cached) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
+ok
+test_prepared_cache_cannot_follow_a_changed_source_manifest (test_training_data.TrainingDataTest.test_prepared_cache_cannot_follow_a_changed_source_manifest) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
+Prepared 4/4 PNGs; elapsed 0.0s
+Prepared cache: /tmp/bone training oxgtw498/training-cache-224
+ok
+test_prepared_cache_uses_original_pngs_and_survives_archive_removal (test_training_data.TrainingDataTest.test_prepared_cache_uses_original_pngs_and_survives_archive_removal) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
+Prepared 4/4 PNGs; elapsed 0.0s
+Prepared cache: /tmp/bone training bnlopaba/training-cache-224
+ok
+test_prepared_index_must_match_manifest_even_with_updated_file_hash (test_training_data.TrainingDataTest.test_prepared_index_must_match_manifest_even_with_updated_file_hash) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
+Prepared 4/4 PNGs; elapsed 0.0s
+Prepared cache: /tmp/bone training luyy0vjt/training-cache-224
+ok
+test_reference_preserves_audited_split_and_excludes_unlabeled (test_training_data.TrainingDataTest.test_reference_preserves_audited_split_and_excludes_unlabeled) ... ok
+test_spawn_worker_reads_cache_without_original_zip (test_training_data.TrainingDataTest.test_spawn_worker_reads_cache_without_original_zip) ... Preparing 4 original PNGs at 224px; preserving {'train': 2, 'validation': 1, 'test': 1}
+Prepared 4/4 PNGs; elapsed 0.0s
+Prepared cache: /tmp/bone training xy5qumv8/training-cache-224
+ok
+test_unsafe_archive_member_paths_are_rejected (test_training_data.TrainingDataTest.test_unsafe_archive_member_paths_are_rejected) ... ok
+test_all_ids_and_tail_batch_are_exported_with_model_identity_and_no_accuracy (test_unlabeled.UnlabeledExportTests.test_all_ids_and_tail_batch_are_exported_with_model_identity_and_no_accuracy) ... ok
+test_corrupt_weights_and_model_changes_preserve_previous_export (test_unlabeled.UnlabeledExportTests.test_corrupt_weights_and_model_changes_preserve_previous_export) ... ok
+test_duplicate_ids_and_audited_image_mismatch_are_refused (test_unlabeled.UnlabeledExportTests.test_duplicate_ids_and_audited_image_mismatch_are_refused) ... ok
+test_negative_predictions_preserve_rows_and_are_marked_invalid (test_unlabeled.UnlabeledExportTests.test_negative_predictions_preserve_rows_and_are_marked_invalid) ... ok
+test_bad_png_and_bomb_limit (test_workbench.ImagingTest.test_bad_png_and_bomb_limit) ... ok
+test_letterbox_keeps_aspect_and_transform (test_workbench.ImagingTest.test_letterbox_keeps_aspect_and_transform) ... ok
+test_actual_snapshot_review_and_staleness (test_workbench.WorkbenchTest.test_actual_snapshot_review_and_staleness) ... ok
+test_additive_schema_migration_preserves_old_prediction_and_review (test_workbench.WorkbenchTest.test_additive_schema_migration_preserves_old_prediction_and_review) ... ok
+test_cross_site_mutation_and_printable_frontend (test_workbench.WorkbenchTest.test_cross_site_mutation_and_printable_frontend) ... ok
+test_explanation_failure_preserves_boneage (test_workbench.WorkbenchTest.test_explanation_failure_preserves_boneage) ... ok
+test_import_duplicate_and_identity (test_workbench.WorkbenchTest.test_import_duplicate_and_identity) ... ok
+test_inference_failure_does_not_create_prediction (test_workbench.WorkbenchTest.test_inference_failure_does_not_create_prediction) ... ok
+test_invalid_format_color_and_missing_sex (test_workbench.WorkbenchTest.test_invalid_format_color_and_missing_sex) ... ok
+test_new_architecture_and_preprocessing_are_snapshotted (test_workbench.WorkbenchTest.test_new_architecture_and_preprocessing_are_snapshotted) ... ok
+test_quality_gate_and_missing_model (test_workbench.WorkbenchTest.test_quality_gate_and_missing_model) ... ok
+test_quality_reject_and_optimistic_revision (test_workbench.WorkbenchTest.test_quality_reject_and_optimistic_revision) ... ok
+test_queued_model_configuration_change_stops_inference (test_workbench.WorkbenchTest.test_queued_model_configuration_change_stops_inference) ... ok
+test_registered_report_and_csv_cannot_leak_previous_model_results (test_workbench.WorkbenchTest.test_registered_report_and_csv_cannot_leak_previous_model_results) ... ok
+test_text_fields_cannot_inject_sql (test_workbench.WorkbenchTest.test_text_fields_cannot_inject_sql) ... ok
+test_unlabeled_prediction_export_is_an_artifact_not_an_accuracy (test_workbench.WorkbenchTest.test_unlabeled_prediction_export_is_an_artifact_not_an_accuracy) ... ok
+
+----------------------------------------------------------------------
+Ran 85 tests in 47.654s
+
+OK
