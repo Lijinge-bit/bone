@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "report_date": "2026-10-24",
+  "purpose": "Descriptive re-tabulation of archived predictions, no new training/inference/model selection",
+  "model_id": "tail-adapt-seed20261023",
+  "band_variable": "reference_boneage_months_not_chronological_age",
+  "band_upper_bounds_exclusive": true,
+  "patient_independence_verified": false,
+  "cross_seed_stability_measured": false,
+  "independent_final_test": false,
+  "new_training_executed": false,
+  "metrics_use_unclipped_predictions": true,
+  "source_sha256": {
+    "docs/reports/tuning-v04-validation-predictions.csv": "759ad61a06d6f5bad1af7df7bb00be1f2be0e769a40476bc38e56b95a9006ad4",
+    "docs/reports/tuning-v04-holdout-predictions.csv": "c77f86e5184a1f11cb229ffe18b88633f9c5f0db717a4d7ae428ddf8ab3419bc",
+    "external:manifest.jsonl": "bf4f9f51d30d08e0c3a89d9bf69e5347af2ec6570c246dbe7a6147e6d49cecb5"
+  },
+  "splits": {
+    "validation": {
+      "overall": {
+        "n": 1260,
+        "mae_months": 12.133392,
+        "bias_months": 0.001983,
+        "p90_absolute_error_months": 26.006351,
+        "within_6_months_n": 425,
+        "within_12_months_n": 748,
+        "within_24_months_n": 1105,
+        "over_24_months_n": 155,
+        "out_of_range_n": 2,
+        "absolute_error_sample_sd_months": 10.176474
+      },
+      "by_reference_boneage_months": {
+        "0–<24": {
+          "n": 9,
+          "mae_months": 19.746041,
+          "bias_months": -1.815843,
+          "p90_absolute_error_months": 41.154597,
+          "within_6_months_n": 1,
+          "within_12_months_n": 4,
+          "within_24_months_n": 6,
+          "over_24_months_n": 3,
+          "out_of_range_n": 2,
+          "absolute_error_sample_sd_months": 14.660322
+        },
+        "24–<72": {
+          "n": 124,
+          "mae_months": 13.360527,
+          "bias_months": 6.751371,
+          "p90_absolute_error_months": 27.1325,
+          "within_6_months_n": 44,
+          "within_12_months_n": 65,
+          "within_24_months_n": 100,
+          "over_24_months_n": 24,
+          "out_of_range_n": 0,
+          "absolute_error_sample_sd_months": 11.005036
+        },
+        "72–<120": {
+          "n": 295,
+          "mae_months": 14.190021,
+          "bias_months": 6.866434,
+          "p90_absolute_error_months": 30.275018,
+          "within_6_months_n": 77,
+          "within_12_months_n": 148,
+          "within_24_months_n": 241,
+          "over_24_months_n": 54,
+          "out_of_range_n": 0,
+          "absolute_error_sample_sd_months": 10.917808
+        },
+        "120–<168": {
+          "n": 621,
+          "mae_months": 10.528202,
+          "bias_months": -2.566959,
+          "p90_absolute_error_months": 20.739929,
+          "within_6_months_n": 231,
+          "within_12_months_n": 412,
+          "within_24_months_n": 580,
+          "over_24_months_n": 41,
+          "out_of_range_n": 0,
+          "absolute_error_sample_sd_months": 9.00757
+        },
+        "≥168": {
+          "n": 211,
+          "mae_months": 12.93642,
+          "bias_months": -5.923436,
+          "p90_absolute_error_months": 28.031281,
+          "within_6_months_n": 72,
+          "within_12_months_n": 119,
+          "within_24_months_n": 178,
+          "over_24_months_n": 33,
+          "out_of_range_n": 0,
+          "absolute_error_sample_sd_months": 10.850867
+        }
+      },
+      "by_reference_boneage_and_sex": {
+        "0–<24": {
+          "F": {
+            "n": 4,
+            "mae_months": 20.739578,
+            "bias_months": -10.145664,
+            "p90_absolute_error_months": 34.853642,
+            "within_6_months_n": 1,
+            "within_12_months_n": 1,
+            "within_24_months_n": 3,
+            "over_24_months_n": 1,
+            "out_of_range_n": 1,
+            "absolute_error_sample_sd_months": 16.333872
+          },
+          "M": {
+            "n": 5,
+            "mae_months": 18.951212,
+            "bias_months": 4.848013,
+            "p90_absolute_error_months": 35.588939,
+            "within_6_months_n": 0,
+            "within_12_months_n": 3,
+            "within_24_months_n": 3,
+            "over_24_months_n": 2,
+            "out_of_range_n": 1,
+            "absolute_error_sample_sd_months": 15.098898
+          }
+        },
+        "24–<72": {
+          "F": {
+            "n": 68,
+            "mae_months": 12.868264,
+            "bias_months": 5.49338,
+            "p90_absolute_error_months": 26.984703,
+            "within_6_months_n": 25,
+            "within_12_months_n": 38,
+            "within_24_months_n": 55,
+            "over_24_months_n": 13,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 11.38244
+          },
+          "M": {
+            "n": 56,
+            "mae_months": 13.958275,
+            "bias_months": 8.278931,
+            "p90_absolute_error_months": 27.06118,
+            "within_6_months_n": 19,
+            "within_12_months_n": 27,
+            "within_24_months_n": 45,
+            "over_24_months_n": 11,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 10.599853
+          }
+        },
+        "72–<120": {
+          "F": {
+            "n": 172,
+            "mae_months": 12.893931,
+            "bias_months": 6.998197,
+            "p90_absolute_error_months": 26.600333,
+            "within_6_months_n": 48,
+            "within_12_months_n": 91,
+            "within_24_months_n": 146,
+            "over_24_months_n": 26,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 9.667331
+          },
+          "M": {
+            "n": 123,
+            "mae_months": 16.00244,
+            "bias_months": 6.68218,
+            "p90_absolute_error_months": 34.110559,
+            "within_6_months_n": 29,
+            "within_12_months_n": 57,
+            "within_24_months_n": 95,
+            "over_24_months_n": 28,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 12.270917
+          }
+        },
+        "120–<168": {
+          "F": {
+            "n": 283,
+            "mae_months": 11.050695,
+            "bias_months": -3.579421,
+            "p90_absolute_error_months": 22.414116,
+            "within_6_months_n": 99,
+            "within_12_months_n": 181,
+            "within_24_months_n": 262,
+            "over_24_months_n": 21,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 9.241153
+          },
+          "M": {
+            "n": 338,
+            "mae_months": 10.09073,
+            "bias_months": -1.719246,
+            "p90_absolute_error_months": 20.199854,
+            "within_6_months_n": 132,
+            "within_12_months_n": 231,
+            "within_24_months_n": 318,
+            "over_24_months_n": 20,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 8.797099
+          }
+        },
+        "≥168": {
+          "F": {
+            "n": 51,
+            "mae_months": 15.997522,
+            "bias_months": -12.168734,
+            "p90_absolute_error_months": 35.075272,
+            "within_6_months_n": 13,
+            "within_12_months_n": 25,
+            "within_24_months_n": 39,
+            "over_24_months_n": 12,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 12.728201
+          },
+          "M": {
+            "n": 160,
+            "mae_months": 11.960693,
+            "bias_months": -3.932747,
+            "p90_absolute_error_months": 26.129198,
+            "within_6_months_n": 59,
+            "within_12_months_n": 94,
+            "within_24_months_n": 139,
+            "over_24_months_n": 21,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 10.029863
+          }
+        }
+      },
+      "macro_mae_months": 14.152242,
+      "worst_band_mae_months": 19.746041
+    },
+    "historical_exploratory_holdout": {
+      "overall": {
+        "n": 1260,
+        "mae_months": 12.417525,
+        "bias_months": 0.899183,
+        "p90_absolute_error_months": 25.6156,
+        "within_6_months_n": 388,
+        "within_12_months_n": 732,
+        "within_24_months_n": 1106,
+        "over_24_months_n": 154,
+        "out_of_range_n": 2,
+        "absolute_error_sample_sd_months": 10.463207
+      },
+      "by_reference_boneage_months": {
+        "0–<24": {
+          "n": 9,
+          "mae_months": 19.902153,
+          "bias_months": 8.739966,
+          "p90_absolute_error_months": 33.053018,
+          "within_6_months_n": 0,
+          "within_12_months_n": 4,
+          "within_24_months_n": 5,
+          "over_24_months_n": 4,
+          "out_of_range_n": 1,
+          "absolute_error_sample_sd_months": 11.493995
+        },
+        "24–<72": {
+          "n": 124,
+          "mae_months": 15.769158,
+          "bias_months": 8.476674,
+          "p90_absolute_error_months": 28.632907,
+          "within_6_months_n": 26,
+          "within_12_months_n": 61,
+          "within_24_months_n": 97,
+          "over_24_months_n": 27,
+          "out_of_range_n": 1,
+          "absolute_error_sample_sd_months": 12.972171
+        },
+        "72–<120": {
+          "n": 295,
+          "mae_months": 13.854463,
+          "bias_months": 8.014502,
+          "p90_absolute_error_months": 28.49633,
+          "within_6_months_n": 85,
+          "within_12_months_n": 147,
+          "within_24_months_n": 249,
+          "over_24_months_n": 46,
+          "out_of_range_n": 0,
+          "absolute_error_sample_sd_months": 10.895528
+        },
+        "120–<168": {
+          "n": 621,
+          "mae_months": 10.703753,
+          "bias_months": -1.693731,
+          "p90_absolute_error_months": 22.62561,
+          "within_6_months_n": 214,
+          "within_12_months_n": 399,
+          "within_24_months_n": 575,
+          "over_24_months_n": 46,
+          "out_of_range_n": 0,
+          "absolute_error_sample_sd_months": 8.892148
+        },
+        "≥168": {
+          "n": 211,
+          "mae_months": 13.163459,
+          "bias_months": -6.205061,
+          "p90_absolute_error_months": 28.129593,
+          "within_6_months_n": 63,
+          "within_12_months_n": 121,
+          "within_24_months_n": 180,
+          "over_24_months_n": 31,
+          "out_of_range_n": 0,
+          "absolute_error_sample_sd_months": 11.486245
+        }
+      },
+      "by_reference_boneage_and_sex": {
+        "0–<24": {
+          "F": {
+            "n": 4,
+            "mae_months": 19.922953,
+            "bias_months": 3.183012,
+            "p90_absolute_error_months": 34.436188,
+            "within_6_months_n": 0,
+            "within_12_months_n": 2,
+            "within_24_months_n": 2,
+            "over_24_months_n": 2,
+            "out_of_range_n": 1,
+            "absolute_error_sample_sd_months": 14.686386
+          },
+          "M": {
+            "n": 5,
+            "mae_months": 19.885513,
+            "bias_months": 13.185529,
+            "p90_absolute_error_months": 30.789891,
+            "within_6_months_n": 0,
+            "within_12_months_n": 2,
+            "within_24_months_n": 3,
+            "over_24_months_n": 2,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 10.122036
+          }
+        },
+        "24–<72": {
+          "F": {
+            "n": 68,
+            "mae_months": 15.918257,
+            "bias_months": 9.588957,
+            "p90_absolute_error_months": 32.632278,
+            "within_6_months_n": 17,
+            "within_12_months_n": 35,
+            "within_24_months_n": 53,
+            "over_24_months_n": 15,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 13.918804
+          },
+          "M": {
+            "n": 56,
+            "mae_months": 15.58811,
+            "bias_months": 7.126045,
+            "p90_absolute_error_months": 28.081032,
+            "within_6_months_n": 9,
+            "within_12_months_n": 26,
+            "within_24_months_n": 44,
+            "over_24_months_n": 12,
+            "out_of_range_n": 1,
+            "absolute_error_sample_sd_months": 11.843398
+          }
+        },
+        "72–<120": {
+          "F": {
+            "n": 172,
+            "mae_months": 13.105913,
+            "bias_months": 7.002425,
+            "p90_absolute_error_months": 26.499931,
+            "within_6_months_n": 52,
+            "within_12_months_n": 84,
+            "within_24_months_n": 150,
+            "over_24_months_n": 22,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 9.214145
+          },
+          "M": {
+            "n": 123,
+            "mae_months": 14.901217,
+            "bias_months": 9.429764,
+            "p90_absolute_error_months": 31.107552,
+            "within_6_months_n": 33,
+            "within_12_months_n": 63,
+            "within_24_months_n": 99,
+            "over_24_months_n": 24,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 12.852363
+          }
+        },
+        "120–<168": {
+          "F": {
+            "n": 283,
+            "mae_months": 11.294852,
+            "bias_months": -2.67284,
+            "p90_absolute_error_months": 23.005835,
+            "within_6_months_n": 91,
+            "within_12_months_n": 177,
+            "within_24_months_n": 261,
+            "over_24_months_n": 22,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 9.156604
+          },
+          "M": {
+            "n": 338,
+            "mae_months": 10.208838,
+            "bias_months": -0.873944,
+            "p90_absolute_error_months": 21.285832,
+            "within_6_months_n": 123,
+            "within_12_months_n": 222,
+            "within_24_months_n": 314,
+            "over_24_months_n": 24,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 8.647065
+          }
+        },
+        "≥168": {
+          "F": {
+            "n": 51,
+            "mae_months": 17.295759,
+            "bias_months": -13.156994,
+            "p90_absolute_error_months": 40.105789,
+            "within_6_months_n": 13,
+            "within_12_months_n": 25,
+            "within_24_months_n": 37,
+            "over_24_months_n": 14,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 15.135356
+          },
+          "M": {
+            "n": 160,
+            "mae_months": 11.846288,
+            "bias_months": -3.989132,
+            "p90_absolute_error_months": 24.855725,
+            "within_6_months_n": 50,
+            "within_12_months_n": 96,
+            "within_24_months_n": 143,
+            "over_24_months_n": 17,
+            "out_of_range_n": 0,
+            "absolute_error_sample_sd_months": 9.746372
+          }
+        }
+      },
+      "macro_mae_months": 14.678597,
+      "worst_band_mae_months": 19.902153
+    }
+  },
+  "fixed_split_band_counts": {
+    "train": {
+      "0–<24": 73,
+      "24–<72": 993,
+      "72–<120": 2366,
+      "120–<168": 4980,
+      "≥168": 1679
+    },
+    "validation": {
+      "0–<24": 9,
+      "24–<72": 124,
+      "72–<120": 295,
+      "120–<168": 621,
+      "≥168": 211
+    },
+    "test": {
+      "0–<24": 9,
+      "24–<72": 124,
+      "72–<120": 295,
+      "120–<168": 621,
+      "≥168": 211
+    }
+  }
+}

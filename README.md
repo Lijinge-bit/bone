@@ -4,7 +4,9 @@
 
 V0.3 已增加 ResNet-50＋性别、版本化预处理、CUDA/AMP 训练、恢复、独立评估、候选注册／回滚及热力图适配。需求依据为 [PRD V0.3](docs/PRD_V0.3_GPU_TRAINING.html)；实际进展、RTX 4060 Laptop 约 8GB 的安装／训练命令见 [训练说明](docs/TRAINING_V0.3.md)。
 
-最新需求修订见 [PRD V0.4：实验复盘与下一轮调校](docs/PRD_V0.4_EXPERIMENT_REVIEW.html)（[下载离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.4_Experiment_Review.zip)）。文档对照原 Word 和归档实测结果，明确精度差距、GPU 成对实验、独立评估前提与验收清单；当前应用／模型包版本仍为 V0.3。
+最新在线报告见 [V0.4.1：单次骨龄预测在不同骨龄段的稳定性与可靠性](docs/AGE_RELIABILITY_REPORT_V0.4.1.md)（[静态HTML版](docs/AGE_RELIABILITY_REPORT_V0.4.1.html)）。报告同步末残差块调校结果，明确参考骨龄与实足年龄的区别，并定义分层、多种子、输入稳健性和独立数据的后续验证方案；新增要求尚未执行。
+
+原 [PRD V0.4：实验复盘与下一轮调校](docs/PRD_V0.4_EXPERIMENT_REVIEW.html)（[下载当时的离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.4_Experiment_Review.zip)）保留为调校前历史需求快照。原MAE＜6月门槛保持，当前应用／完整模型包版本仍为V0.3。
 
 当前云端活动研究模型已更新为 **ResNet-50 末残差块＋性别／回归头微调、224 输入**：验证 MAE **12.7541 → 12.1334 月**，历史固定留出 MAE **12.9245 → 12.4175 月**。本轮为真实 CPU 单种子、3 轮成对实验；低龄段仍有较大误差，**<6 月目标未通过**，患者独立性未验证。结果、限制、安装新权重和后续训练见 [V0.4 调校报告](docs/TUNING_V0.4.md)。RTX 4060 全骨干 CUDA 对照入口见 [本机实验说明](docs/E1_4060.md)，尚未在云端实机执行。
 

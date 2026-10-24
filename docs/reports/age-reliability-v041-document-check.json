@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "report_date": "2026-10-24",
+  "scope": "Documentation and archived prediction descriptive statistics only",
+  "sections": 10,
+  "scripts": 0,
+  "external_assets": 0,
+  "broken_internal_anchors": 0,
+  "broken_report_relative_links": 0,
+  "browser_errors": [],
+  "html_http_asset_requests": [],
+  "viewports": [
+    {
+      "width": 1440,
+      "horizontal_page_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_page_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_page_overflow": false
+    }
+  ],
+  "table_column_consistency": true,
+  "a4_print_generated": true,
+  "archived_summary_consistency": true,
+  "descriptive_source_hashes_verified": true,
+  "old_prd_historical_banner_verified": true,
+  "new_training_or_inference_executed": false,
+  "application_training_source_modified": false,
+  "old_experiment_evidence_modified": false,
+  "source_sha256": {
+    "docs/AGE_RELIABILITY_REPORT_V0.4.1.md": "d61e9f0e5aa5713986bb5e818c8affe43c6799118dc532a8c6dec6d84244064c",
+    "docs/AGE_RELIABILITY_REPORT_V0.4.1.html": "c2b90fca1db936e6e6b499ce61f8cbff723ee1be51de29ea747ca2fbb48f20ee",
+    "docs/reports/age-reliability-v041-descriptive.json": "c4f3cc1c09fb573b9553e0294660094f2e7828e8b39769622d4d39d5a1227de3"
+  }
+}
