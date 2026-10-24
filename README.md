@@ -12,6 +12,10 @@ V0.3 已增加 ResNet-50＋性别、版本化预处理、CUDA/AMP 训练、恢�
 
 ## 下载完整研究项目包
 
+**最新独立安装包（2026-10-24）：[BoneAtlas_Complete_20261024.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Complete_20261024.zip)。** 内嵌当前末残差块微调模型、六张公开样例、全新数据库及V0.4.1可靠性报告，不用合并旧版本，也不用另行下载当前预测权重。解压到新目录后按 [本包启动说明](docs/START_20261024.md) 安装依赖、检查模型和启动。当前应用仍为V0.3；继续E1研究另需全量原图与V0.3初始化，具体见启动说明。
+
+以下保留V0.3完整基线包和V0.4增量更新的历史入口。
+
 - [直接下载 V0.3 完整包 BoneAtlas_MVP_0.3_Training.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_MVP_0.3_Training.zip)
 - [打开下载文件页面](https://github.com/Lijinge-bit/bone/blob/main/downloads/BoneAtlas_MVP_0.3_Training.zip)：如直接下载未开始，可点击页面上的 **Download raw file**。
 

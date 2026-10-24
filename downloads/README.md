@@ -1,5 +1,11 @@
 # 完整研究项目包
 
+**最新独立安装包：[BoneAtlas_Complete_20261024.zip](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Complete_20261024.zip)**。包含当前末残差块微调模型、完整应用源码／工具、六张公开样例、全新待质检数据库和最新V0.4.1可靠性报告。无需合并历史包或另行获取当前预测权重。[启动与包内容](../docs/START_20261024.md) · [SHA-256](BoneAtlas_Complete_20261024.zip.sha256) · [包检查记录](BoneAtlas_Complete_20261024.check.json)。
+
+大小：101,631,224 字节（约101.6 MB／96.9 MiB）。解压后89项测试通过、0跳过，12组真实预测／Grad-CAM及浏览器闭环通过。SHA-256：`fb17dd2cc4b95dc74270d28f8af127cef2fa9ba59c40b374b38301d43ca0e033`。
+
+下文为历史版本与增量包说明，保留作追溯和训练基线获取入口。
+
 最新需求文档：[PRD V0.4 实验复盘与下一轮调校 · 离线 HTML 包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_PRD_V0.4_Experiment_Review.zip)。解压后双击 HTML 阅读，包含原要求对照、真实曲线、后续实验与验收。文档为 V0.4，下面的完整应用／模型包为 V0.3。
 
 最新调校权重：[V0.4 模型与训练更新包](https://github.com/Lijinge-bit/bone/raw/refs/heads/main/downloads/BoneAtlas_Model_Tuning_V0.4.zip)。需要下方的 V0.3 完整项目；按 [在线调校报告](../docs/TUNING_V0.4.md) 合并文件，运行下载校验工具还原权重后注册。新模型为 CPU 末残差块微调，验证 MAE 12.1334 月、同一历史留出 MAE 12.4175 月；仍未达到 <6 月目标，0–<24 月误差未改善，完整 4060 全骨干训练待本机执行。更新包不包含 `var/`，解压不会替换数据库或切换活动模型。
